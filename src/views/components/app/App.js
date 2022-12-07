@@ -223,6 +223,24 @@ function App({ stopSong, pauseSongzz, playSongzz, resumeSong }) {
     }
   }
 
+  function receiveMessage2(e) {
+    if (e.origin.startsWith('http://localhost:3001') && e.data?.access_token && e.data?.service) {
+      if (e.data.service === 'twitch') {
+        console.log("Receive postMessage TOKEN");
+        console.log(e.data);
+        setTwitchAccessToken(e.data.access_token);
+        setTwitchRefreshToken(e.data.refresh_token);
+        setTwitchUsername(e.data.username);
+        setTwitchUserId(e.data.userId);
+        setTwitchProfileImage(e.data.profileImg);
+        // RELOAD
+        history.push('/');
+        // window.location.replace("http://localhost:3001/");
+        // toggleEnabled('twitch', true);
+      } 
+    }
+  }
+
   return (
     <React.Fragment>
       {/*<Route path="/login" component={LoginPage} />*/}

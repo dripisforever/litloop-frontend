@@ -3,7 +3,7 @@
 
 import React, { forwardRef, useState } from "react";
 import PropTypes from "prop-types";
-
+import styled from "styled-components";
 // MATERIAL
 import Typography from "@material-ui/core/Typography";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
@@ -27,6 +27,15 @@ import Popover from "@material-ui/core/Popover";
 // const OG_TWITTER = #37416c
 // const OG_TWITTER = #353555
 // const LIT_LOOP = #6b57ea
+const VolumeSlider = styled.div`
+`;
+
+const DarkDivPlayToggle = styled.div`
+  position: absolute;
+  padding: 200px;
+  width: 100%;
+  height: 100%;
+`;
 
 const useStyles = makeStyles((theme) => ({
   controlsWrapper: {
@@ -37,7 +46,7 @@ const useStyles = makeStyles((theme) => ({
     right: 0,
     bottom: 0,
     height: "100%",
-    background: "rgba(0,0,0,0.6)",
+    background: "rgba(0,0,0,0.3)",
     display: "flex",
     flexDirection: "column",
     justifyContent: "space-between",
@@ -137,6 +146,7 @@ const Controls = forwardRef(
       playbackRate,
       onPlaybackRateChange,
       onToggleFullScreen,
+      doubleClickToggleFullScreen,
       volume,
       onVolumeChange,
       onBookmark,
@@ -171,13 +181,14 @@ const Controls = forwardRef(
             justify="space-between"
             style
             style={{ padding: 16 }}
+            onClick={onPlayPause}
           >
             <Grid item>
               <Typography variant="h5" style={{ color: "#fff" }}>
-                Video Title
+                Crystal Castles - Kerosene
               </Typography>
             </Grid>
-            <Grid item>
+            {/*<Grid item>
               <Button
                 onClick={onBookmark}
                 variant="contained"
@@ -190,10 +201,10 @@ const Controls = forwardRef(
               >
 
               </Button>
-            </Grid>
+            </Grid>*/}
           </Grid>
-          <Grid container direction="row" alignItems="center" justify="center">
-            <IconButton
+          <Grid container  direction="row" alignItems="center" justify="center">
+            {/*<IconButton
               onClick={onRewind}
               className={classes.controlIcons}
               aria-label="rewind"
@@ -202,8 +213,9 @@ const Controls = forwardRef(
                 className={classes.controlIcons}
                 fontSize="inherit"
               />
-            </IconButton>
-            <IconButton
+            </IconButton>*/}
+
+            {/*<IconButton
               onClick={onPlayPause}
               className={classes.controlIcons}
               aria-label="play"
@@ -213,16 +225,18 @@ const Controls = forwardRef(
               ) : (
                 <PlayArrowIcon fontSize="inherit" />
               )}
-            </IconButton>
-            <IconButton
+            </IconButton>*/}
+
+            {/*<IconButton
               onClick={onFastForward}
               className={classes.controlIcons}
               aria-label="forward"
             >
               <FastForwardIcon fontSize="inherit" />
-            </IconButton>
+            </IconButton>*/}
           </Grid>
 
+          <DarkDivPlayToggle onClick={doubleClickToggleFullScreen} />
           {/* bottom controls */}
           <Grid
             container
@@ -260,30 +274,7 @@ const Controls = forwardRef(
                   )}
                 </IconButton>
 
-                <IconButton
-                  // onClick={() => setState({ ...state, muted: !state.muted })}
-                  onClick={onMute}
-                  className={`${classes.bottomIcons} ${classes.volumeButton}`}
-                >
-                  {muted ? (
-                    <VolumeMute fontSize="large" />
-                  ) : volume > 0.5 ? (
-                    <VolumeUp fontSize="large" />
-                  ) : (
-                    <VolumeDown fontSize="large" />
-                  )}
-                </IconButton>
 
-                <Slider
-                  min={0}
-                  max={100}
-                  value={muted ? 0 : volume * 100}
-                  onChange={onVolumeChange}
-                  aria-labelledby="input-slider"
-                  className={classes.volumeSlider}
-                  onMouseDown={onSeekMouseDown}
-                  onChangeCommitted={onVolumeSeekDown}
-                />
                 <Button
                   variant="text"
                   onClick={
@@ -305,7 +296,9 @@ const Controls = forwardRef(
             </Grid>
 
             <Grid item>
-              <Button
+              {/* Playback Rate */}
+
+              {/*<Button
                 onClick={handleClick}
                 aria-describedby={id}
                 className={classes.bottomIcons}
@@ -345,7 +338,32 @@ const Controls = forwardRef(
                     </Button>
                   ))}
                 </Grid>
-              </Popover>
+              </Popover>*/}
+              <IconButton
+                // onClick={() => setState({ ...state, muted: !state.muted })}
+                onClick={onMute}
+                className={`${classes.bottomIcons} ${classes.volumeButton}`}
+              >
+                {muted ? (
+                  <VolumeMute fontSize="large" />
+                ) : volume > 0.5 ? (
+                  <VolumeUp fontSize="large" />
+                ) : (
+                  <VolumeDown fontSize="large" />
+                )}
+              </IconButton>
+              {/*<VolumeSlider
+                <Slider
+                  min={0}
+                  max={100}
+                  value={muted ? 0 : volume * 100}
+                  onChange={onVolumeChange}
+                  aria-labelledby="input-slider"
+                  className={classes.volumeSlider}
+                  onMouseDown={onSeekMouseDown}
+                  onChangeCommitted={onVolumeSeekDown}
+                />
+              </VolumeSlider>*/}
               <IconButton
                 onClick={onToggleFullScreen}
                 className={classes.bottomIcons}

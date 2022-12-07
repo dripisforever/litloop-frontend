@@ -34,6 +34,7 @@ const VideoWrapper = styled.div`
   grid-template-columns: repeat(3, 1fr);
   /* grid-template-columns: */
 `;
+
 const REQUIRED_FIELDS = ["tagline"];
 
 function TrackProfile() {
@@ -62,13 +63,17 @@ function TrackProfile() {
             // className="DAMN"
             // style={`display: flex;`}
           >
-            <VideoCard url={"https://views-test-api.s3.us-west-1.amazonaws.com/%40gudaniky%3Avideo%3A7033332221628992770.mp4"}/>
-            <VideoCard url={"https://views-test-api.s3.us-west-1.amazonaws.com/Crystal+Castles+-+Kerosene(American+Psycho).mp4"}/>
-            <VideoCard url={"https://views-test-api.s3.us-west-1.amazonaws.com/%40yearboyl%3Avideo%3A7015198041556684038.mp4"}/>
+            <VideoCard url={"https://d1ca20q97pi6ei.cloudfront.net/%40gudaniky%3Avideo%3A7033332221628992770.mp4"}/>
+            <VideoCard url={"https://d1ca20q97pi6ei.cloudfront.net/Crystal+Castles+-+Kerosene(American+Psycho).mp4"}/>
+            <VideoCard url={"https://d1ca20q97pi6ei.cloudfront.net/%40yearboyl%3Avideo%3A7015198041556684038.mp4"}/>
 
-            <VideoCard url={"https://views-test-api.s3.us-west-1.amazonaws.com/%40gudaniky%3Avideo%3A7033332221628992770.mp4"}/>
+            <VideoCard url={"https://d1ca20q97pi6ei.cloudfront.net/%40gudaniky%3Avideo%3A7033332221628992770.mp4"}/>
+            <VideoCard url={"https://d1ca20q97pi6ei.cloudfront.net/Crystal+Castles+-+Kerosene(American+Psycho).mp4"}/>
+            <VideoCard url={"https://d1ca20q97pi6ei.cloudfront.net/%40yearboyl%3Avideo%3A7015198041556684038.mp4"}/>
+
+            {/*<VideoCard url={"https://views-test-api.s3.us-west-1.amazonaws.com/%40gudaniky%3Avideo%3A7033332221628992770.mp4"}/>
             <VideoCard url={"https://views-test-api.s3.us-west-1.amazonaws.com/Crystal+Castles+-+Kerosene(American+Psycho).mp4"}/>
-            <VideoCard url={"https://views-test-api.s3.us-west-1.amazonaws.com/%40yearboyl%3Avideo%3A7015198041556684038.mp4"}/>
+            <VideoCard url={"https://views-test-api.s3.us-west-1.amazonaws.com/%40yearboyl%3Avideo%3A7015198041556684038.mp4"}/>*/}
 
 
           </VideoWrapper>

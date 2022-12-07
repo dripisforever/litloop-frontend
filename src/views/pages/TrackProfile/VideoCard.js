@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import { findDOMNode } from "react-dom";
 import ReactPlayer from "react-player";
 import screenful from "screenfull";
+import styled from "styled-components";
 
 // MATERIAL
 import AppBar from "@material-ui/core/AppBar";
@@ -24,6 +25,9 @@ import { makeStyles, withStyles } from "@material-ui/core/styles";
 // VIEWS
 import Controls from "./Controls";
 
+const DoubleClickFullScreenWrapper = styled.div`
+  padding: 200px;
+`;
 
 const useStyles = makeStyles((theme) => ({
   playerWrapper: {
@@ -48,7 +52,7 @@ const useStyles = makeStyles((theme) => ({
     right: 0,
     bottom: 0,
     // background: "rgba(0,0,0,0.4)",
-    background: "#37416c",
+    // background: "#37416c",
     display: "flex",
     flexDirection: "column",
     justifyContent: "space-between",
@@ -262,6 +266,15 @@ function VideoCard({url}) {
     screenful.toggle(playerContainerRef.current);
   };
 
+  const doubleClickToggleFullScreen = (event) => {
+    if (event.detail === 2) {
+      console.log('double click');
+      screenful.toggle(playerContainerRef.current);
+    } else {
+      handlePlayPause();
+    }
+  }
+
   const handleMouseMove = () => {
     console.log("mousemove");
     controlsRef.current.style.visibility = "visible";
@@ -350,7 +363,9 @@ function VideoCard({url}) {
           onMouseLeave={hanldeMouseLeave}
           ref={playerContainerRef}
           className={classes.playerWrapper}
+
         >
+          {/*<DoubleClickFullScreenWrapper onClick={doubleClickToggleFullScreen} />*/}
           <ReactPlayer
             ref={playerRef}
             // width="400px"
@@ -401,6 +416,7 @@ function VideoCard({url}) {
             playbackRate={playbackRate}
             onPlaybackRateChange={handlePlaybackRate}
             onToggleFullScreen={toggleFullScreen}
+            doubleClickToggleFullScreen={doubleClickToggleFullScreen}
             volume={volume}
             // onBookmark={addBookmark}
           />

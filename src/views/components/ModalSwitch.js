@@ -45,7 +45,7 @@ import OAuthPopup from "views/pages/LoginPage/pocket/oauth2popup";
 import TwitchAuthCallback from "views/pages/Auth/TwitchAuthCallback";
 import GoogleAuthCallback from "views/pages/Auth/GoogleAuthCallback";
 import SpotifyAuthCallback from "views/pages/Auth/SpotifyAuthCallback";
-import UnsplashCallback from "views/pages/LoginPage/UnsplashCallback";
+// import UnsplashCallback from "views/pages/LoginPage/UnsplashCallback";
 
 
 // import LoginPageOauth from "views/pages/LoginPage";
@@ -355,7 +355,7 @@ function ModalSwitch({  children, renderModal, stopSong, pauseSong, resumeSong, 
 
         {/*<Route exact path="/auth/youtube/callback" component={YoutubeAuthCallback} />*/}
         {/*<Route exact path="/auth/unsplash/callback" component={UnsplashCallback} />*/}
-        <Route  path="/auth/unsplash/callback" component={UnsplashCallback} />
+        {/*<Route  path="/auth/unsplash/callback" component={UnsplashCallback} />*/}
         {/*<Route  path="/auth/unsplash/callback" element={<UnsplashCallback />} />*/}
 
 
@@ -371,6 +371,7 @@ function ModalSwitch({  children, renderModal, stopSong, pauseSong, resumeSong, 
         <Route exact path="/cu" component={ChunkUpload} />
 
         <Route exact path="/movies" component={ModalMovies} />
+        <Route exact path="/feed" component={ModalMovies} />
         <Route exact path="/people" component={ModalPeople} />
         {/*<Route exact path="/feed" component={ModalPhotos} />*/}
         <Route exact path="/" component={ModalMovies} />

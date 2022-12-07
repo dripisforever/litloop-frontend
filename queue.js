@@ -34,3 +34,13 @@ function queue_sounds(sounds){
 }
 
 queue_sounds([new Audio(foo), new Audio(bar), new Audio(lol)]);
+
+
+
+// REFERENCE: https://github.com/video-react/video-react/issues/184
+document.addEventListener('keydown', (e) => {
+  if (e.keyCode === 32) {
+    // this.ref.player.pause();
+    play();
+  }
+})

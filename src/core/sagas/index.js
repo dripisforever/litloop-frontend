@@ -3,6 +3,11 @@ import { getFetchTypes, verifyCachedData, createUrl, createAPIUrl, createAuthUrl
 import { setAccessToken } from "core/actions";
 import * as schemas from "core/schemas";
 import * as actions from "core/actions";
+// import {
+//
+//   Redirect,
+//
+// } from "react-router-dom";
 
 // import { watchFetchAlbum, watchFetchLikeAlbum } from "./album";
 // import { watchFetchArtist, watchFetchArtistAlbums, watchFetchArtistImages } from "./artist";
@@ -291,16 +296,25 @@ export function* fetcherAuthSaga({action, endpoint, params, schema, processData,
       });
 
       yield put(actions.setAccessToken(data))
-      yield put(actions.fetchCurrentUser())
-      // yield put(actions.setUserProfile(res))
 
+      put(actions.fetchCurrentUser())
+      // let data_current = yield put(actions.fetchCurrentUser())
+      // yield put(actions.setUserProfile(res))
+      // console.log(data_current);
+
+      
       // useLocation().push('/movies')
       // historyPush('/');
       // useHistory().push('/')
       // yield put(useHistory.push('/'))
       // yield call(history.push('/movies'))
       // yield call(forwardTo, '/movies');
-      yield call(history.push, '/movies');
+
+      history.push('/');
+      // yield call(history.push, '/movies');
+      // yield call(window.location.assign, '/movies');
+      // window.location.assign = '/movies';
+      // window.location.href = '/movies';
     }
   } catch (error) {
     console.log(error);

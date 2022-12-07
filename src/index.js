@@ -52,7 +52,7 @@ const renderApp = () => {
             <CssBaseline />
             <ConfigurationProvider>
 
-              {/*{(login_url === '/login' ) ? (
+              {(login_url === '/login' ) ? (
                 <Router history={history}>
                   <Route path="/login" component={LoginPage} />
 
@@ -61,11 +61,11 @@ const renderApp = () => {
                 <Router history={history}>
                   <App />
                 </Router>
-              )}*/}
+              )}
 
-              <Router history={history}>
+              {/*<Router history={history}>
                 <App />
-              </Router>
+              </Router>*/}
             </ConfigurationProvider>
           </ThemeProvider>
 
