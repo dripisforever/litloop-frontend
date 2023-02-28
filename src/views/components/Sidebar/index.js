@@ -81,7 +81,7 @@ const StyledLi = styled.li`
 `;
 
 const LinkStyled = styled(Link)`
-  font-weight: bold;
+
   color: #FFF;
   text-decoration: none;
   &:hover: {
@@ -93,6 +93,10 @@ const LinkStyled = styled(Link)`
   grid-gap: 1em;
  grid-template-columns: 20px 29px minmax(81px,0fr); */
   display: flex;
+
+  span {
+    font-family: Helvetica;
+  }
 `;
 
 // const links = [
@@ -142,7 +146,15 @@ const LinkStyled = styled(Link)`
 //     <${link.iconName}Icon/>
 //   </LinkStyled
 // })
+const StyledDivIcon = styled.div`
+  margin-right: 10px;
 
+  svg {
+    height: 16px;
+    width: 16px;
+  }
+
+`;
 const Sidebar = () => {
   const dispatch = useDispatch();
 
@@ -156,10 +168,10 @@ const Sidebar = () => {
       <StyledUl>
         <StyledLi>
           <LinkStyled onClick={handleCloseSidebar} to="/feed/trending">
-            <div className="icon">
+            <StyledDivIcon className="icon">
               <TrendingIcon />
 
-            </div>
+            </StyledDivIcon>
             <span>Trending</span>
           </LinkStyled>
         </StyledLi>
@@ -170,23 +182,23 @@ const Sidebar = () => {
             to="/explore"
             // activeClassName="active"
           >
-            <div className="icon">
+            <StyledDivIcon className="icon">
               {/*<VidIcon />*/}
               <FaWpexplorer />
 
-            </div>
+            </StyledDivIcon>
             <span>Explore</span>
           </LinkStyled>
         </StyledLi>
 
         <StyledLi>
           <LinkStyled onClick={handleCloseSidebar} to="/feed/trending">
-            <div className="icon">
+            <StyledDivIcon className="icon">
               {/*<MessagesIcon />*/}
               {/*<FiMessageCircle />*/}
               <TbMessageCircle2 />
 
-            </div>
+            </StyledDivIcon>
             <span>Messages</span>
           </LinkStyled>
         </StyledLi>
@@ -209,11 +221,11 @@ const Sidebar = () => {
             to="/feed/history"
             // activeClassName="active"
           >
-            <div className="icon">
+            <StyledDivIcon className="icon">
               <HistoryIcon />
               {/*<FaHistory />*/}
 
-            </div>
+            </StyledDivIcon>
             <span>History</span>
           </LinkStyled>
         </StyledLi>
@@ -240,10 +252,10 @@ const Sidebar = () => {
             to="/playlists/"
             // activeClassName="active"
           >
-            <div className="icon">
+            <StyledDivIcon className="icon">
               {/*<LikeIcon />*/}
               <h3>Playlists</h3>
-            </div>
+            </StyledDivIcon>
           </LinkStyled>
         </StyledLi>
 

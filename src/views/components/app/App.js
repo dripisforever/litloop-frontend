@@ -217,7 +217,7 @@ const App = () => {
 
           {/*<Route path="auth/twitch/callback" element={<TwitchAuthCallback />} />*/}
 
-          {/*<ModalRoutes
+          <ModalRoutes
             // stopSong={stopSong}
             // pauseSong={pauseSong}
             // resumeSong={resumeSong}
@@ -228,8 +228,8 @@ const App = () => {
             resumeSong={resumeSongz}
             audioControl={audioControlz}
             // videoControl={videoControlz}
-          />*/}
-          <LegacyRoutes />
+          />
+          {/*<LegacyRoutes />*/}
         </Container>
       )}
 
