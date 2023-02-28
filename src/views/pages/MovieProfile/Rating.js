@@ -1,28 +1,28 @@
 import React from "react";
-import {
-  CircularProgress,
-  Avatar,
-  makeStyles,
-  colors
-} from "@material-ui/core";
 
-const useStyles = makeStyles(theme => ({
-  avatar: {
-    width: 46,
-    height: 46,
-    backgroundColor: colors.common.white
-  },
-  value: theme.typography.button,
-  percent: {
-    fontSize: "50%"
-  }
-}));
+// MATERIAL DONE
+// import { CircularProgress, Avatar, makeStyles, colors } from "@mui/material";
+import { StyledCircularProgress, StyledAvatar } from 'views/styledComponents';
+
+// const useStyles = makeStyles(theme => ({
+//   avatar: {
+//     width: 46,
+//     height: 46,
+//     backgroundColor: colors.common.white
+//   },
+//   value: theme.typography.button,
+//   percent: {
+//     fontSize: "50%"
+//   }
+// }));
 
 function Rating({ value }) {
-  const classes = useStyles();
+  // const classes = useStyles();
 
   return (
-    <Avatar className={classes.avatar}>
+    <StyledAvatar
+      // className={classes.avatar}
+    >
       {/*<CircularProgress
         style={{ position: "absolute" }}
         variant="static"
@@ -30,11 +30,13 @@ function Rating({ value }) {
         color="primary"
         thickness={4}
       />*/}
-      <span className={classes.value}>
+      <span
+        // className={classes.value}
+      >
         {value}
         {/*<sup className={classes.percent}>%</sup>*/}
       </span>
-    </Avatar>
+    </StyledAvatar>
   );
 }
 

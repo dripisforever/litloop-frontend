@@ -1,31 +1,38 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { selectors } from "core/reducers/index";
-import { Typography, makeStyles, Box, Grid, Link } from "@material-ui/core";
+
+
+// MATERIAL DONE
+// import { Typography, Box, Grid, Link, makeStyles } from "@mui/material";
+import { StyledTypography, StyledBox, StyledGrid, StyledLink } from 'views/styledComponents';
+
+
 import Rating from "./Rating";
-import { getMovieReleaseYear, getImdbProfileUrl } from "core/utils";
 import Introduction from "views/components/Introduction";
 import ImdbLogo from "views/components/ImdbLogo";
 import MovieGenreChip from "./MovieGenreChip";
 
-const useStyles = makeStyles(theme => ({
-  year: {
-    color: theme.palette.text.secondary
-  },
-  tagline: {
-    fontStyle: "italic"
-  },
-  genreChip: {
-    margin: theme.spacing(0.5)
-  },
-  overview: {
-    whiteSpace: "pre-wrap"
-  }
-}));
+import { selectors } from "core/reducers/index";
+import { getMovieReleaseYear, getImdbProfileUrl } from "core/utils";
+
+// const useStyles = makeStyles(theme => ({
+//   year: {
+//     color: theme.palette.text.secondary
+//   },
+//   tagline: {
+//     fontStyle: "italic"
+//   },
+//   genreChip: {
+//     margin: theme.spacing(0.5)
+//   },
+//   overview: {
+//     whiteSpace: "pre-wrap"
+//   }
+// }));
 
 function MovieIntroduction({ movieId }) {
   const movie = useSelector(state => selectors.selectMovie(state, movieId));
-  const classes = useStyles();
+  // const classes = useStyles();
 
   const releaseYear = getMovieReleaseYear(movie);
 
@@ -60,49 +67,51 @@ function MovieIntroduction({ movieId }) {
       imageSrc={movie.poster_path}
       title={
         <>
-          <Typography variant="h5" gutterBottom={!movie.tagline}>
+          <StyledTypography variant="h5" gutterBottom={!movie.tagline}>
             {movie.title}
             {releaseYear && (
               <>
                 {" "}
-                <span className={classes.year}>{`(${getMovieReleaseYear(
-                  movie
-                )})`}</span>
+                <span
+                  // className={classes.year}
+                >
+                  {`(${getMovieReleaseYear(movie)})`}
+                </span>
               </>
             )}
-          </Typography>
+          </StyledTypography>
           {movie.tagline && (
-            <Typography
-              className={classes.tagline}
+            <StyledTypography
+              // className={classes.tagline}
               color="textSecondary"
               gutterBottom
             >
               {`"${movie.tagline}"`}
-            </Typography>
+            </StyledTypography>
           )}
         </>
       }
       content={
         <>
-          <Grid container spacing={2}>
-            <Grid item xs={12}>
-              <Box display="flex" alignItems="center">
+          <StyledGrid container spacing={2}>
+            <StyledGrid item xs={12}>
+              <StyledBox display="flex" alignItems="center">
                 {/*<Rating value={movie.vote_average * 10} />*/}
                 <Rating value={movie.vote_average} />
-                <Box marginLeft={2}>
-                  <Link
+                <StyledBox marginLeft={2}>
+                  <StyledLink
                     href={getImdbProfileUrl(movie.imdb_id)}
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    <ImdbLogo />
-                  </Link>
-                </Box>
-              </Box>
-            </Grid>
+                    {/*<ImdbLogo />*/}
+                  </StyledLink>
+                </StyledBox>
+              </StyledBox>
+            </StyledGrid>
 
 
-          </Grid>
+          </StyledGrid>
         </>
       }
     />

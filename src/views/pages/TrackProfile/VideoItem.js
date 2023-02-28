@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 
 import RouterLink from "views/components/RouterLink";
 import ModalLink from "views/components/ModalLink";
-import { makeStyles } from "@material-ui/styles";
+import { makeStyles } from "@mui/material/styles";
 import { selectors } from "core/reducers/index";
 import BaseCardHeader from "views/components/BaseCardHeader";
 import MovieRatingTag from "./MovieRatingTag";
@@ -78,7 +78,7 @@ const LikesCounter = styled.span`
 `;
 
 function VideoItem({ videoId, subheader, handleLikePhoto, handleUnLikePhoto }) {
-  const classes = useStyles();
+  // const classes = useStyles();
   const video = useSelector(state => selectors.selectVideo(state, videoId));
   const { getImageUrl } = useConfiguration();
   const m3u8_url = "https://mutantium.stream.voidboost.cc/1/5/1/6/7/2/b1507d3c8cf5bd6c36d090edb94cdbd6:2021091109:b1hsaC83YXU2MFlJa2UzNnd6dkg3YXJEcmx4ZHV2bHIwTUVyMzd5ZXZtVW9IUHY5Yy9TNVdZdVExSllYMXdyZXhqc2xsN0ZDanorY3ZhV2xwVjRlcXc9PQ==/goaum.mp4:hls:manifest.m3u8"

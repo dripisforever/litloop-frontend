@@ -43,30 +43,30 @@ const TwitchAuthCallback = () => {
 
 
       // getMe()
-      // const MyTwitch = await axios.get('https://api.twitch.tv/helix/users', config).then(async (res) => {
-      //   console.log(res);
-      //   const user = res?.data?.data?.[0];
-      //
-      //   // setTwitchUserId(user.id);
-      //   // setTwitchUsername(user.login);
-      //   setTwitchProfileImage(user.profile_image_url);
-      //
-      //   // await litloopAPI.updateTwitchUserData(
-      //   //   {
-      //   //     username: user.login,
-      //   //     twitch_id: user.id,
-      //   //     avatar: user.profile_image_url,
-      //   //     email: user.email,
-      //   //   },
-      //   //   accessToken,
-      //   //   refreshToken
-      //   // );
-      //   return {
-      //     Username: user.login,
-      //     ProfileImg: user.profile_image_url,
-      //     userId: user.id,
-      //   };
-      // });
+      const MyTwitch = await axios.get('https://api.twitch.tv/helix/users', config).then(async (res) => {
+        console.log(res);
+        const user = res?.data?.data?.[0];
+
+        // setTwitchUserId(user.id);
+        // setTwitchUsername(user.login);
+        // setTwitchProfileImage(user.profile_image_url);
+
+        // await litloopAPI.updateTwitchUserData(
+        //   {
+        //     username: user.login,
+        //     twitch_id: user.id,
+        //     avatar: user.profile_image_url,
+        //     email: user.email,
+        //   },
+        //   accessToken,
+        //   refreshToken
+        // );
+        // return {
+        //   Username: user.login,
+        //   ProfileImg: user.profile_image_url,
+        //   userId: user.id,
+        // };
+      });
 
       // const MyTwitch = await TwitchAPI.getMe({ accessToken: accessToken }).then(async (res) => {
       //   const user = res?.data?.data?.[0];
@@ -129,7 +129,7 @@ const TwitchAuthCallback = () => {
 
     if (res.access_token) {
       // setTimeout(() => window.close(), 100);
-      // window.close()
+      window.close()
     }
   }
 

@@ -1,27 +1,38 @@
 import React from "react";
+import { useSelector } from "react-redux";
+import styled from "styled-components";
+
+// MATERIAL DONE
+// import { makeStyles } from "@mui/material/styles";
+
 import BaseImage from "views/components/BaseImage";
 import BaseCard from "views/components/BaseCard";
-import { useSelector } from "react-redux";
 import RouterLink from "views/components/RouterLink";
-import { makeStyles } from "@material-ui/styles";
-import { selectors } from "core/reducers/index";
 import BaseCardHeader from "views/components/BaseCardHeader";
+
 import { getAspectRatioString } from "./AspectRatio";
 import { useConfiguration } from "./ConfigurationProvider";
 
-const useStyles = makeStyles(theme => ({
-  link: {
-    textDecoration: "none"
-  }
-}));
+import { selectors } from "core/reducers/index";
+
+// const useStyles = makeStyles(theme => ({
+//   link: {
+//     textDecoration: "none"
+//   }
+// }));
+
+
+const StyledRouterLink = styled(RouterLink)`
+  text-decoration: none;
+`;
 
 function PersonCard({ personId }) {
-  const classes = useStyles();
+  // const classes = useStyles();
   const person = useSelector(state => selectors.selectPerson(state, personId));
   const { getImageUrl } = useConfiguration();
 
   return (
-    <RouterLink className={classes.link} to={`/person/${personId}`}>
+    <StyledRouterLink to={`/person/${personId}`}>
       <BaseCard hasActionArea>
         <BaseImage
           src={getImageUrl(person.profile_path)}
@@ -30,7 +41,7 @@ function PersonCard({ personId }) {
         />
         <BaseCardHeader title={person.name} />
       </BaseCard>
-    </RouterLink>
+    </StyledRouterLink>
   );
 }
 

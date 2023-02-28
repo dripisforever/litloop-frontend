@@ -8,6 +8,9 @@ const openSignInWindow = (url, name) => {
    // remove any existing event listeners
    window.removeEventListener('message', receiveMessage);
 
+   const TopPosition = window.innerHeight ? (window.innerHeight - 850) / 2 : 0;
+   const settings = `height=700,width=600,top=${TopPosition},left=50,scrollbars=yes,resizable`;
+
    // window features
    const strWindowFeatures =
      'toolbar=no, menubar=no, width=800, height=600, top=60, left=250';
@@ -15,12 +18,14 @@ const openSignInWindow = (url, name) => {
    if (windowObjectReference === null || windowObjectReference.closed) {
      /* if the pointer to the window object in memory does not exist
       or if such pointer exists but the window was closed */
-     windowObjectReference = window.open(url, name, strWindowFeatures);
+     // windowObjectReference = window.open(url, name, strWindowFeatures);
+     windowObjectReference = window.open(url, name, settings);
    } else if (previousUrl !== url) {
      /* if the resource to load is different,
       then we load it in the already opened secondary window and then
       we bring such window back on top/in front of its parent window. */
-     windowObjectReference = window.open(url, name, strWindowFeatures);
+     // windowObjectReference = window.open(url, name, strWindowFeatures);
+     windowObjectReference = window.open(url, name, settings);
      windowObjectReference.focus();
    } else {
      /* else the window reference must exist and the window

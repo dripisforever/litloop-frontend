@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useRef, useState } from 'react';
 // import { Amplify, Auth, Hub, Logger } from 'aws-amplify';
 // import { toast } from 'react-toastify';
 
-import LogsContext from '../logs/LogsContext';
+import LogsContext from 'views/pages/logs/LogsContext';
 import litloopAPI from 'views/pages/Auth/litloop/API';
 
 // Amplify.configure({
@@ -18,7 +18,7 @@ const AccountContext = React.createContext();
 export const AccountProvider = ({ children }) => {
   const [user, setUser] = useState();
   const [loading, setLoading] = useState(true);
-  const { addLog } = useContext(LogsContext);
+  // const { addLog } = useContext(LogsContext);
   const invoked = useRef();
 
   const authenticate = async ({ username, password }) => {
@@ -140,7 +140,7 @@ export const AccountProvider = ({ children }) => {
 
       // Hub.listen('auth', listener);
     })();
-  }, [addLog]);
+  }, []);
 
   return (
     <AccountContext.Provider

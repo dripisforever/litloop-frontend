@@ -1,15 +1,13 @@
-import React, {useState} from "react";
-import { useSelector, connect } from "react-redux";
+import React, { useState } from "react";
+import { connect, useSelector, useDispatch } from "react-redux";
 import { Link, useLocation, withRouter } from "react-router-dom";
 import styled from "styled-components";
 
-// MATERIAL
-import { ListItem, ListItemText, ListItemAvatar, Avatar, makeStyles } from "@material-ui/core";
-import MuiListItem from "@material-ui/core/ListItem";
-import CardActionArea from '@material-ui/core/CardActionArea';
-import PlayCircleOutlineIcon from '@material-ui/icons/PlayCircleOutline';
-// import { Link } from '@material-ui/core';
-import { withStyles } from '@material-ui/core/styles';
+// MATERIAL UNDONE
+// import { CardActionArea, ListItem, ListItemText, ListItemAvatar, Avatar, makeStyles } from "@mui/material";
+import { StyledCardActionArea, StyledListItem, StyledListItemText, StyledListItemAvatar, StyledAvatar } from 'views/styledComponents';
+// import MuiListItem from "@mui/material/ListItem";
+
 
 
 // VIEWS
@@ -26,62 +24,6 @@ import "views/components/track-card/track-card.css"
 
 // CORE
 import { selectors } from "core/reducers/index";
-
-
-const useStyles = makeStyles(theme => ({
-  linkHover: {
-    fontWeight: "bold",
-    color: '#FFF',
-    textDecoration: 'none',
-    "&:hover": {
-      textDecoration: "underline"
-    }
-    // "&:hover": {
-    //   opacity: 0.7
-    // },
-    // "&:hover", "&:focus", "&:hover", "&:visited", "&:link", "&:active": {
-    //   textDecoration: "underline"
-    // }
-  },
-  linkHoverz: {
-    fontWeight: "bold",
-    color: '#FFF',
-    textDecoration: 'none',
-    '&:hover': {
-      textDecoration: "underline"
-    }
-  },
-  root: {
-    paddingTop: "0px",
-    paddingBottom: "0px",
-    display: "flex",
-    cursor: "default",
-    // flexDirection: "column"
-
-  },
-  icons: {
-    display: "flex"
-  },
-  stepperIcon: {
-    fontSize: theme.typography.h2.fontSize
-  },
-  active: {
-    // display: "contents",
-    fontWeight: "bold",
-
-    // color: "#646498",
-    color: "#6666d8",
-
-    // color: "#5848f8;",
-    textDecoration: 'none',
-    '&:hover': {
-      textDecoration: "underline"
-    }
-
-    // background: rgb(51, 51, 51);
-  }
-}));
-
 
 const HideIndexItem = styled.div`
   padding: 0 16px;
@@ -117,65 +59,40 @@ const HideIndexItem = styled.div`
 
   border-radius: 4px;
 `;
+const TrackNumber = styled.div`
+  color: white;
+`;
 
+const StyledLink = styled(Link)`
+  color: white;
+  text-decoration: none;
+  cursor: pointer;
+  &:hover {
+    text-decoration: underline;
+    cursor: pointer;
+  }
+  font-family: Verdana;
+`;
+const StyledSpan = styled.span`
+  color: white;
+  cursor: pointer;
+`;
 
-const ListItemz = withStyles({
-  root: {
-    "&$selected": {
-      backgroundColor: "green",
-
-      // backgroundColor: "rgba(255,255,255,.3)",
-
-      color: "white",
-      "& .MuiListItemIcon-root": {
-        color: "white"
-      }
-    },
-    "&$selected:hover": {
-      backgroundColor: "purple",
-      // backgroundColor: "rgba(255,255,255,.3)",
-      color: "white",
-      "& .MuiListItemIcon-root": {
-        color: "white"
-      }
-    },
-    "&:hover": {
-      backgroundColor: "blue",
-      // backgroundColor: "rgba(255,255,255,.3)",
-
-      color: "white",
-      "& .MuiListItemIcon-root": {
-        color: "white",
-        // opacity: "0.1",
-      }
-    }
-  },
-  selected: {}
-})(MuiListItem);
-
-const mini_style = {
-  fontSize: "20px",
-  position: "relative",
-  color: "#ccc",
-  cursor: "default",
-};
-
-const album_cover = {
-  display: "flex",
-  alignItems: "center",
-}
-// const classes = useStyles();
+const StyledDiv = styled.div`
+  display: table;
+`;
 function LinkTrack(obj, id) {
-  const classes = useStyles();
+  // const classes = useStyles();
   return (
     <span>
-      <Link
+      <StyledLink
         // className={classes.linkHoverz}
-        className={
-          obj.track.id === id
-                ? `${classes.active}`
-                : `${classes.linkHoverz}`
-        }
+
+        // className={
+        //   obj.track.id === id
+        //         ? `${classes.active}`
+        //         : `${classes.linkHoverz}`
+        // }
         to={`/track/${obj.track.id}/`}
         underline="hover"
         // style={{
@@ -190,7 +107,7 @@ function LinkTrack(obj, id) {
 
         {obj.track.name}
 
-      </Link>
+      </StyledLink>
     </span>
   )
 }
@@ -213,7 +130,7 @@ function PlaylistTrackListItem({
   ...rest
 }) {
   const { pathname } = useLocation();
-  const classes = useStyles();
+  // const classes = useStyles();
   // const playlistTrack = useSelector(state => selectors.selectTrack(state, playlistTrackId));
   // const playlistTrack = useSelector(state => selectors.selectPlaylistTracks(state, playlistTrackId));
   const track = useSelector(state => selectors.selectPlaylistTrack(state, playlistTrackId));
@@ -238,12 +155,18 @@ function PlaylistTrackListItem({
   }
 
   const secondaryDAMN = track.track.artists.map((artist, i) =>
-    <span key={i}>
-      {i > 0 && ", "}
-      <Link to={`/artist/${artist.id}/`} className={classes.linkHover} underline="hover">
-        {artist.name}
-      </Link>
-    </span>
+
+      <StyledSpan key={i}>
+        {i > 0 && ", "}
+        <StyledLink
+          to={`/artist/${artist.id}/`}
+          // className={classes.linkHover}
+          underline="hover"
+        >
+          {artist.name}
+        </StyledLink>
+      </StyledSpan>
+
   )
 
   return (
@@ -252,7 +175,7 @@ function PlaylistTrackListItem({
       {/*<CardActionArea className={classes.root}>*/}
 
 
-        <div className="trackNumber">
+        <TrackNumber className="trackNumber">
           <span
             // className={
             //   track.track.id === id ? `${classes.active}`: `${classes.linkHoverz}`
@@ -261,19 +184,31 @@ function PlaylistTrackListItem({
             >
             {index+1}
           </span>
-          <div className="play-song" onClick={singleClickPlayTrack} style={mini_style}>
+          <div
+            className="play-song"
+            onClick={singleClickPlayTrack}
+            // style={mini_style}
+          >
             <i className={`fa ${buttonClass} play-btn`} aria-hidden="true"/>
           </div>
 
-        </div>
+        </TrackNumber>
 
 
 
-        <ListItemAvatar style={album_cover}>
-          <Avatar src={track.track.album.images[2] ? track.track.album.images[2].url : ""}  variant={"rounded"} />
-        </ListItemAvatar>
+        <StyledListItemAvatar
+          // style={album_cover}
+        >
+          <StyledAvatar src={track.track.album.images[2] ? track.track.album.images[2].url : ""}  variant={"rounded"} />
+        </StyledListItemAvatar>
 
-        <ListItemText primary={LinkTrack(track, songId)} secondary={secondaryDAMN} />
+        {/*<StyledListItemText primary={LinkTrack(track, songId)} secondary={secondaryDAMN} />*/}
+        <StyledListItemText>
+          {LinkTrack(track, songId)}
+          <StyledDiv>
+            {secondaryDAMN}
+          </StyledDiv>
+        </StyledListItemText>
 
         <FormattedTime value={track.track.duration_ms} unit={'ms'} />
       {/*</CardActionArea>*/}

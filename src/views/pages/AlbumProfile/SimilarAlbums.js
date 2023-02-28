@@ -1,10 +1,20 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchArtistAlbums } from "core/actions";
-import { selectors } from "core/reducers/index";
-import { useTheme } from "@material-ui/styles";
+import styled from "styled-components";
+
+
+// MATERIAL DONE
+// import { useTheme } from "@mui/material/styles";
 import AlbumCard from "views/components/AlbumCard";
 import BaseGridList from "views/components/BaseGridList";
+
+// CORE
+import { fetchArtistAlbums } from "core/actions";
+import { selectors } from "core/reducers/index";
+
+const StyledBaseGridList = styled(BaseGridList)`
+  min-item-width: ${props => 260 / 2 - props.theme.spacing}
+`;
 
 function renderItem(albumId) {
   return (
@@ -21,7 +31,7 @@ function ArtistAlbums({ artistId }) {
   const isFetching = useSelector(state =>
     selectors.selectIsFetchingArtistAlbums(state, artistId)
   );
-  const theme = useTheme();
+  // const theme = useTheme();
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -29,11 +39,11 @@ function ArtistAlbums({ artistId }) {
   }, [artistId, dispatch]);
 
   return (
-    <BaseGridList
+    <StyledBaseGridList
       items={artistAlbumsIds}
       loading={isFetching}
       renderItem={renderItem}
-      minItemWidth={260 / 2 - theme.spacing(2)}
+      // minItemWidth={260 / 2 - theme.spacing(2)}
       listEmptyMessage="No recommendation has been found"
     />
   );

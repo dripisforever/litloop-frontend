@@ -1,39 +1,33 @@
 import React from "react";
+import { connect, useSelector } from 'react-redux';
+import { withRouter} from 'react-router-dom';
+import styled from 'styled-components';
+
+
 import BaseImage from "views/components/BaseImage";
 import BaseCard from "views/components/BaseCard";
-import { useSelector } from "react-redux";
 
 import RouterLink from "views/components/RouterLink";
 import ModalLink from "views/components/ModalLink";
-import { makeStyles } from "@material-ui/styles";
-import { selectors } from "core/reducers/index";
+
+
 import BaseCardHeader from "views/components/BaseCardHeader";
 import MovieRatingTag from "./MovieRatingTag";
 import { getAspectRatioString } from "./AspectRatio";
 import { useConfiguration } from "./ConfigurationProvider";
 
 
-import { connect } from 'react-redux';
-import styled from 'styled-components';
-import { withRouter} from 'react-router-dom';
 import Button from 'views/components/Button';
 import LikeIcon from 'views/components/LikeIcon';
-import {screenLargerThan} from "views/style/util"
+import { screenLargerThan } from "views/style/util"
 // import { likePhoto, unLikePhoto } from '../../actions/photo';
+
 import { fetchLikeAlbum, fetchUnLikeAlbum } from "core/actions";
-import {
-  primaryColor1,
-  white,
-  likeColor,
-  greenColor,
-} from 'views/style/colors';
+import { selectors } from "core/reducers/index";
+import { primaryColor1, white, likeColor, greenColor, } from 'views/style/colors';
 
 
-const useStyles = makeStyles(theme => ({
-  link: {
-    textDecoration: "none"
-  }
-}));
+
 
 const LikedBtn = styled(Button)`
   display: flex;
@@ -78,7 +72,7 @@ const LikesCounter = styled.span`
 `;
 
 function AlbumCard({ albumId, subheader, handleLikePhoto, handleUnLikePhoto }) {
-  const classes = useStyles();
+  // const classes = useStyles();
   const album = useSelector(state => selectors.selectAlbum(state, albumId));
   const { getImageUrl } = useConfiguration();
 

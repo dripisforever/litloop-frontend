@@ -13,7 +13,7 @@ import GalleryFineUploader from "views/components/upload/GalleryFineUploader";
 import LargeFileUpload from "views/components/upload/LargeFileUpload";
 import ChunkUpload from "views/components/upload/ChunkUpload";
 
-import ModalMui from "views/components/ModalMui";
+import ModalCustom from "views/components/ModalCustom";
 import ModalRoute from "views/components/ModalRoute";
 import ModalMovie from "views/components/ModalMovie";
 import ModalMovies from "views/components/ModalMovies";
@@ -334,23 +334,11 @@ function ModalSwitch({  children, renderModal, stopSong, pauseSong, resumeSong, 
         {/*{children}*/}
         {/*<Route exact path="/movies" component={PopularMovies} />*/}
 
-        <Route path="/login" render={props =>
-          auth ? (
-
-            <Redirect
-              to={{
-                pathname: '/movies',
-              }}
-            />
-
-          ) : (
-            <LoginPage {...props} />
-            // <LoginPageOauth {...props} />
-        )} />
+        <Route path="/login" render={props => auth ? ( <Redirect to={{pathname: '/movies',}} /> ) : ( <LoginPage {...props} /> )} />
 
         {/*<Route path="/auth/twitch/callback" element={<TwitchAuthCallback />} />*/}
-        <Route path="/auth/twitch/callback" component={TwitchAuthCallback} />
-        {/*<Route exact path="/auth/google/callback" component={GoogleAuthCallback} />*/}
+        {/*<Route path="/auth/twitch/callback" component={TwitchAuthCallback} />*/}
+        {/*<Route path="/auth/google/callback" component={GoogleAuthCallback} />*/}
         {/*<Route exact path="/auth/spotify/callback" component={SpotifyAuthCallback} />*/}
 
         {/*<Route exact path="/auth/youtube/callback" component={YoutubeAuthCallback} />*/}
@@ -359,7 +347,7 @@ function ModalSwitch({  children, renderModal, stopSong, pauseSong, resumeSong, 
         {/*<Route  path="/auth/unsplash/callback" element={<UnsplashCallback />} />*/}
 
 
-        <Route element={<OAuthPopup />} path="/auth/provider/callback" />
+        {/*<Route element={<OAuthPopup />} path="/auth/provider/callback" />*/}
 
         {/*<Route exact path="/auth/callback" component={OAuthCallback} />*/}
 
@@ -380,14 +368,21 @@ function ModalSwitch({  children, renderModal, stopSong, pauseSong, resumeSong, 
 
 
         {/*<Route exact path="/album" component={ModalMovies} />*/}
-        {/*<Route path="/movies/:id" component={ModalMovie} />*/}
+        <Route path="/movies/:id" component={ModalMovie} />
         {/*<Route path="/movies/:id" component={MovieCard} />*/}
         {/*<Route path="/album/:albumId" component={AlbumProfile}/>*/}
         {/*<Route path="/track/:trackId" component={TrackProfile}/>*/}
 
 
         <Route path="/movies/:movieId" component={MovieProfile} />
-
+        {/*<Route path="/movies/:movieId">
+          <MovieProfile
+            stopSong={stopSong}
+            pauseSong={pauseSong}
+            resumeSong={resumeSong}
+            audioControl={audioControl}
+          />
+        </Route>*/}
         <Route exact path="/search/:searchType">
           <SearchResults />
         </Route>

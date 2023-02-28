@@ -1,3 +1,5 @@
+// REFERENCE https://markmurray.co/blog/view-tracking-with-react/
+
 import React, { Component } from 'react'
 import { findDOMNode } from 'react-dom'
 import PropTypes from 'prop-types'

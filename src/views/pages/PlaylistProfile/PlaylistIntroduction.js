@@ -4,8 +4,9 @@ import { Link, withRouter } from "react-router-dom";
 import styled from 'styled-components';
 
 
-// MATERIAL UNDONE
-import { Typography, Box, Grid, makeStyles } from "@material-ui/core";
+// MATERIAL DONE
+// import { Typography, Box, Grid, makeStyles } from "@mui/material";
+import { StyledTypography, StyledBox, StyledGrid } from 'views/styledComponents';
 
 
 // VIEWS
@@ -34,20 +35,20 @@ import { selectors } from "core/reducers/index";
 import { fetchLikePlaylist, fetchUnLikePlaylist } from "core/actions";
 
 
-const useStyles = makeStyles(theme => ({
-  year: {
-    color: theme.palette.text.secondary
-  },
-  tagline: {
-    fontStyle: "italic"
-  },
-  genreChip: {
-    margin: theme.spacing(0.5)
-  },
-  overview: {
-    whiteSpace: "pre-wrap"
-  }
-}));
+// const useStyles = makeStyles(theme => ({
+//   year: {
+//     color: theme.palette.text.secondary
+//   },
+//   tagline: {
+//     fontStyle: "italic"
+//   },
+//   genreChip: {
+//     margin: theme.spacing(0.5)
+//   },
+//   overview: {
+//     whiteSpace: "pre-wrap"
+//   }
+// }));
 
 
 const LikedBtn = styled(Button)`
@@ -96,7 +97,7 @@ const LikesCounter = styled.span`
 function PlaylistIntroduction({ playlistId, handleLikePhoto, handleUnLikePhoto }) {
   const playlist = useSelector(state => selectors.selectPlaylist(state, playlistId));
   const tracks = useSelector(state => selectors.selectPlaylistTracks(state, playlistId));
-  const classes = useStyles();
+  // const classes = useStyles();
 
   // function handleLoadMore() {
   //   dispatch(fetchPopularMovies(nextPage));
@@ -161,37 +162,37 @@ function PlaylistIntroduction({ playlistId, handleLikePhoto, handleUnLikePhoto }
       backgroundImageSrc={playlist.images[0] ? playlist.images[0].url : ""}
       imageSrc={
         <>
-          <Box flexBasis={100}>
+          <div flexBasis={100}>
             <BaseImage
               src={playlist.images[0] ? playlist.images[0].url : ""}
               aspectRatio={getAspectRatioString(1, 1)}
             />
-          </Box>
+          </div>
         </>
       }
       title={
         <>
-          <Typography variant="h5" gutterBottom={!playlist.tagline}>
+          <StyledTypography variant="h5" gutterBottom={!playlist.tagline}>
             {playlist.name} by {playlist.owner.display_name}
 
 
-          </Typography>
+          </StyledTypography>
           {playlist.tagline && (
-            <Typography
-              className={classes.tagline}
+            <StyledTypography
+              // className={classes.tagline}
               color="textSecondary"
               gutterBottom
             >
               {`"${playlist.tagline}"`}
-            </Typography>
+            </StyledTypography>
           )}
         </>
       }
       content={
         <>
-          <Grid container spacing={2}>
-            <Grid item xs={12}>
-              <Box display="flex" alignItems="center">
+          <StyledGrid container spacing={2}>
+            <StyledGrid item xs={12}>
+              <StyledGrid display="flex" alignItems="center">
                 {/*{playlist.tracks.items.map((item) => (
                   <SongRow
                     // playSong={playSong}
@@ -199,11 +200,11 @@ function PlaylistIntroduction({ playlistId, handleLikePhoto, handleUnLikePhoto }
                     />
                 ))}*/}
 
-              </Box>
-            </Grid>
+              </StyledGrid>
+            </StyledGrid>
 
 
-          </Grid>
+          </StyledGrid>
         </>
       }
       likeButton={

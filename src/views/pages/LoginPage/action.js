@@ -12,7 +12,7 @@ const twitch_query = {
   scope: 'user:read:follows clips:edit',
 };
 const twitch_basic_url = "https://id.twitch.tv/oauth2/authorize?"
-const twitch_oauthurl = twitch_basic_url + queryString.stringify(twitch_query)
+export const twitch_oauthurl = twitch_basic_url + queryString.stringify(twitch_query)
 export const twitchSignInAction = () => () => {
 
   // openSignInWindow(twitch_oauthurl + "&scope=profile email", "SignIn");
@@ -27,10 +27,11 @@ const google_query = {
   redirect_uri: "http://localhost:3001/auth/google/callback",
   response_type: 'code',
 };
-const google_basic_url = "https://accounts.google.com/o/oauth2/auth?"
-const google_oauthurl = google_basic_url + queryString.stringify(google_query)
+const GOOGLE_ROOT_OAUTH = "https://accounts.google.com/o/oauth2/auth?"
+export const GOOGLE_OAUTH = GOOGLE_ROOT_OAUTH + queryString.stringify(google_query)
+
 export const googleSignInAction = () => () => {
-  openSignInWindow(google_oauthurl + "&scope=profile email", "SignIn");
+  openSignInWindow(GOOGLE_OAUTH + "&scope=profile email", "SignIn");
   // openSignInWindow(REACT_APP_SERVER_URL + "/users/google", "SignIn");
 };
 
@@ -45,7 +46,7 @@ const spotify_query = {
   // state: csrfState,
 };
 const spotify_url = "https://accounts.spotify.com/authorize?"
-const spotifyOAuthurl = spotify_url + queryString.stringify(spotify_query)
+export const spotifyOAuthurl = spotify_url + queryString.stringify(spotify_query)
 export const spotifySignInAction = () => () => {
   openSignInWindow(spotifyOAuthurl + "&scope", "SignIn");
   // openSignInWindow(REACT_APP_SERVER_URL + "/auth/spotify", "SignIn");
@@ -62,7 +63,7 @@ const apple_query = {
   state: 'eyJ1c2VyX3VybCI6Imh0dHBzOlwvXC9hcGkudmMucnVcL3YzLjBcL2F1dGhcL2FwcGxlP3N0YXRlPWprWGc2TVlGRVM1Q3RmVkdNUFBlOGR4Z0VzNVV1diJ9',
 };
 const apple_basic_url = `https://appleid.apple.com/auth/authorize?`;
-const apple_oauthurl = apple_basic_url + queryString.stringify(apple_query)
+export const apple_oauthurl = apple_basic_url + queryString.stringify(apple_query)
 export const appleSignInAction = () => () => {
   // openSignInWindow(apple_oauthurl + "&scope=name email", "SignIn");
   openSignInWindow(apple_oauthurl, "SignIn");
@@ -80,7 +81,7 @@ const deezer_query = {
   // state: csrfState,
 };
 const deezer_basic_url = "https://connect.deezer.com/oauth/auth.php?"
-const deezer_oauthurl = deezer_basic_url + queryString.stringify(deezer_query)
+export const deezer_oauthurl = deezer_basic_url + queryString.stringify(deezer_query)
 export const deezerSignInAction = () => () => {
   openSignInWindow(deezer_oauthurl, "SignIn");
   // openSignInWindow(REACT_APP_SERVER_URL, "SignIn");
@@ -102,7 +103,7 @@ const unsplash_query = {
 };
 
 const unsplash_basic_url = "https://unsplash.com/oauth/authorize?"
-const unsplash_oauthurl = unsplash_basic_url + queryString.stringify(unsplash_query)
+export const unsplash_oauthurl = unsplash_basic_url + queryString.stringify(unsplash_query)
 
 export const unsplashSignInAction = () => () => {
   openSignInWindow(unsplash_oauthurl, "SignIn");
@@ -139,7 +140,7 @@ const vk_query = {
   // state: csrfState,
 };
 const vk_basic_url = "https://oauth.vk.com/authorize?"
-const vk_oauthurl = vk_basic_url + queryString.stringify(vk_query)
+export const vk_oauthurl = vk_basic_url + queryString.stringify(vk_query)
 export const vkSignInAction = () => () => {
   openSignInWindow(vk_oauthurl + "&scope=public+read_photos+write_likes+read_collections+write_collections", "SignIn");
   openSignInWindow(REACT_APP_SERVER_URL + "/auth/vk", "SignIn");

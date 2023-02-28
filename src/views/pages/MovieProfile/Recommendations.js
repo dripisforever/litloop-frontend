@@ -1,10 +1,16 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchRecommendations } from "core/actions";
-import { selectors } from "core/reducers/index";
-import { useTheme } from "@material-ui/styles";
+
+// MATERIAL DONE
+// import { useTheme } from "@mui/material/styles";
+
+
 import MovieCard from "views/components/MovieCard";
 import BaseGridList from "views/components/BaseGridList";
+
+import { fetchRecommendations } from "core/actions";
+import { selectors } from "core/reducers/index";
+
 
 function renderItem(recommendationId) {
   return (
@@ -15,7 +21,7 @@ function renderItem(recommendationId) {
 }
 
 function Recommendations({ movieId }) {
-  const theme = useTheme();
+  // const theme = useTheme();
   const dispatch = useDispatch();
   const recommendationIds = useSelector(
     state => selectors.selectMovieRecommendations(state, movieId) || []
@@ -54,7 +60,7 @@ function Recommendations({ movieId }) {
       items={recommendationIds}
       loading={isFetching}
       renderItem={renderItem}
-      minItemWidth={260 / 2 - theme.spacing(2)}
+      // minItemWidth={260 / 2 - theme.spacing(2)}
       listEmptyMessage="No recommendation has been found"
     />
   );

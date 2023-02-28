@@ -1,31 +1,54 @@
 import React, { useEffect, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Drawer, makeStyles, List } from "@material-ui/core";
-import { toggleDrawer, fetchLogout } from "core/actions";
-import MovieIcon from "@material-ui/icons/LocalMovies";
-import PersonIcon from "@material-ui/icons/RecentActors";
-import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-import FavoriteIcon from '@material-ui/icons/Favorite';
+import { useLocation } from "react-router-dom";
+import styled from "styled-components";
 
-import { ListItemIcon, ListItemText, ListItem } from "@material-ui/core";
+// MATERIAL DONE
+// import { Drawer, List } from "@mui/material";
+// import { makeStyles } from "@mui/material/styles";
+// import MovieIcon from "@mui/icons-material/LocalMovies";
+// import PersonIcon from "@mui/icons-material/RecentActors";
+// import ExitToAppIcon from '@mui/icons-material/ExitToApp';
+// import FavoriteIcon from '@mui/icons-material/Favorite';
+// import { ListItemIcon, ListItemText, ListItem } from "@mui/material";
+import { StyledList, StyledListItem, StyledListItemIcon, StyledListItemText,  } from 'views/styledComponents';
 
 import { selectors } from "core/reducers/index";
+import { toggleDrawer, fetchLogout } from "core/actions";
+import useSelectAuthUser from "core/hooks/useSelectAuthUser";
+import { getState } from 'core/store';
+
+
+
 import AppDrawerItem from "views/components/AppDrawerItem";
 import RouterLink from "views/components/RouterLink";
 
-import { getState } from 'core/store';
+// const useStyles = makeStyles(theme => ({
+//   drawerPaper: {
+//     width: 240
+//   }
+// }));
 
-import { useLocation } from "react-router-dom";
-import useSelectAuthUser from "core/hooks/useSelectAuthUser";
+const StyledDrawer = styled.div`
 
-const useStyles = makeStyles(theme => ({
-  drawerPaper: {
-    width: 240
-  }
-}));
+`;
+
+
+const StyledMovieIcon = styled.div`
+
+`;
+const StyledPersonIcon = styled.div`
+
+`;
+const StyledExitToAppIcon = styled.div`
+
+`;
+const StyledFavoriteIcon = styled.div`
+
+`;
 
 function AppDrawer() {
-  const classes = useStyles();
+  // const classes = useStyles();
   const location = useLocation();
   const dispatch = useDispatch();
   const isOpen = useSelector(state => selectors.selectIsDrawerOpen(state));
@@ -53,50 +76,50 @@ function AppDrawer() {
   // const { isSignedIn, isFetching, authUser } = useSelectAuthUser();
 
   return (
-    <Drawer
+    <StyledDrawer
       open={isOpen}
       anchor="right"
-      classes={{ paper: classes.drawerPaper }}
+      // classes={{ paper: classes.drawerPaper }}
       onClose={handleClose}
     >
-      <List>
+      <StyledList>
         { authUser.access_token &&
-          <ListItem
+          <StyledListItem
             button
             to={'/liked'}
             component={RouterLink}
 
           >
-            <ListItemIcon><FavoriteIcon/></ListItemIcon>
-            <ListItemText primary={"Liked"} />
-          </ListItem>
+            <StyledListItemIcon><StyledFavoriteIcon/></StyledListItemIcon>
+            <StyledListItemText primary={"Liked"} />
+          </StyledListItem>
         }
 
         { authUser.access_token &&
-          <ListItem
+          <StyledListItem
             button
             to={'/movies'}
             component={RouterLink}
             onClick={handleLogOut}
           >
-            <ListItemIcon><ExitToAppIcon/></ListItemIcon>
-            <ListItemText primary={"Logout"} />
-          </ListItem>
+            <StyledListItemIcon><StyledExitToAppIcon/></StyledListItemIcon>
+            <StyledListItemText primary={"Logout"} />
+          </StyledListItem>
         }
 
         { !authUser.access_token &&
-          <ListItem
+          <StyledListItem
             button
             to={'/login'}
             component={RouterLink}
 
           >
-            <ListItemIcon><ExitToAppIcon/></ListItemIcon>
-            <ListItemText primary={"SignIn"} />
-          </ListItem>
+            <StyledListItemIcon><StyledExitToAppIcon/></StyledListItemIcon>
+            <StyledListItemText primary={"SignIn"} />
+          </StyledListItem>
         }
-      </List>
-    </Drawer>
+      </StyledList>
+    </StyledDrawer>
   );
 }
 

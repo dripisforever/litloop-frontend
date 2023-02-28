@@ -1,14 +1,20 @@
 import React, { useEffect } from "react";
-import { Typography } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchAlbum } from "core/actions";
 import { useParams } from "react-router-dom";
+
+// MATERIAL DONE
+// import { Typography } from "@mui/material";
+import { StyledTypography } from 'views/styledComponents';
+
+// VIEWS
 import Profile from "views/components/Profile";
 import AlbumIntroduction from "./AlbumIntroduction";
 // import AlbumImageGridList from "./AlbumImageGridList";
 // import AlbumVideoList from "./AlbumVideoList";
 import AlbumCastGridList from "./AlbumCastGridList";
 import SimilarAlbums from "./SimilarAlbums";
+
+import { fetchAlbum } from "core/actions";
 import { selectors } from "core/reducers/index";
 import { verifyCachedData } from "core/utils";
 
@@ -35,12 +41,12 @@ function AlbumProfile({stopSong, pauseSong, resumeSong, audioControl}) {
       main={
         <>
 
-          <Typography variant="h6" gutterBottom>
+          <StyledTypography variant="h6" gutterBottom>
             Images
-          </Typography>
-          <Typography variant="h6" gutterBottom>
+          </StyledTypography>
+          <StyledTypography variant="h6" gutterBottom>
             Recommendations
-          </Typography>
+          </StyledTypography>
 
         </>
       }

@@ -6,7 +6,10 @@ const Container = styled.div`
   /* margin-top: 60px; */
 
   /* margin-top: 2em; */
-  padding-top: 1em;
+  body {
+    margin: 0px;
+  }
+  padding-top: 5em;
   padding-left: 1em;
   padding-bottom: 6em;
   background-color: #181818;
@@ -15,6 +18,7 @@ const Container = styled.div`
   @media screen and (max-width: 1093px) {
     margin-left: 0;
   }
+
 `;
 
 export default Container;

@@ -9,20 +9,15 @@ const Input = styled.input`
   /* background-color: ${inputBgColor}; */
   border: none;
   background-color: #2b2b2b;
-  /* background-color: ${props =>
-    props.msgColor ? lighten(0.27, props.msgColor) : inputBgColor};
-  border: ${props =>
-    props.msgColor
-      ? `1px solid${darken(0.1, props.msgColor)}`
-      : '1px solid transparent'};
-       */
+  /* background-color: ${props => props.msgColor ? lighten(0.27, props.msgColor) : inputBgColor};
+  border: ${props => props.msgColor ? `1px solid${darken(0.1, props.msgColor)}`: '1px solid transparent'}; */
   box-shadow: none;
   position: relative;
   padding: 12px;
   height: 36px;
   width: ${props => (props.fullWidth ? '100%' : '65%')};
   /* width: ${props => (props.fullWidth ? '100%' : '810px')}; */
-  border-radius: ${props => (props.rounded ? '20px' : '3px')};
+  border-radius: ${props => (props.rounded ? '10px' : '3px')};
   box-sizing: border-box;
   font-family: inherit;
   font-size: 14px;
@@ -31,40 +26,22 @@ const Input = styled.input`
   line-height: 16px;
   color: white;
   /* color: ${textColor2}; */
-  ${props =>
-    props.disabled
-      ? `
-    opacity: 0.6;
-  `
-      : ``} &:focus {
+  ${props => props.disabled ? `opacity: 0.6;` : ``} &:focus {
     border-color: ${darken(0.1, inputBgColor)};
     color: black;
-    background-color: ${props =>
-      props.msgColor
-        ? lighten(0.27, props.msgColor)
-        : lighten(0.07, inputBgColor)};
-    -webkit-box-shadow: 0 0 0 1000px
-      ${props =>
-        props.msgColor
-          ? lighten(0.27, props.msgColor)
-          : lighten(0.07, inputBgColor)}
-      inset !important;
+    background-color: ${props => props.msgColor ? lighten(0.27, props.msgColor) : lighten(0.07, inputBgColor)};
+    -webkit-box-shadow: 0 0 0 1000px ${props => props.msgColor ? lighten(0.27, props.msgColor) : lighten(0.07, inputBgColor)} inset !important;
   }
   &:-webkit-autofill {
-    -webkit-box-shadow: 0 0 0 1000px
-      ${props =>
-        props.msgColor ? lighten(0.27, props.msgColor) : inputBgColor}
-      inset;
+    -webkit-box-shadow: 0 0 0 1000px ${props => props.msgColor ? lighten(0.27, props.msgColor) : inputBgColor} inset;
   }
 `;
 
 const AreaInput = styled.textarea`
   resize: none;
-  background-color: ${props =>
-    props.msgColor ? lighten(0.27, props.msgColor) : inputBgColor};
+  background-color: ${props => props.msgColor ? lighten(0.27, props.msgColor) : inputBgColor};
   width: ${props => (props.fullWidth ? '100%' : 'none')};
-  border: ${props =>
-    props.msgColor ? `1px solid${darken(0.1, props.msgColor)}` : '0px'};
+  border: ${props => props.msgColor ? `1px solid${darken(0.1, props.msgColor)}` : '0px'};
   box-shadow: none;
   position: relative;
   border-radius: 3px;
@@ -75,17 +52,9 @@ const AreaInput = styled.textarea`
   font-weight: normal;
   outline: none;
   color: ${textColor2};
-  ${props =>
-    props.disabled
-      ? `
-    opacity: 0.6;
-  `
-      : ``} &:focus {
+  ${props => props.disabled ? `opacity: 0.6;` : ``} &:focus {
     outline: ${`${darken(0.35, inputBgColor)} auto 1px !important`};
-    background-color: ${props =>
-      props.msgColor
-        ? `${props.msgColor} !important`
-        : `${lighten(0.07, inputBgColor)} !important`};
+    background-color: ${props => props.msgColor ? `${props.msgColor} !important` : `${lighten(0.07, inputBgColor)} !important`};
   }
 `;
 
@@ -152,6 +121,7 @@ const TextInput = ({
         type="text"
         disabled={disabled}
         placeholder={hintText}
+        className={className}
         rounded={rounded}
         msgColor={message ? msgColor : void 0}
         fullWidth={fullWidth}

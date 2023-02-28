@@ -1,8 +1,13 @@
 import React from "react";
-import { Typography } from "@material-ui/core";
 import { useSelector } from "react-redux";
-import { selectors } from "core/reducers/index";
+
+// MATERIAL DONE
+// import { Typography } from "@mui/material";
+import { StyledTypography } from 'views/styledComponents';
+
 import TextWithLabel from "views/components/TextWithLabel";
+
+import { selectors } from "core/reducers/index";
 
 function ArtistInfo({ artistId }) {
   const artist = useSelector(state => selectors.selectArtist(state, artistId));
@@ -28,7 +33,7 @@ function ArtistInfo({ artistId }) {
         <TextWithLabel
           label="Also Known As"
           text={artist.also_known_as.map(alias => (
-            <Typography key={alias}>{alias}</Typography>
+            <StyledTypography key={alias}>{alias}</StyledTypography>
           ))}
         />
       ) : null}

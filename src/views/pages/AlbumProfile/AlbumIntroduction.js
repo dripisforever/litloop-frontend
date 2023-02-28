@@ -1,52 +1,53 @@
 import React from "react";
-import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
-import { selectors } from "core/reducers/index";
-import { Typography, makeStyles, Box, Grid } from "@material-ui/core";
-// import { Typography, makeStyles, Box, Grid, Link } from "@material-ui/core";
-import Rating from "./Rating";
-// import { getAlbumReleaseYear, getImdbProfileUrl } from "core/utils";
-import Introduktion from "views/components/Introduktion";
-import ImdbLogo from "views/components/ImdbLogo";
-import AlbumGenreChip from "./AlbumGenreChip";
-
-import useDocumentTitle from "views/components/useDocumentTitle"
-
-import { connect } from 'react-redux';
+import { connect, useSelector } from "react-redux";
+import { Link, withRouter } from "react-router-dom";
 import styled from 'styled-components';
-import { withRouter} from 'react-router-dom';
+
+// MATERIAL DONE
+// import { Typography, Box, Grid, makeStyles } from "@mui/material";
+import { StyledTypography, StyledBox, StyledGrid } from 'views/styledComponents';
+// import { Typography, makeStyles, Box, Grid, Link } from "@mui/material";
+// import { makeStyles, Box, Typography } from "@mui/material";
+
+import Rating from "./Rating";
+import Introduktion from "views/components/Introduktion";
+// import ImdbLogo from "views/components/ImdbLogo";
+import AlbumGenreChip from "./AlbumGenreChip";
+import BaseImage from "views/components/BaseImage";
 import Button from 'views/components/Button';
 import LikeIcon from 'views/components/LikeIcon';
-import {screenLargerThan} from "views/style/util"
-// import { likePhoto, unLikePhoto } from '../../actions/photo';
-import { fetchLikeAlbum, fetchUnLikeAlbum } from "core/actions";
-import {
-  primaryColor1,
-  white,
-  likeColor,
-  greenColor,
-} from 'views/style/colors';
+// import useDocumentTitle from "views/components/useDocumentTitle"
 
-
-import BaseImage from "views/components/BaseImage";
-// import { makeStyles, Box, Typography } from "@material-ui/core";
 import { getAspectRatioString } from "views/components/AspectRatio";
 import { useConfiguration } from "views/components/ConfigurationProvider";
 
-const useStyles = makeStyles(theme => ({
-  year: {
-    color: theme.palette.text.secondary
-  },
-  tagline: {
-    fontStyle: "italic"
-  },
-  genreChip: {
-    margin: theme.spacing(0.5)
-  },
-  overview: {
-    whiteSpace: "pre-wrap"
-  }
-}));
+import { screenLargerThan } from "views/style/util"
+import { primaryColor1, white, likeColor, greenColor, } from 'views/style/colors';
+
+// CORE
+import { selectors } from "core/reducers/index";
+// import { likePhoto, unLikePhoto } from '../../actions/photo';
+import useDocumentTitle from "core/hooks2/useDocumentTitle"
+import { fetchLikeAlbum, fetchUnLikeAlbum } from "core/actions";
+
+
+// import { getAlbumReleaseYear, getImdbProfileUrl } from "core/utils";
+
+
+// const useStyles = makeStyles(theme => ({
+//   year: {
+//     color: theme.palette.text.secondary
+//   },
+//   tagline: {
+//     fontStyle: "italic"
+//   },
+//   genreChip: {
+//     margin: theme.spacing(0.5)
+//   },
+//   overview: {
+//     whiteSpace: "pre-wrap"
+//   }
+// }));
 
 
 
@@ -55,9 +56,8 @@ const LikedBtn = styled(Button)`
   display: flex;
   align-items: center;
   margin: 0;
-  ${props =>
-    props.likedByUser &&
-    `
+  ${props => props.likedByUser &&
+  `
     background-color: ${likeColor};
     color: ${white};
     &:hover {
@@ -96,8 +96,9 @@ const LikesCounter = styled.span`
 
 function AlbumIntroduction({ albumId, handleLikePhoto, handleUnLikePhoto }) {
   const album = useSelector(state => selectors.selectAlbum(state, albumId));
-  const classes = useStyles();
+  // const classes = useStyles();
 
+  // useDocumentTitle(album.name);
   function intersperse(arr, sep) {
       if (arr.length === 0) {
           return [];
@@ -194,17 +195,17 @@ function AlbumIntroduction({ albumId, handleLikePhoto, handleUnLikePhoto }) {
       backgroundImageSrc={album.images[0] ? album.images[0].url : ""}
       imageSrc={
         <>
-          <Box flexBasis={500}>
+          <StyledBox flexBasis={500}>
             <BaseImage
               src={album.images[0] ? album.images[0].url : ""}
               aspectRatio={getAspectRatioString(1, 1)}
             />
-          </Box>
+          </StyledBox>
         </>
       }
       title={
         <>
-          <Typography variant="h5" gutterBottom={!album.tagline}>
+          <StyledTypography variant="h5" gutterBottom={!album.tagline}>
             {album.name} by {album.artists.map((artist, i) =>
                 <span key={i}>
                   {i > 0 && ", "}
@@ -228,23 +229,23 @@ function AlbumIntroduction({ albumId, handleLikePhoto, handleUnLikePhoto }) {
             {/*{linkList}*/}
 
 
-          </Typography>
+          </StyledTypography>
           {album.tagline && (
-            <Typography
-              className={classes.tagline}
+            <StyledTypography
+              // className={classes.tagline}
               color="textSecondary"
               gutterBottom
             >
               {`"${album.tagline}"`}
-            </Typography>
+            </StyledTypography>
           )}
         </>
       }
       content={
         <>
-          <Grid container spacing={2}>
-            <Grid item xs={12}>
-              <Box display="flex" alignItems="center">
+          <StyledGrid container spacing={2}>
+            <StyledGrid item xs={12}>
+              <StyledBox display="flex" alignItems="center">
                 {/*<Rating value={album.vote_average * 10} />
                 <Box marginLeft={2}>
                   <Link
@@ -265,11 +266,11 @@ function AlbumIntroduction({ albumId, handleLikePhoto, handleUnLikePhoto }) {
                   {
                     album.artists[0].name}
                 </Link>*/}
-              </Box>
-            </Grid>
+              </StyledBox>
+            </StyledGrid>
 
 
-          </Grid>
+          </StyledGrid>
         </>
       }
       likeButton={

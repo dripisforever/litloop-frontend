@@ -1,3 +1,4 @@
+// V5
 import React from "react";
 import { Route, Redirect } from "react-router-dom";
 import PopularMovies from "views/pages/PopularMovies";
@@ -8,7 +9,7 @@ import PopularPeople from "views/pages/PopularPeople";
 import SearchResults from "views/pages/SearchResults";
 import SwitchWithScrollRestoration from "views/components/SwitchWithScrollRestoration";
 
-function Routes() {
+function LegacyRoutes() {
   return (
     <SwitchWithScrollRestoration>
       <Route exact path="/search/:searchType">
@@ -17,12 +18,15 @@ function Routes() {
       <Route exact path="/movies">
         <PopularMovies />
       </Route>
+
+      <Route exact path="/people">
+        <PopularPeople />
+      </Route>
+      
       <Route path="/movies/:movieId">
         <MovieProfile />
       </Route>
-      <Route exact path="/person/popular">
-        <PopularPeople />
-      </Route>
+
       <Route path="/person/:personId">
         <PersonProfile />
       </Route>
@@ -37,4 +41,4 @@ function Routes() {
   );
 }
 
-export default Routes;
+export default LegacyRoutes;

@@ -3,83 +3,86 @@ import styled from 'styled-components';
 
 import Downshift from "downshift";
 
-// MATERIAL UNDONE
-import { makeStyles } from "@material-ui/core/styles";
-import TextField from "@material-ui/core/TextField";
-import Paper from "@material-ui/core/Paper";
-import { InputAdornment, IconButton } from "@material-ui/core";
-import SearchIcon from "@material-ui/icons/Search";
+// MATERIAL DONE
+// import { makeStyles } from "@mui/material/styles";
+// import { TextField, Paper, InputAdornment, IconButton } from "@mui/material";
+// import SearchIcon from "@mui/icons-material/Search";
 
 
 // VIEWS
 import TextInput from 'views/components/SearchBar/TextField';
 import LoadingIndicator from "views/components/LoadingIndicator";
-import clsx from "clsx";
+// import clsx from "clsx";
 import AutoSearchSuggestion from "./AutoSearchSuggestion";
 
-const PaperStyledSuggestion = styled.div`
+
+// const useStyles = makeStyles(theme => ({
+//   container: {
+//     flexGrow: 1,
+//     position: "relative"
+//   },
+//   paper: {
+//     position: "absolute",
+//     zIndex: 1,
+//     marginTop: theme.spacing(1),
+//     left: 0,
+//     right: 0,
+//     maxHeight: 380,
+//     overflow: "auto"
+//   },
+//   inputInput: {
+//     width: "auto",
+//     flexGrow: 1
+//   },
+//
+//   root: {
+//     "& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
+//       // borderColor: "green"
+//     },
+//     "&:hover .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
+//       // borderColor: "red"
+//     },
+//     "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline": {
+//       borderColor: "white"
+//     },
+//     "& .MuiOutlinedInput-input": {
+//       // color: "green"
+//     },
+//     "&:hover .MuiOutlinedInput-input": {
+//       // color: "red"
+//     },
+//     "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-input": {
+//       // color: "purple"
+//     },
+//     "& .MuiInputLabel-outlined": {
+//       // color: "green"
+//     },
+//     "&:hover .MuiInputLabel-outlined": {
+//       // color: "red"
+//     },
+//     "& .MuiInputLabel-outlined.Mui-focused": {
+//       color: "white"
+//     }
+//   },
+// }));
+
+const StyledTextField = styled.input`
+
+`;
+const StyledAutoSearchSuggestion = styled.div`
   position: absolute;
   z-index: 1;
   margin-top: 10px;
   /* left: 0; */
   /* right: 0; */
   max-height: 380px;
+  width: 50%;
   /* overflow: auto; */
 `;
-const useStyles = makeStyles(theme => ({
-  container: {
-    flexGrow: 1,
-    position: "relative"
-  },
-  paper: {
-    position: "absolute",
-    zIndex: 1,
-    marginTop: theme.spacing(1),
-    left: 0,
-    right: 0,
-    maxHeight: 380,
-    overflow: "auto"
-  },
-  inputInput: {
-    width: "auto",
-    flexGrow: 1
-  },
+const StyledPaper = styled.div`
 
-  root: {
-    "& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
-      // borderColor: "green"
-    },
-    "&:hover .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
-      // borderColor: "red"
-    },
-    "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline": {
-      borderColor: "white"
-    },
-    "& .MuiOutlinedInput-input": {
-      // color: "green"
-    },
-    "&:hover .MuiOutlinedInput-input": {
-      // color: "red"
-    },
-    "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-input": {
-      // color: "purple"
-    },
-    "& .MuiInputLabel-outlined": {
-      // color: "green"
-    },
-    "&:hover .MuiInputLabel-outlined": {
-      // color: "red"
-    },
-    "& .MuiInputLabel-outlined.Mui-focused": {
-      color: "white"
-    }
-  },
-}));
-
-// const TextFieldStyled = styled.input`
-//
-// `;
-const PaperStyled = styled.div`
+`;
+const Container = styled.div`
 
 `;
 
@@ -90,8 +93,7 @@ const SearchTx = styled(TextInput)`
   border: 0;
   // margin-right: 25em;
 `;
-
-const Containerz = styled.div`
+const StyledSearchIcon = styled.div`
 
 `;
 
@@ -109,7 +111,7 @@ function AutoSearch({
   autoFocus,
   extractSuggestionKey
 }) {
-  const classes = useStyles();
+  // const classes = useStyles();
 
   function handleInputChange(event) {
     const value = event.target.value;
@@ -118,7 +120,7 @@ function AutoSearch({
   // const q = new URLSearchParams(window.location.search).get('query');
   return (
     <Downshift
-      inputValue={inputValue}
+      inputValue={inputValue || ''}
       onSelect={onItemSelect}
       itemToString={item => item?.title || ""}
     >
@@ -148,7 +150,7 @@ function AutoSearch({
             className="INPUT"
             >
             <SearchTx
-              value={q}
+              value={q || ''}
               onChange={(event) => {
                 openMenu();
                 handleInputChange(event);
@@ -164,59 +166,10 @@ function AutoSearch({
             />
 
 
-            {/*<TextFieldStyled*/}
-            {/*<TextField
-              // className={classes.root}
-              value={q}
-              fullWidth={true}
-              // label={label}
-              // disableUnderline={}
-              autoFocus={autoFocus}
-
-              // id="filled-basic"
-              // label="Filled"
-              // variant="filled"
-
-              id="outlined-basic"
-              // style={{ height: "100px" }}
-              // label="Outlined"
-              variant="outlined"
-
-              InputLabelProps={getLabelProps({ shrink: true })}
-              InputProps={{
-                ...inputProps,
-                classes: {
-                  input: classes.inputInput
-                },
-                // disableUnderline: true,
-                onChange: event => {
-                  openMenu();
-                  handleInputChange(event);
-                  return onChange;
-                },
-                onBlur,
-                onFocus: e => {
-                  openMenu();
-                  return onFocus;
-                },
-                onKeyPress: e => {
-                  if (e.key === "Enter") {
-                    handlePressEnterOrSearch();
-                  }
-                },
-                endAdornment: (
-                  <InputAdornment position="end">
-                    <IconButton onClick={handlePressEnterOrSearch}>
-                      <SearchIcon />
-                    </IconButton>
-                  </InputAdornment>
-                )
-              }}
-            />*/}
 
             <div {...getMenuProps()}>
               {isOpen ? (
-                <PaperStyledSuggestion
+                <StyledAutoSearchSuggestion
                   // className={classes.paper}
                   square
                 >
@@ -238,7 +191,7 @@ function AutoSearch({
                     })}
                   {/*</LoadingIndicator>*/}
 
-                </PaperStyledSuggestion>
+                </StyledAutoSearchSuggestion>
               ) : null}
             </div>
           </div>

@@ -1,24 +1,33 @@
 import React from "react";
-import { Box, Typography, makeStyles } from "@material-ui/core";
+import styled from "styled-components";
 
-const useStyles = makeStyles(theme => ({
-  bold: {
-    fontWeight: theme.typography.fontWeightBold
-  }
-}));
+// MATERIAL DONE
+// import { Box, Typography, makeStyles } from "@mui/material";
+import { StyledBox, StyledTypography,   } from "views/styledComponents";
+
+// const useStyles = makeStyles(theme => ({
+//   bold: {
+//     fontWeight: theme.typography.fontWeightBold
+//   }
+// }));
+
+const ReStyledTypography = styled(StyledTypography)`
+  font-weight: ${props => props.theme.typography.fontWeightBold};
+`;
+
 
 function TextWithLabel({ label, text }) {
-  const classes = useStyles();
+  // const classes = useStyles();
 
   return (
-    <Box my={1}>
-      <Typography className={classes.bold}>{label}</Typography>
-      {typeof text === "string" ? (
-        <Typography variant="body2">{text}</Typography>
-      ) : (
-        text
-      )}
-    </Box>
+    <StyledBox my={1}>
+      <ReStyledTypography
+        // className={classes.bold}
+      >
+        {label}
+      </ReStyledTypography>
+      {typeof text === "string" ? (<StyledTypography variant="body2">{text}</StyledTypography>) : (text)}
+    </StyledBox>
   );
 }
 

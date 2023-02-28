@@ -1,39 +1,68 @@
 import React, { useContext } from "react";
-import { DialogContext } from "./BaseDialog";
-import { DialogTitle, Typography, Box, IconButton } from "@material-ui/core";
-import CloseIcon from "@material-ui/icons/Close";
-import { makeStyles } from "@material-ui/styles";
 
-const useStyles = makeStyles(theme => ({
-  root: {
-    padding: theme.spacing(1, 2)
-  },
-  title: {
-    flex: 1
-  },
-  closeButton: {
-    marginRight: theme.spacing(1)
-  }
-}));
+// MATERIAL DONE
+// import { DialogTitle, Typography, Box, IconButton } from "@mui/material";
+import { StyledDialogTitle, StyledTypography, StyledBox, StyledIconButton } from 'views/styledComponents';
+
+// import CloseIcon from "@mui/icons-material/Close";
+import {StyledCloseIcon} from 'views/styledComponents/icons';
+// import { makeStyles } from "@mui/material/styles";
+
+import { DialogContext } from "./BaseDialog";
+
+
+// const useStyles = makeStyles(theme => ({
+//   root: {
+//     padding: theme.spacing(1, 2)
+//   },
+//   title: {
+//     flex: 1
+//   },
+//   closeButton: {
+//     marginRight: theme.spacing(1)
+//   }
+// }));
+
+// const StyledDialogTitle = styled.title`
+//
+// `;
+// const StyledTypography = styled.p`
+//
+// `;
+// const StyledBox = styled.div`
+//
+// `;
+// const StyledIconButton = styled.button`
+//
+// `;
+
 
 function BaseDialogTitle({ title, titleRight }) {
-  const classes = useStyles();
+  // const classes = useStyles();
   const { fullScreen, closeDialog } = useContext(DialogContext);
 
   return (
-    <DialogTitle className={classes.root} disableTypography>
-      <Box display="flex" alignItems="center">
+    <StyledDialogTitle
+      // className={classes.root}
+      disableTypography
+    >
+      <StyledBox display="flex" alignItems="center">
         {fullScreen && (
-          <IconButton className={classes.closeButton} onClick={closeDialog}>
-            <CloseIcon />
-          </IconButton>
+          <StyledIconButton
+            // className={classes.closeButton}
+            onClick={closeDialog}
+          >
+            <StyledCloseIcon />
+          </StyledIconButton>
         )}
-        <Typography className={classes.title} variant="h6" noWrap>
+        <StyledTypography
+          // className={classes.title}
+          variant="h6" noWrap>
           {title}
-        </Typography>
+        </StyledTypography>
         {titleRight}
-      </Box>
-    </DialogTitle>
+      </StyledBox>
+    </StyledDialogTitle>
   );
 }
 

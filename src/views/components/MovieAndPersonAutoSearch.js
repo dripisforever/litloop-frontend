@@ -149,7 +149,7 @@ function MovieAndPersonAutoSearch({ className, autoFocus }) {
         // (<MovieListItem movieId={suggestion.id}/>)
       }
       loading={isFetching}
-      inputValue={searchValue}
+      inputValue={searchValue || ''}
       onInputValueChange={handleInputValueChange}
       onPressEnterOrClickSearch={handleRedirect}
       onItemSelect={handleSelectSuggestion}

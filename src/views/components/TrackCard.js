@@ -1,24 +1,32 @@
 import React from "react";
+import { useSelector } from "react-redux";
+import styled from "styled-components";
+
+// MATERIAL DONE
+// import { makeStyles } from "@mui/material/styles";
+
 import BaseImage from "views/components/BaseImage";
 import BaseCard from "views/components/BaseCard";
-import { useSelector } from "react-redux";
+
 import RouterLink from "views/components/RouterLink";
 import ModalLink from "views/components/ModalLink";
-import { makeStyles } from "@material-ui/styles";
-import { selectors } from "core/reducers/index";
+
+
 import BaseCardHeader from "views/components/BaseCardHeader";
 import MovieRatingTag from "./MovieRatingTag";
 import { getAspectRatioString } from "./AspectRatio";
 import { useConfiguration } from "./ConfigurationProvider";
 
-const useStyles = makeStyles(theme => ({
-  link: {
-    textDecoration: "none"
-  }
-}));
+import { selectors } from "core/reducers/index";
+
+// const useStyles = makeStyles(theme => ({
+//   link: {
+//     textDecoration: "none"
+//   }
+// }));
 
 function TrackCard({ trackId, subheader }) {
-  const classes = useStyles();
+  // const classes = useStyles();
   const track = useSelector(state => selectors.selectTrack(state, trackId));
   const { getImageUrl } = useConfiguration();
 

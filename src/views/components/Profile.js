@@ -1,35 +1,44 @@
 import React from "react";
-import { Box, makeStyles } from "@material-ui/core";
+import styled from "styled-components";
+
+// MATERIAL DONE
+// import { Box, makeStyles } from "@mui/material";
+import { StyledBox } from 'views/styledComponents';
 import LoadingIndicator from "./LoadingIndicator";
 
-const useStyles = makeStyles(theme => ({
-  flexType: {
-    width: "100%",
-  }
-}));
+// const useStyles = makeStyles(theme => ({
+//   flexType: {
+//     width: "100%",
+//   }
+// }));
 
 function Profile({ introduction, main, leftSide, rightSide, loading }) {
-  const classes = useStyles();
+  // const classes = useStyles();
   return (
     // <LoadingIndicator loading={loading}>
-      <Box>
-        <Box padding={1}>{introduction}</Box>
-        <Box  display="flex" flexWrap="wrap">
+      <StyledBox>
+        <StyledBox padding={1}>{introduction}</StyledBox>
+        <StyledBox  display="flex" >
           {leftSide && (
-            <Box flex={1} flexBasis={240} padding={1}>
+            <StyledBox flex={1} flexBasis={240} padding={1}>
               {leftSide}
-            </Box>
+            </StyledBox>
           )}
-          <Box className={classes.flexType}  flex={10} flexBasis={500} padding={1}>
+          <StyledBox
+            // className={classes.flexType}
+            flex={10}
+            flexBasis={500}
+            padding={1}
+          >
             {main}
-          </Box>
+          </StyledBox>
           {rightSide && (
-            <Box flex={1} flexBasis={260} padding={1}>
+            <StyledBox flex={1} flexBasis={260} padding={1}>
               {rightSide}
-            </Box>
+            </StyledBox>
           )}
-        </Box>
-      </Box>
+        </StyledBox>
+      </StyledBox>
     // </LoadingIndicator>
   );
 }

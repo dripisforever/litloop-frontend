@@ -1,24 +1,22 @@
-import { createMuiTheme } from "@material-ui/core";
-import { createTheme } from "@material-ui/core";
+import styled, { ThemeProvider } from 'styled-components';
 
-// const theme = createMuiTheme({
-const theme = createTheme({
-  overrides: {
-    MuiDialogContent: {
-      width: "55em",
-      color: "red",
-    },
-    MuiContainer: {
-      backgroundColor: "red",
-      display: "flex"
-    },
+const lit_theme = {
+  spacing: '8px',
+  colors: {
+
   },
-  palette: {
-    type: "dark"
+  fonts: [],
+  fontSizes: {
+
   },
-  root: {
+  fontWeights: {}
 
-  }
-});
+};
 
-export default theme;
+export default function Theme({children}) {
+  return (
+    <ThemeProvider theme={lit_theme}>
+      {children}
+    </ThemeProvider>
+  )
+}

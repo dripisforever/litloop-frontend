@@ -1,6 +1,7 @@
-import TextField from "@material-ui/core/TextField";
-import SearchIcon from "@material-ui/icons/Search";
-import { makeStyles, createStyles, fade, Theme } from "@material-ui/core/styles";
+// MATERIAL DONE
+// import TextField from "@mui/material/TextField";
+// import SearchIcon from "@mui/icons-material/Search";
+// import { makeStyles, createStyles, fade, Theme } from "@mui/material/styles";
 
 
 function AutoSearchBar({}){

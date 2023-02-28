@@ -13,11 +13,9 @@ function InfiniteList({
   keyExtractor
 }) {
   return (
-    <InfiniteScrollWrapper
-      hasNextPage={hasNextPage}
-      loading={loading}
-      onLoadMore={onLoadMore}
-    >
+    <>
+
+
       <BaseAlterList
         keyExtractor={keyExtractor}
         items={items}
@@ -26,7 +24,14 @@ function InfiniteList({
         spacing={spacing}
         renderItem={renderItem}
       />
-    </InfiniteScrollWrapper>
+
+
+      <InfiniteScrollWrapper
+        loading={loading}
+        hasNextPage={hasNextPage}
+        onLoadMore={onLoadMore}
+      />
+    </>
   );
 }
 

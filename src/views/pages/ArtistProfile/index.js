@@ -1,8 +1,11 @@
 import React, { useEffect } from "react";
-import { Typography } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchArtist } from "core/actions";
 import { useParams } from "react-router-dom";
+
+// MATERIAL DONE
+// import { Typography } from "@mui/material";
+import { StyledTypography } from 'views/styledComponents';
+
 import Profile from "views/components/Profile";
 import ArtistInfo from "./ArtistInfo";
 import ArtistIntroduction from "./ArtistIntroduction";
@@ -13,6 +16,7 @@ import ArtistAlbums from "./ArtistAlbums";
 
 import { selectors } from "core/reducers/index";
 import { verifyCachedData } from "core/utils";
+import { fetchArtist } from "core/actions";
 
 const REQUIRED_FIELDS = ["biography", "imdb_id"];
 
@@ -36,22 +40,22 @@ function ArtistProfile() {
       introduction={<ArtistIntroduction artistId={artistId} />}
       leftSide={
         <>
-          <Typography variant="h6" gutterBottom>
+          <StyledTypography variant="h6" gutterBottom>
             Artistal Info
-          </Typography>
+          </StyledTypography>
           <ArtistInfo artistId={artistId} />
         </>
       }
       main={
         <>
-          <Typography variant="h6" gutterBottom>
+          <StyledTypography variant="h6" gutterBottom>
             Images
-          </Typography>
+          </StyledTypography>
 
 
-          <Typography variant="h6" gutterBottom>
+          <StyledTypography variant="h6" gutterBottom>
             Albums
-          </Typography>
+          </StyledTypography>
           <ArtistAlbums artistId={artistId}/>
         </>
       }

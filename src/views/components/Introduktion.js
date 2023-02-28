@@ -1,40 +1,48 @@
 import React from "react";
+import styled from 'styled-components';
+// MATERIAL DONE
+// import { Box, Typography, makeStyles } from "@mui/material";
+import { StyledBox, StyledTypography, makeStyles } from 'views/styledComponents';
+
+
 import BaseImage from "views/components/BaseImage";
-import { makeStyles, Box, Typography } from "@material-ui/core";
 import { getAspectRatioString } from "./AspectRatio";
 import { useConfiguration } from "./ConfigurationProvider";
 
-const useStyles = makeStyles(theme => ({
-  backdrop: {
-    backgroundImage: ({ backgroundImageSrc }) => `url(${backgroundImageSrc})`,
-    backgroundPosition: "center",
-    backgroundRepeat: "no-repeat",
-    backgroundSize: "cover",
-    filter: "opacity(100) grayscale(100%) contrast(130%)",
-    position: "absolute",
-    top: 0,
-    left: 0,
-    width: "100%",
-    height: "100%"
-  },
-  container: {
-    // backgroundImage: "radial-gradient(circle at 20% 50%, rgba(12.55%, 24.71%, 34.51%, 0.98) 0%, rgba(12.55%, 24.71%, 34.51%, 0.88) 100%)"
-  }
-}));
+// const useStyles = makeStyles(theme => ({
+//   backdrop: {
+//     backgroundImage: ({ backgroundImageSrc }) => `url(${backgroundImageSrc})`,
+//     backgroundPosition: "center",
+//     backgroundRepeat: "no-repeat",
+//     backgroundSize: "cover",
+//     filter: "opacity(100) grayscale(100%) contrast(130%)",
+//     position: "absolute",
+//     top: 0,
+//     left: 0,
+//     width: "100%",
+//     height: "100%"
+//   },
+//   container: {
+//     // backgroundImage: "radial-gradient(circle at 20% 50%, rgba(12.55%, 24.71%, 34.51%, 0.98) 0%, rgba(12.55%, 24.71%, 34.51%, 0.88) 100%)"
+//   }
+// }));
 
+const StyledDiv = styled.div`
+  width: 10%;
+`;
 function Introduktion({ backgroundImageSrc, imageSrc, title, content, likeButton, uploadButton }) {
   const { getImageUrl } = useConfiguration();
-  const classes = useStyles({
-    backgroundImageSrc: getImageUrl(backgroundImageSrc)
-  });
+  // const classes = useStyles({
+  //   backgroundImageSrc: getImageUrl(backgroundImageSrc)
+  // });
 
   return (
-    <Box position="relative">
+    <StyledDiv className="position" position="relative">
       {/*<div className={classes.backdrop} />*/}
-      <Box
-        className={classes.container}
+      <div
+        className="DAMN"
         display="flex"
-        flexWrap="wrap"
+        // flexWrap="wrap"
         justifyContent="center"
         position="relative"
         zIndex={1}
@@ -46,22 +54,22 @@ function Introduktion({ backgroundImageSrc, imageSrc, title, content, likeButton
           />
         </Box>*/}
         {imageSrc}
-        <Box padding={2} flex={1} flexBasis={300}>
+        <StyledBox padding={2} flex={1} flexBasis={300}>
           {typeof title === "string" ? (
-            <Typography variant="h5" gutterBottom>
+            <StyledTypography variant="h5" gutterBottom>
               {title}
-            </Typography>
+            </StyledTypography>
           ) : (
             title
           )}
           {content}
 
-        </Box>
+        </StyledBox>
 
-      </Box>
+      </div>
       {likeButton}
       {uploadButton}
-    </Box>
+    </StyledDiv>
   );
 }
 

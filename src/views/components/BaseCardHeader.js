@@ -1,27 +1,34 @@
 import React from "react";
-import { CardHeader } from "@material-ui/core";
-import { makeStyles } from "@material-ui/styles";
-import clsx from "clsx";
+import styled from "styled-components";
 
-const useStyles = makeStyles(theme => ({
-  cardHeader: {
-    padding: theme.spacing(1)
-  },
-  cardTitle: {
-    fontWeight: theme.typography.fontWeightBold
-  }
-}));
+// import { CardHeader } from "@mui/material";
+// import { makeStyles } from "@mui/material/styles";
+// import clsx from "clsx";
+
+// const useStyles = makeStyles(theme => ({
+//   cardHeader: {
+//     padding: theme.spacing(1)
+//   },
+//   cardTitle: {
+//     fontWeight: theme.typography.fontWeightBold
+//   }
+// }));
+
+const StyledCardHeader = styled.div`
+  padding: ${props => props.theme.spacing}
+`;
+
 
 function BaseCardHeader({ className, ...rest }) {
-  const classes = useStyles();
+  // const classes = useStyles();
 
   return (
-    <CardHeader
+    <StyledCardHeader
       {...rest}
-      className={clsx(classes.cardHeader, className)}
+      // className={clsx(classes.cardHeader, className)}
       titleTypographyProps={{
         variant: "subtitle2",
-        className: classes.cardTitle
+        // className: classes.cardTitle
       }}
       subheaderTypographyProps={{ variant: "subtitle2" }}
     />

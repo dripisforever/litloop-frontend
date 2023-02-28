@@ -1,17 +1,25 @@
 import React from 'react';
+import styled from 'styled-components';
+
 import BaseImage from "views/components/BaseImage";
 import ModalMovieList from 'views/components/ModalMovieList';
+
 import { getDirectorByMovieId, getMovieById } from 'core/data';
 // import { ModalLink } from '../../../src';
 // import  ModalLink  from 'views/components/ModalLink';
 import  ModalLink  from './ModalLink';
-import styled from 'styled-components';
-import { Typography } from '@material-ui/core';
-import PropTypes from 'prop-types';
+
+// MODAL DONE
+// import { Typography } from '@mui/material';
+import { StyledTypography } from 'views/styledComponents';
 
 const Root = styled.div`
   padding: 12px;
 `;
+
+// const StyledTypography = styled.p`
+//
+// `;
 
 const ModalMovie = ({
   match: {
@@ -26,7 +34,7 @@ const ModalMovie = ({
 
   return (
     <Root>
-      <Typography variant="h6">{movie.title}</Typography>
+      <StyledTypography variant="h6">{movie.title}</StyledTypography>
       {/*<BaseImage
         src={getImageUrl(movie.poster_path)}
         alt={movie.title}

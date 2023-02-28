@@ -1,19 +1,24 @@
 import React, { useEffect } from "react";
-import useQueryString from "core/hooks/useQueryString";
-import { Tabs, Tab, Box } from "@material-ui/core";
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
-import { fetchMovieSearch, fetchPersonSearch, fetchArtistSearch, fetchTrackSearch, fetchAlbumSearch } from "core/actions";
-import { DEFAULT_FIRST_PAGE } from "core/reducers/higherOrderReducers/createPagination";
-import { selectors } from "core/reducers/index";
-import useHistoryPush from "core/hooks/useHistoryPush";
+import { useSelector, useDispatch } from "react-redux";
 import { useParams, useLocation } from "react-router-dom";
+
+// MATERIAL UNDONE
+// import { Tabs, Tab, Box } from "@mui/material";
+import { StyledTabs, StyledTab, StyledBox } from 'views/styledComponents';
+
 import SearchResultsHeader from "./SearchResultsHeader";
 import MovieSearchResults from "./MovieSearchResults";
 import PersonSearchResults from "./PersonSearchResults";
 import ArtistSearchResults from "./ArtistSearchResults";
 import AlbumSearchResults from "./AlbumSearchResults";
 import TrackSearchResults from "./TrackSearchResults";
+
+import { fetchMovieSearch, fetchPersonSearch, fetchArtistSearch, fetchTrackSearch, fetchAlbumSearch } from "core/actions";
+import { DEFAULT_FIRST_PAGE } from "core/reducers/higherOrderReducers/createPagination";
+import { selectors } from "core/reducers/index";
+import useHistoryPush from "core/hooks/useHistoryPush";
+import useQueryString from "core/hooks/useQueryString";
+
 
 function SearchResults() {
   const { query } = useQueryString();
@@ -62,14 +67,14 @@ function SearchResults() {
 
   return (
     <>
-      <Tabs value={searchType} onChange={handleChange}>
-        <Tab value="movie" label={`Movies (${totalMovieCount})`} />
-        <Tab value="person" label={`People (${totalPersonCount})`} />
-        <Tab value="artist" label={`Artist (${totalArtistCount})`} />
-        <Tab value="album" label={`Album (${totalAlbumCount})`} />
-        <Tab value="track" label={`Track (${totalTrackCount})`} />
-      </Tabs>
-      <Box marginTop={2}>
+      <StyledTabs value={searchType} onChange={handleChange}>
+        <StyledTab value="movie" label={`Movies (${totalMovieCount})`}>movie {totalMovieCount}</StyledTab>
+        <StyledTab value="person" label={`People (${totalPersonCount})`}>person {totalPersonCount}</StyledTab>
+        <StyledTab value="artist" label={`Artist (${totalArtistCount})`}>artist {totalArtistCount}</StyledTab>
+        <StyledTab value="album" label={`Album (${totalAlbumCount})`}>album {totalAlbumCount}</StyledTab>
+        <StyledTab value="track" label={`Track (${totalTrackCount})`}>track {totalTrackCount}</StyledTab>
+      </StyledTabs>
+      <StyledBox marginTop={2}>
         <SearchResultsHeader
           query={query}
           totalResults={totalResults[searchType]}
@@ -79,7 +84,7 @@ function SearchResults() {
         {searchType === "artist" && <ArtistSearchResults query={query} />}
         {searchType === "album" && <AlbumSearchResults query={query} />}
         {searchType === "track" && <TrackSearchResults query={query} />}
-      </Box>
+      </StyledBox>
     </>
   );
 }

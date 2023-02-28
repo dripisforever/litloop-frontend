@@ -269,6 +269,42 @@ export const StyledConnectSpotify = styled(Button)`
   }
 `;
 
+export const StyledConnectApple = styled(Button)`
+  background-color: hsla(0, 65%, 18%, 1);
+  width: max-content;
+  margin-left: 0;
+  height: 42px;
+  border-radius: 10px;
+  display: flex;
+
+  &#disconnect {
+    background-color: hsla(0, 65%, 10%, 1);
+  }
+
+  &&& {
+    border: thin solid hsla(0, 65%, 18%, 1);
+
+    &:hover {
+      background-color: hsla(0, 65%, 28%, 1);
+      border: inherit;
+    }
+
+    &:focus {
+      background-color: hsla(0, 65%, 28%, 1);
+      box-shadow: 0 0 0 0.2rem hsla(0, 65%, 38%, 1);
+    }
+
+    &:active {
+      background-color: hsla(0, 65%, 40%, 1);
+      border-color: hsla(0, 65%, 45%, 1);
+    }
+
+    :disabled {
+      background-color: hsla(0, 65%, 18%, 1);
+    }
+  }
+`;
+
 export const StyledCreateFormTitle = styled.h3`
   text-align: center;
   border-bottom: 2px solid rgb(163, 163, 163);
@@ -425,8 +461,8 @@ export const DeleteAccountFooter = styled.div`
 export const StyledConnectContainer = styled.div`
   margin-bottom: 10px;
   display: grid;
-  grid-template-areas: 'name disconnect';
-  grid-template-columns: min-content;
+  /* grid-template-areas: 'name disconnect'; /*
+  /* grid-template-columns: min-content; */
   color: white;
 
   button {

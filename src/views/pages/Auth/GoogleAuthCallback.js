@@ -12,9 +12,11 @@ import Alert from 'views/pages/Alert';
 import { footerVisibleAtom, navigationBarVisibleAtom } from 'views/pages/Auth/navigation/atoms';
 
 
+const GOOGLE_CLIENT_ID = "570066117191-b0ob663u6klf2a7v80381h570jsagkqe.apps.googleusercontent.com";
+
 const GoogleAuthCallback = () => {
   const [error, setError] = useState();
-  const { setGoogleAccessToken, setGoogleRefreshToken, setGoogleUserId, setGoogleUsername, setGoogleProfileImage, } = useContext(GoogleContext) || {};
+  const { setGoogleEmail, setGoogleAccessToken, setGoogleRefreshToken, setGoogleUserId, setGoogleUsername, setGoogleProfileImage, } = useContext(GoogleContext) || {};
   // const setNavigationBarVisible = useSetRecoilState(navigationBarVisibleAtom);
   // const setFooterVisible = useSetRecoilState(footerVisibleAtom);
 
@@ -25,36 +27,56 @@ const GoogleAuthCallback = () => {
       // const requestAccessToken = await litloopAPI.getGoogleAccessToken(authCode);
       const res = await axios.put('http://localhost:8000/auth/google/token', { code: authCode });
 
+      console.log(res)
       const accessToken = res.data.access_token;
-      const refreshToken = res.data.refresh_token;
+      const refreshToken = res.data.id_token;
       // if (setGoogleAccessToken) setGoogleAccessToken(accessToken);
       // if (setGoogleRefreshToken) setGoogleRefreshToken(refreshToken);
 
+      const config = {
+        headers: {
+          'Authorization': `Bearer ${accessToken}`,
+          // 'Client-ID': GOOGLE_CLIENT_ID
+        }
+      };
+
       // const MyGoogle = await GoogleAPI.getMe({ accessToken: accessToken }).then(async (res) => {
-      //   const user = res?.data?.data?.[0];
-      //   setGoogleUserId(user.id);
-      //   setGoogleUsername(user.login);
-      //   setGoogleProfileImage(user.profile_image_url);
-      //
-      //   // await litloopAPI.updateGoogleUserData(
-      //   //   {
-      //   //     Username: user.login,
-      //   //     Id: user.id,
-      //   //     Profile: user.profile_image_url,
-      //   //   },
-      //   //   accessToken,
-      //   //   refreshToken
-      //   // );
-      //
-      //   return {
-      //     Username: user.login,
-      //     ProfileImg: user.profile_image_url,
-      //     userId: user.id,
-      //   };
-      // });
+      // const MyGoogle = await axios.get('https://www.googleapis.com/oauth2/v1/userinfo', config).then(async (res) => {
+      const MyGoogle = await axios.get('https://www.googleapis.com/oauth2/v3/userinfo', config).then(async (res) => {
+        // const user = res?.data?.data?.[0];
+        const user = res?.data;
+        console.log(res.data);
+
+
+        // setGoogleUsername(user.givenName);
+        // setGoogleProfileImage(user.picture);
+        // setGoogleUserId(user.sub);
+        // setGoogleEmail(user.email);
+
+        // await litloopAPI.updateGoogleUserData(
+        //   {
+        //     Username: user.login,
+        //     Id: user.id,
+        //     Profile: user.profile_image_url,
+        //   },
+        //   accessToken,
+        //   refreshToken
+        // );
+
+        return {
+          Email: user.email,
+          // Username: user.givenName,
+          ProfileImg: user.picture,
+          userId: user.sub,
+        };
+      });
 
       // return { access_token: accessToken, refresh_token: refreshToken, ...MyGoogle };
-      return { access_token: accessToken, refresh_token: refreshToken };
+      return {
+        access_token: accessToken,
+        refresh_token: refreshToken,
+        ...MyGoogle
+      };
     },
     [
       setGoogleAccessToken,
@@ -73,7 +95,7 @@ const GoogleAuthCallback = () => {
       {
         service: 'google',
         access_token: res.access_token,
-        refresh_token: res.refresh_token,
+        // refresh_token: res.refresh_token,
         // username: res.Username,
         // profileImg: res.ProfileImg,
         // userId: res.userId,

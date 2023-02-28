@@ -1,3 +1,5 @@
+// REFERENCE mediacms
+
 import React, { useState, useEffect, useRef } from 'react';
 import { useLayout, usePopup } from '../../../utils/hooks/';
 import { LinksContext } from '../../../utils/contexts/';
@@ -230,7 +232,7 @@ export function SearchField(props) {
             key={i}
             index={i}
             onPredictionItemLoad={onPredictionItemLoad}
-            value={useItems[i][0]}
+            value={useItems[i][0] || ''}
             onSelect={onPredictionSelect}
             itemsDomArray={getItemsArr}
             nextIndex={nextItem}
@@ -299,7 +301,7 @@ export function SearchField(props) {
                 placeholder="Search"
                 aria-label="Search"
                 name="q"
-                value={queryVal}
+                value={queryVal || ''}
                 onChange={onQueryChange}
                 onFocus={onInputFocus}
                 onBlur={onInputBlur}

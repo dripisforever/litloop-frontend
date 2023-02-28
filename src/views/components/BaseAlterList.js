@@ -2,35 +2,38 @@ import React from "react";
 import styled from 'styled-components';
 
 import LoadingIndicator from "views/components/LoadingIndicator";
-import { makeStyles } from "@material-ui/styles";
-import { Typography } from "@material-ui/core";
+
+// MATERIAL UNDONE
+// import { makeStyles } from "@mui/material/styles";
+// import { Typography } from "@mui/material";
+import { StyledTypography } from "views/styledComponents";
 
 const DEFAULT_ITEMS = [];
 
 function defaultKeyExtractor(id) {
   return id;
 }
-// const FlexList = styled.div`
-//   list-style: "none";
-//   padding: 0;
-//   display: "list-item";
-//   grid-gap: ${({ spacing }) => theme.spacing(spacing)};
-//   grid-template-columns: ${({ minItemWidth }) => repeat(auto-fill, minmax(minItemWidth, 1))}
-// `;
+const FlexList = styled.div`
+  list-style: none;
+  padding: 0;
+  display: list-item;
+  grid-gap: ${(props) => props.theme.spacing};
+  grid-template-columns: ${(props) => `repeat(auto-fill, minmax(${props.minItemWidth}px, 1))`}
+`;
 
 
 // grid-template-columns
 
-const useStyles = makeStyles(theme => ({
-  flexList: {
-    listStyle: "none",
-    padding: 0,
-    display: "list-item",
-    gridGap: ({ spacing }) => theme.spacing(spacing),
-    gridTemplateColumns: ({ minItemWidth }) =>
-      `repeat(auto-fill, minmax(${minItemWidth}px, 1fr))`
-  }
-}));
+// const useStyles = makeStyles(theme => ({
+//   flexList: {
+//     listStyle: "none",
+//     padding: 0,
+//     display: "list-item",
+//     gridGap: ({ spacing }) => theme.spacing(spacing),
+//     gridTemplateColumns: ({ minItemWidth }) =>
+//       `repeat(auto-fill, minmax(${minItemWidth}px, 1fr))`
+//   }
+// }));
 
 function BaseAlterList({
   items = DEFAULT_ITEMS,
@@ -41,17 +44,15 @@ function BaseAlterList({
   keyExtractor = defaultKeyExtractor,
   listEmptyMessage = "Nothing has been found"
 }) {
-  const classes = useStyles({ minItemWidth, spacing });
+  // const classes = useStyles({ minItemWidth, spacing });
 
   function extractItemKey(item, index) {
-    return typeof keyExtractor === "string"
-      ? item[keyExtractor]
-      : keyExtractor(item, index);
+    return typeof keyExtractor === "string" ? item[keyExtractor] : keyExtractor(item, index);
   }
 
   if (!items.length && !loading) {
     if (typeof listEmptyMessage === "string") {
-      return <Typography>{listEmptyMessage}</Typography>;
+      return <StyledTypography>{listEmptyMessage}</StyledTypography>;
     }
 
     return listEmptyMessage;
@@ -62,15 +63,15 @@ function BaseAlterList({
   // }
   return (
     <React.Fragment>
-      <div className={classes.flexList}>
-      {/*<FlexList>*/}
+      {/*<div className={classes.flexList}>*/}
+      <FlexList>
         {items.map((item, index) => (
           <React.Fragment key={extractItemKey(item, index)}>
             {renderItem(item, index)}
           </React.Fragment>
         ))}
-      {/*</FlexList>*/}
-      </div>
+      </FlexList>
+      {/*</div>*/}
       {/*<LoadingIndicator loading={loading} />*/}
     </React.Fragment>
   );

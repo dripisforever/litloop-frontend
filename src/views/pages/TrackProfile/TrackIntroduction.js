@@ -1,50 +1,55 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React , { useState, useEffect }from "react";
+import { connect, useSelector } from "react-redux";
+import { Link, withRouter} from 'react-router-dom';
 
-import { selectors } from "core/reducers/index";
-import { Link } from "react-router-dom";
-import { Typography, makeStyles, Box, Grid } from "@material-ui/core";
-import Rating from "./Rating";
+import styled from 'styled-components';
+
+
+
+// MATERIAL DONE
+// import { Typography, Box, Grid, makeStyles } from "@mui/material";
+import { StyledTypography, StyledBox, StyledGrid } from 'views/styledComponents';
+// import * as SC from 'views/styledComponents';
+
+// import Rating from "./Rating";
 // import { getTrackReleaseYear, getImdbProfileUrl } from "core/utils";
 import Introduktion from "views/components/Introduktion";
 import ImdbLogo from "views/components/ImdbLogo";
 import TrackGenreChip from "./TrackGenreChip";
 
 import BaseImage from "views/components/BaseImage";
-// import { makeStyles, Box, Typography } from "@material-ui/core";
 import { getAspectRatioString } from "views/components/AspectRatio";
 import { useConfiguration } from "views/components/ConfigurationProvider";
 
-import { connect } from 'react-redux';
-import styled from 'styled-components';
-import { withRouter} from 'react-router-dom';
+
 import Button from 'views/components/Button';
 import LikeIcon from 'views/components/LikeIcon';
-import {screenLargerThan} from "views/style/util"
+import {screenLargerThan} from "views/style/util";
+import { primaryColor1, white, likeColor, greenColor,} from 'views/style/colors';
 // import { likePhoto, unLikePhoto } from '../../actions/photo';
+
 import { fetchLikeTrack, fetchUnLikeTrack } from "core/actions";
-import {
-  primaryColor1,
-  white,
-  likeColor,
-  greenColor,
-} from 'views/style/colors';
+import { selectors } from "core/reducers/index";
+import useDocumentTitle from "core/hooks2/useDocumentTitle"
 
 
-const useStyles = makeStyles(theme => ({
-  year: {
-    color: theme.palette.text.secondary
-  },
-  tagline: {
-    fontStyle: "italic"
-  },
-  genreChip: {
-    margin: theme.spacing(0.5)
-  },
-  overview: {
-    whiteSpace: "pre-wrap"
-  }
-}));
+
+
+
+// const useStyles = makeStyles(theme => ({
+//   year: {
+//     color: theme.palette.text.secondary
+//   },
+//   tagline: {
+//     fontStyle: "italic"
+//   },
+//   genreChip: {
+//     margin: theme.spacing(0.5)
+//   },
+//   overview: {
+//     whiteSpace: "pre-wrap"
+//   }
+// }));
 
 
 const LikedBtn = styled(Button)`
@@ -91,14 +96,18 @@ const LikesCounter = styled.span`
 
 
 function TrackIntroduction({ trackId, handleLikePhoto, handleUnLikePhoto }) {
+  const [name, setName] = useState(null);
   const track = useSelector(state => selectors.selectTrack(state, trackId));
-  const classes = useStyles();
+  // const classes = useStyles();
+
+  // useDocumentTitle(track.name)
 
   // const releaseYear = getTrackReleaseYear(track);
 
   if (!track) {
     return null;
   }
+
   const linkList = track.artists.map((artist) => {
     return (
       <li key={artist.id}>
@@ -112,23 +121,27 @@ function TrackIntroduction({ trackId, handleLikePhoto, handleUnLikePhoto }) {
     );
   });
 
+
+
   return (
     <Introduktion
       backgroundImageSrc={track.album.images[0] ? track.album.images[0].url : ""}
       imageSrc={
         <>
-          <Box flexBasis={100}>
+
+          {/*<SC.Box flexBasis={100}>*/}
+          <StyledBox flexBasis={100}>
             <BaseImage
               src={track.album.images[0] ? track.album.images[0].url : ""}
               aspectRatio={getAspectRatioString(1, 1)}
             />
-          </Box>
+          </StyledBox>
         </>
 
       }
       title={
         <>
-          <Typography variant="h5" gutterBottom={!track.tagline}>
+          <StyledTypography variant="h5" gutterBottom={!track.tagline}>
             {track.name}  <br/>{track.artists.map((artist, i) =>
                 <span key={i}>
                   {i > 0 && ", "}
@@ -150,23 +163,23 @@ function TrackIntroduction({ trackId, handleLikePhoto, handleUnLikePhoto }) {
               )
             }
 
-          </Typography>
+          </StyledTypography>
           {track.tagline && (
-            <Typography
-              className={classes.tagline}
+            <StyledTypography
+              // className={classes.tagline}
               color="textSecondary"
               gutterBottom
             >
               {`"${track.tagline}"`}
-            </Typography>
+            </StyledTypography>
           )}
         </>
       }
       content={
         <>
-          <Grid container spacing={2}>
-            <Grid item xs={12}>
-              <Box display="flex" alignItems="center">
+          <StyledGrid container spacing={2}>
+            <StyledGrid item xs={12}>
+              <StyledBox display="flex" alignItems="center">
                 {/*<Rating value={track.vote_average * 10} />
                 <Box marginLeft={2}>
                   <Link
@@ -178,11 +191,11 @@ function TrackIntroduction({ trackId, handleLikePhoto, handleUnLikePhoto }) {
                   </Link>
                 </Box>*/}
                 {/*{linkList}*/}
-              </Box>
-            </Grid>
+              </StyledBox>
+            </StyledGrid>
 
 
-          </Grid>
+          </StyledGrid>
         </>
       }
       likeButton={

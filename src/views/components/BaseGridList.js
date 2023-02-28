@@ -1,7 +1,9 @@
 import React from "react";
 import LoadingIndicator from "views/components/LoadingIndicator";
-import { makeStyles } from "@material-ui/styles";
-import { Typography } from "@material-ui/core";
+import styled from "styled-components";
+
+
+import { StyledTypography } from "views/styledComponents";
 
 const DEFAULT_ITEMS = [];
 
@@ -9,16 +11,14 @@ function defaultKeyExtractor(id) {
   return id;
 }
 
-const useStyles = makeStyles(theme => ({
-  flexList: {
-    listStyle: "none",
-    padding: 0,
-    display: "grid",
-    gridGap: ({ spacing }) => theme.spacing(spacing),
-    gridTemplateColumns: ({ minItemWidth }) =>
-      `repeat(auto-fill, minmax(${minItemWidth}px, 1fr))`
-  }
-}));
+
+const StyledFlexList = styled.div`
+  list-style: none;
+  padding: 0;
+  display: grid;
+  grid-gap: ${(props) => props.theme.spacing};
+  grid-template-columns: ${(props) => `repeat(auto-fill, minmax(${props.minItemWidth}px, 1fr))`}
+`;
 
 function BaseGridList({
   items = DEFAULT_ITEMS,
@@ -29,7 +29,7 @@ function BaseGridList({
   keyExtractor = defaultKeyExtractor,
   listEmptyMessage = "Nothing has been found"
 }) {
-  const classes = useStyles({ minItemWidth, spacing });
+  // const classes = useStyles({ minItemWidth, spacing });
 
   function extractItemKey(item, index) {
     return typeof keyExtractor === "string"
@@ -39,7 +39,7 @@ function BaseGridList({
 
   if (!items.length && !loading) {
     if (typeof listEmptyMessage === "string") {
-      return <Typography>{listEmptyMessage}</Typography>;
+      return <StyledTypography>{listEmptyMessage}</StyledTypography>;
     }
 
     return listEmptyMessage;
@@ -47,13 +47,17 @@ function BaseGridList({
 
   return (
     <React.Fragment>
-      <div className={classes.flexList}>
+      <StyledFlexList
+        // spacing={}
+        minItemWidth={160}
+      >
         {items.map((item, index) => (
           <React.Fragment key={extractItemKey(item, index)}>
             {renderItem(item, index)}
           </React.Fragment>
         ))}
-      </div>
+      </StyledFlexList>
+
       <LoadingIndicator loading={loading} />
     </React.Fragment>
   );

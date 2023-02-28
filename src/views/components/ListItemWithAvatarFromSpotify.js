@@ -1,18 +1,24 @@
 import React from "react";
+// import {
+//   ListItem,
+//   ListItemAvatar,
+//   Avatar,
+//   ListItemText,
+//   makeStyles
+// } from "@mui/material";
 import {
-  ListItem,
-  ListItemAvatar,
-  Avatar,
-  ListItemText,
-  makeStyles
-} from "@material-ui/core";
+  StyledListItem,
+  StyledListItemAvatar,
+  StyledAvatar,
+  StyledListItemText,
+} from 'views/styledComponents';
 import { useConfiguration } from "./ConfigurationProvider";
 
-const useStyles = makeStyles(theme => ({
-  secondaryText: {
-    wordBreak: "break-word"
-  }
-}));
+// const useStyles = makeStyles(theme => ({
+//   secondaryText: {
+//     wordBreak: "break-word"
+//   }
+// }));
 
 function ListItemWithAvatarFromSpotify({
   avatarUrl,
@@ -20,7 +26,7 @@ function ListItemWithAvatarFromSpotify({
   secondaryText,
   ...rest
 }) {
-  const classes = useStyles();
+  // const classes = useStyles();
   const { getImageUrlz } = useConfiguration();
 
   function renderItem(avatarUrl) {
@@ -50,19 +56,19 @@ function ListItemWithAvatarFromSpotify({
   // );
 
   return (
-    <ListItem alignItems="flex-start" dense {...rest}>
-      <ListItemAvatar>
-        <Avatar src={avatarUrl}  variant={"circular"} />
-      </ListItemAvatar>
+    <StyledListItem alignItems="flex-start" dense {...rest}>
+      <StyledListItemAvatar>
+        <StyledAvatar src={avatarUrl}  variant={"circular"} />
+      </StyledListItemAvatar>
 
-      <ListItemText
-        classes={{
-          secondary: classes.secondaryText
-        }}
+      <StyledListItemText
+        // classes={{
+        //   secondary: classes.secondaryText
+        // }}
         primary={primaryText}
         secondary={secondaryText}
       />
-    </ListItem>
+    </StyledListItem>
   );
 
   // return (

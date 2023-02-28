@@ -208,6 +208,24 @@ const litloopAPI = {
     }).catch((e) => console.error(e))
   },
 
+  getGoogleData: async () => {
+    await INSTANCE.get(`/google`, {
+      params: {},
+    }).catch((e) => console.error(e))
+  },
+  
+  getSpotifyData: async () => {
+    await INSTANCE.get(`/spotify`, {
+      params: {},
+    }).catch((e) => console.error(e))
+  },
+
+  getAppleMusicData: async () => {
+    await INSTANCE.get(`/applemusic`, {
+      params: {},
+    }).catch((e) => console.error(e))
+  },
+
 
   updateFavoriteStreams: async (value) => {
     await INSTANCE.put(`/twitch/favorite_streams`, {

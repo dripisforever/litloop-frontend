@@ -1,17 +1,27 @@
 import React, {useState} from "react";
 import { useDispatch } from "react-redux";
+import styled from "styled-components";
 
-// MATERIAL UNDONE
-import { withStyles } from '@material-ui/core/styles';
-import { IconButton, Avatar, Button, Menu, MenuItem } from "@material-ui/core";
-import MenuIcon from "@material-ui/icons/Menu";
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import DraftsIcon from '@material-ui/icons/Drafts';
-import SendIcon from '@material-ui/icons/Send';
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import { ListItem } from "@material-ui/core";
+// MATERIAL DONE
+// import { withStyles } from '@mui/material/styles';
+// import { IconButton, Avatar, Button, Menu, MenuItem, ListItem, ListItemIcon, ListItemText } from "@mui/material";
+import {
+  StyledIconButton,
+  StyledAvatar,
+  StyledButton,
+  StyledMenu,
+  StyledMenuItem,
+  StyledListItem,
+  StyledListItemIcon,
+  StyledListItemText
+} from 'views/styledComponents';
+
+// import MenuIcon from "@mui/icons-material/Menu";
+// import InboxIcon from '@mui/icons-material/MoveToInbox';
+// import DraftsIcon from '@mui/icons-material/Drafts';
+// import SendIcon from '@mui/icons-material/Send';
+// import FavoriteIcon from '@mui/icons-material/Favorite';
+import { StyledMenuIcon, StyledInboxIcon, StyledDraftsIcon, StyledSendIcon, StyledFavoriteIcon } from 'views/styledComponents/icons';
 
 // VIEWS
 import RouterLink from "views/components/RouterLink";
@@ -21,36 +31,45 @@ import { toggleDrawer } from "core/actions";
 import ListItemWithAvatarFromSpotify from "views/components/ListItemWithAvatarFromSpotify";
 import { getState } from "core/store";
 
-const StyledMenu = withStyles({
-  paper: {
-    border: '1px solid #d3d4d5',
-  },
-})((props) => (
-  <Menu
-    elevation={0}
-    getContentAnchorEl={null}
-    anchorOrigin={{
-      vertical: 'bottom',
-      horizontal: 'center',
-    }}
-    transformOrigin={{
-      vertical: 'top',
-      horizontal: 'center',
-    }}
-    {...props}
-  />
-));
+// const StyledMenuOld = withStyles({
+//   paper: {
+//     border: '1px solid #d3d4d5',
+//   },
+// })((props) => (
+//   <Menu
+//     elevation={0}
+//     getContentAnchorEl={null}
+//     anchorOrigin={{
+//       vertical: 'bottom',
+//       horizontal: 'center',
+//     }}
+//     transformOrigin={{
+//       vertical: 'top',
+//       horizontal: 'center',
+//     }}
+//     {...props}
+//   />
+// ));
+//
+// const StyledMenuItemOld = withStyles((theme) => ({
+//   root: {
+//     '&:focus': {
+//       backgroundColor: theme.palette.primary.main,
+//       '& .MuiListItemIcon-root, & .MuiListItemText-primary': {
+//         color: theme.palette.common.white,
+//       },
+//     },
+//   },
+// }))(MenuItem);
 
-const StyledMenuItem = withStyles((theme) => ({
-  root: {
-    '&:focus': {
-      backgroundColor: theme.palette.primary.main,
-      '& .MuiListItemIcon-root, & .MuiListItemText-primary': {
-        color: theme.palette.common.white,
-      },
-    },
-  },
-}))(MenuItem);
+
+
+
+
+
+
+
+
 
 function AvatarHover({avatarUrl}) {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -91,16 +110,16 @@ function AvatarHover({avatarUrl}) {
         <MenuItem onClick={handleClose}>Logout</MenuItem>
       </Menu>*/}
 
-      <IconButton
+      <StyledIconButton
         aria-controls="customized-menu"
         aria-haspopup="true"
         variant="contained"
         color="primary"
         onClick={handleClick}
       >
-        <Avatar src={avatarUrl}  variant={"circular"} />
+        <StyledAvatar src={avatarUrl}  variant={"circular"} />
 
-      </IconButton>
+      </StyledIconButton>
       <StyledMenu
         id="customized-menu"
         anchorEl={anchorEl}
@@ -109,29 +128,29 @@ function AvatarHover({avatarUrl}) {
         onClose={handleClose}
       >
         <StyledMenuItem>
-          <ListItemIcon>
-            <SendIcon fontSize="small" />
-          </ListItemIcon>
-          <ListItemText primary="My Profile" />
+          <StyledListItemIcon>
+            <StyledSendIcon fontSize="small" />
+          </StyledListItemIcon>
+          <StyledListItemText primary="My Profile" />
         </StyledMenuItem>
         { authUser.access_token &&
-          <ListItem button to={'/liked'} component={RouterLink}>
-            <ListItemIcon><FavoriteIcon/></ListItemIcon>
-            <ListItemText primary={"Liked"} />
-          </ListItem>
+          <StyledListItem button to={'/liked'} component={RouterLink}>
+            <StyledListItemIcon><StyledFavoriteIcon/></StyledListItemIcon>
+            <StyledListItemText primary={"Liked"} />
+          </StyledListItem>
         }
         <StyledMenuItem>
-          <ListItemIcon>
-            <DraftsIcon fontSize="small" />
-          </ListItemIcon>
-          <ListItemText primary="Liked" />
+          <StyledListItemIcon>
+            <StyledDraftsIcon fontSize="small" />
+          </StyledListItemIcon>
+          <StyledListItemText primary="Liked" />
         </StyledMenuItem>
 
         <StyledMenuItem>
-          <ListItemIcon>
-            <InboxIcon fontSize="small" />
-          </ListItemIcon>
-          <ListItemText primary="Logout" />
+          <StyledListItemIcon>
+            <StyledInboxIcon fontSize="small" />
+          </StyledListItemIcon>
+          <StyledListItemText primary="Logout" />
         </StyledMenuItem>
 
       </StyledMenu>

@@ -13,11 +13,9 @@ function InfiniteGridList({
   keyExtractor
 }) {
   return (
-    <InfiniteScrollWrapper
-      hasNextPage={hasNextPage}
-      loading={loading}
-      onLoadMore={onLoadMore}
-    >
+    <>
+
+
       <BaseGridList
         keyExtractor={keyExtractor}
         items={items}
@@ -26,7 +24,14 @@ function InfiniteGridList({
         spacing={spacing}
         renderItem={renderItem}
       />
-    </InfiniteScrollWrapper>
+
+
+      <InfiniteScrollWrapper
+        loading={loading}
+        hasNextPage={hasNextPage}
+        onLoadMore={onLoadMore}
+      />
+    </>
   );
 }
 

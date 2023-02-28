@@ -1,19 +1,22 @@
 import React from "react";
-import { Typography, Box } from "@material-ui/core";
+
+// MATERIAL DONE
+// import { Typography, Box } from "@mui/material";
+import { StyledTypography, StyledBox } from 'views/styledComponents';
 
 function SearchResultsHeader({ query, totalResults }) {
   return (
-    <Box
+    <StyledBox
       display="flex"
       alignItems="center"
       justifyContent="space-between"
-      flexWrap="wrap"
+      // flexWrap="wrap"
     >
-      <Typography variant="h6">Search Results For: {query}</Typography>
-      <Typography color="textSecondary">
+      <StyledTypography variant="h6">Search Results For: {query}</StyledTypography>
+      <StyledTypography color="textSecondary">
         Total {totalResults} Results
-      </Typography>
-    </Box>
+      </StyledTypography>
+    </StyledBox>
   );
 }
 

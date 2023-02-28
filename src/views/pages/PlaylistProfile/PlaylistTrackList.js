@@ -8,6 +8,7 @@ import { selectors } from "core/reducers/index";
 import BaseList from "views/components/BaseList";
 import TrackCard from "views/components/TrackCard";
 import InfiniteList from "views/components/InfiniteList";
+import InfiniteGridList from "views/components/InfiniteGridList";
 import LoadingIndicator from "views/components/LoadingIndicator";
 import PlaylistTrackListItem from "./PlaylistTrackListItem";
 

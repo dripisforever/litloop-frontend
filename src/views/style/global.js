@@ -33,6 +33,7 @@ const GlobalStyle = createGlobalStyle`
 
   body {
     margin: 0;
+    background-color: red;
   }
 
   /**
@@ -507,6 +508,7 @@ const GlobalStyle = createGlobalStyle`
       font-weight: 400;
       line-height: 1.6;
       color: ${primaryColor1};
+      background: #17152a;
   }
 
   html, body {

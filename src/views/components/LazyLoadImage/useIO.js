@@ -1,3 +1,4 @@
+// REFERENCE https://dev.to/deepakfilth/how-to-optimize-your-site-using-intersection-observer-api-413l
 
 import { useEffect, useRef, useState } from 'react';
 

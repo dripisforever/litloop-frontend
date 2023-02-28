@@ -5,7 +5,7 @@ import moment from 'moment';
 import './SongControlsStyled.css';
 
 
-import { ListItem, ListItemText, ListItemAvatar, Avatar, makeStyles } from "@material-ui/core";
+import { ListItem, ListItemText, ListItemAvatar, Avatar, makeStyles } from "@mui/material";
 
 class SongControlsStyled extends Component {
 

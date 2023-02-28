@@ -10,6 +10,8 @@ import { askForBrowserNotificationPermission, getLocalstorage } from 'views/util
 
 import AccountContext from 'views/pages/account/AccountContext';
 import API from '../navigation/API';
+import litloopAPI from 'views/pages/Auth/litloop/API';
+
 import validateToken from './validateToken';
 
 // const TTL = 100000;
@@ -23,6 +25,7 @@ export const GoogleProvider = ({ children }) => {
   const [googleAccessToken, setGoogleAccessToken] = useCookieState('Google-access_token');
   const [googleRefreshToken, setGoogleRefreshToken] = useCookieState('Google-refresh_token');
   const [googleUserId, setGoogleUserId] = useCookieState('Google-userId');
+  const [googleEmail, setGoogleEmail] = useCookieState('Google-email');
 
   const [googleUsername, setGoogleUsername] = useCookieState('Google-username') || {};
   const [googleProfileImage, setGoogleProfileImage] = useCookieState('Google-profileImg');
@@ -43,8 +46,8 @@ export const GoogleProvider = ({ children }) => {
       channel_update_notis,
       favorite_streams,
       refresh_token,
-      user: { Id, Profile, Username } = {},
-    } = await API.getGoogleData()
+      user: { Id, Username, Profile, Email } = {},
+    } = await litloopAPI.getGoogleData()
       .then((res) => res?.data?.Item || {})
       .catch((e) => {
         console.error('Google usetoken useEffect error: ', e);
@@ -56,6 +59,7 @@ export const GoogleProvider = ({ children }) => {
     setGoogleRefreshToken(refresh_token);
     setGoogleUserId(Id);
     setGoogleUsername(Username);
+    setGoogleEmail(Email);
     setGoogleProfileImage(Profile);
 
     setFavStreams(
@@ -72,6 +76,7 @@ export const GoogleProvider = ({ children }) => {
     setGoogleRefreshToken,
     setGoogleUserId,
     setGoogleUsername,
+    setGoogleEmail,
     setGoogleProfileImage,
     setFavStreams,
     setUpdateNotischannels,
@@ -118,6 +123,8 @@ export const GoogleProvider = ({ children }) => {
         setGoogleUserId,
         googleUsername,
         setGoogleUsername,
+        googleEmail,
+        setGoogleEmail,
         googleProfileImage,
         setGoogleProfileImage,
         updateNotischannels,

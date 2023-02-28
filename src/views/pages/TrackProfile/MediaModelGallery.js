@@ -1,16 +1,22 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { IconButton, Box, makeStyles } from "@material-ui/core";
-import BaseDialog from "views/components/BaseDialog";
-import useHistoryPush from "core/hooks/useHistoryPush";
-import useQueryString from "core/hooks/useQueryString";
 import { useLocation } from "react-router-dom";
+import { FullScreen } from "react-full-screen";
+import { HotKeys } from "react-hotkeys";
+
+
+// MATERIAL UNDONE
+import { IconButton, Box, makeStyles } from "@mui/material";
+import FullscreenIcon from "@mui/icons-material/Fullscreen";
+import FullscreenExitIcon from "@mui/icons-material/FullscreenExit";
+
+import BaseDialog from "views/components/BaseDialog";
 import YouTubePlayer from "./YouTubePlayer";
 import MediaGalleryModalStepper from "./MediaGalleryModalStepper";
 import MediaGalleryModalImageViewer from "./MediaGalleryModalImageViewer";
-import FullScreen from "react-full-screen";
-import FullscreenIcon from "@material-ui/icons/Fullscreen";
-import FullscreenExitIcon from "@material-ui/icons/FullscreenExit";
-import { HotKeys } from "react-hotkeys";
+
+// CORE
+import useHistoryPush from "core/hooks/useHistoryPush";
+import useQueryString from "core/hooks/useQueryString";
 
 const keyMap = {
   NEXT: ["right", "d"],
@@ -32,7 +38,7 @@ function MediaGalleryModal({
   queryParamName,
   isVideoPlayer = false
 }) {
-  const classes = useStyles();
+  // const classes = useStyles();
   const location = useLocation();
   const historyPush = useHistoryPush();
 
@@ -99,7 +105,7 @@ function MediaGalleryModal({
         onChange={enabled => setIsFullScreen(enabled)}
       >
         <HotKeys keyMap={keyMap} handlers={keyHandlers} allowChanges={true}>
-          <Box position="relative">
+          <StyledBox position="relative">
             {isVideoPlayer ? (
               <YouTubePlayer youTubeId={dataSource[activeStepIndex]} />
             ) : (
@@ -119,7 +125,7 @@ function MediaGalleryModal({
                 {isFullScreen ? <FullscreenExitIcon /> : <FullscreenIcon />}
               </IconButton>
             )}
-          </Box>
+          </StyledBox>
         </HotKeys>
       </FullScreen>
     </BaseDialog>

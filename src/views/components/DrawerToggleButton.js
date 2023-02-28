@@ -1,8 +1,18 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { IconButton } from "@material-ui/core";
-import MenuIcon from "@material-ui/icons/Menu";
+import styled from "styled-components";
+
+// MATERIAL DONE
+// import { IconButton } from "@mui/material";
+// import MenuIcon from "@mui/icons-material/Menu";
 import { toggleDrawer } from "core/actions";
+
+const StyledIconButton = styled.div`
+
+`;
+const StyledMenuIcon = styled.div`
+
+`;
 
 function DrawerToggleButton() {
   const dispatch = useDispatch();
@@ -12,9 +22,9 @@ function DrawerToggleButton() {
   }
 
   return (
-    <IconButton onClick={handleClick}>
-      <MenuIcon />
-    </IconButton>
+    <StyledIconButton onClick={handleClick}>
+      <StyledMenuIcon />
+    </StyledIconButton>
   );
 }
 

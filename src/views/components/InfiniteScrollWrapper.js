@@ -1,15 +1,18 @@
 import React from "react";
-import { RootRef } from "@material-ui/core";
-import { useInfiniteScroll } from "react-infinite-scroll-hook";
+import  useInfiniteScroll  from "react-infinite-scroll-hook";
 
 function InfiniteScrollWrapper({ hasNextPage, loading, onLoadMore, children }) {
-  const infiniteContainerRef = useInfiniteScroll({
+
+  const [sentryRef] = useInfiniteScroll({
+  // const [sentryRef, {rootRef}] = useInfiniteScroll({
     hasNextPage,
     loading,
     onLoadMore
   });
 
-  return <RootRef rootRef={infiniteContainerRef}>{children}</RootRef>;
+  return (
+    <div ref={sentryRef} />
+  )
 }
 
 export default InfiniteScrollWrapper;

@@ -1,21 +1,27 @@
 import React from "react";
-import ReactDOM from "react-dom";
+import ReactDOM, { createRoot }  from 'react-dom/client';
 import { Router, useLocation, Route } from "react-router-dom";
-
 import { Provider } from "react-redux";
 import { PersistGate } from 'redux-persist/integration/react';
 
-// MATERIAL
-import { ThemeProvider } from "@material-ui/styles";
-import { CssBaseline } from "@material-ui/core";
+// MATERIAL DONE
+// import { ThemeProvider } from "styled-components";
+// import styled from 'emotion/react' // OLD
+// import styled from '@emotion/styled' // NEW
 
 // VIEWS
+// import App from "views/components/app/App";
 import App from "views/components/app";
+import AppHeader from "views/components/AppHeader";
 import LoginPage from "views/pages/LoginPage";
 import ConfigurationProvider from "views/components/ConfigurationProvider";
-import theme from "views/theme";
-import 'views/style/global';
-import GlobalStyle from 'views/style/global';
+import  Theme  from "views/theme/index";
+import { darkTheme } from "views/theme/darktheme";
+
+// import 'views/style/global';
+// import GlobalStyle from 'views/style/global';
+import GlobalStyle from 'views/styles/GlobalStyle';
+
 import * as serviceWorker from "./serviceWorker";
 // import store from "./store";
 
@@ -28,60 +34,71 @@ import { store, persistor, sagaMiddleware } from 'core/store';
 import rootSaga from "core/sagas/index";
 // import rootSaga from "core/sagas/SagaIndex";
 
-
-
-// import {createBrowserHistory} from 'history';
-// export const history = createBrowserHistory();
-
 import history  from "core/services/history";
 
-const login_url = window.location.pathname
 // store.runSaga(rootSaga);
 sagaMiddleware.run(rootSaga);
 
-const renderApp = () => {
 
-  // const location = useLocation();
-  // const login_url = location.pathname
-  // return (
-    ReactDOM.render(
-      <Provider store={store}>
-        <PersistGate loading={null} persistor={persistor}>
+const container = document.getElementById('root');
+const root = createRoot(container);
 
-          <ThemeProvider theme={theme}>
-            <CssBaseline />
-            <ConfigurationProvider>
+// root.render(
+//
+//   <Provider store={store}>
+//     <PersistGate loading={null} persistor={persistor}>
+//
+//       {/*<ThemeProvider theme={theme}>*/}
+//       <Theme>
+//         {/*<CssBaseline />*/}
+//         <ConfigurationProvider>
+//
+//           <Router history={history}>
+//             <App />
+//           </Router>
+//
+//         </ConfigurationProvider>
+//       </Theme>
+//       {/*</ThemeProvider>*/}
+//
+//     </PersistGate>
+//   </Provider>,
+//
+// );
 
-              {(login_url === '/login' ) ? (
-                <Router history={history}>
-                  <Route path="/login" component={LoginPage} />
+root.render(
+  <React.StrictMode>
+    <Provider store={store}>
+      {/*<PersistGate loading={null} persistor={persistor}>*/}
 
-                </Router>
-              ) : (
-                <Router history={history}>
-                  <App />
-                </Router>
-              )}
+        {/*<ThemeProvider theme={theme}>*/}
+        {/*<Theme>*/}
+          {/*<CssBaseline />*/}
+          <GlobalStyle />
+          <ConfigurationProvider>
 
-              {/*<Router history={history}>
-                <App />
-              </Router>*/}
-            </ConfigurationProvider>
-          </ThemeProvider>
+            {/*<BrowserRouter>*/}
 
-        </PersistGate>
-      </Provider>,
-      document.getElementById("root")
-    )
-  // )
+            <Router history={history}>
+              <App />
+            </Router>
+            {/*</BrowserRouter>*/}
 
-}
+          </ConfigurationProvider>
+        {/*</Theme>*/}
+        {/*</ThemeProvider>*/}
 
-if (process.env.NODE_ENV !== "production" && module.hot) {
-  module.hot.accept("views/components/app/App", renderApp);
-}
+      {/*</PersistGate>*/}
+    </Provider>
+  </React.StrictMode>
 
-renderApp();
+);
+
+// if (process.env.NODE_ENV !== "production" && module.hot) {
+//   module.hot.accept("views/components/app/App", renderApp);
+// }
+
+// renderApp();
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

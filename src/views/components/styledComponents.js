@@ -20,6 +20,12 @@ export const TransparentButton = styled.button`
   color: white;
 `;
 
+export const StyledSvg = styled.svg`
+
+  height: 20px;
+  width: 20px;
+
+`;
 export const StyledListForm = styled(Form)`
   /* margin: 10px; */
   height: 60px;
@@ -246,8 +252,7 @@ export const StyledCountdownCircle = styled.div`
   }
 
   svg circle {
-    stroke-dasharray: ${({ isLoading, size }) =>
-      isLoading ? 2 * 3.14 * (size / 2 - 2) * 0.7 : 2 * 3.14 * (size / 2 - 2)}px;
+    stroke-dasharray: ${({ isLoading, size }) => isLoading ? 2 * 3.14 * (size / 2 - 2) * 0.7 : 2 * 3.14 * (size / 2 - 2)}px;
     stroke-dashoffset: 0px;
     stroke-linecap: round;
     stroke-width: 3px;
@@ -285,10 +290,7 @@ export const ButtonGroup = styled.div`
   justify-content: ${({ justifyContent }) => justifyContent};
 `;
 
-export const StyledButton = styled(Button).attrs(({ type }) => ({
-  type: type || 'submit',
-  variant: 'secondary',
-}))`
+export const StyledButton = styled(Button).attrs(({ type }) => ({ type: type || 'submit', variant: 'secondary', }))`
   &&& {
     border: none;
     box-shadow: none;

@@ -1,14 +1,26 @@
 import React from "react";
-import useScrollTrigger from "@material-ui/core/useScrollTrigger";
-import Slide from "@material-ui/core/Slide";
+import styled from "styled-components";
+
+// MATERIAL UNDONE
+// import useScrollTrigger from "@mui/material/useScrollTrigger";
+// import Slide from "@mui/material/Slide";
+
+
+const StyledSlide = styled.div`
+
+`;
 
 function HideOnScroll({ children }) {
-  const trigger = useScrollTrigger();
+  // const trigger = useScrollTrigger();
 
   return (
-    <Slide appear={false} direction="down" in={!trigger}>
+    <StyledSlide
+      appear={false}
+      direction="down"
+      // in={!trigger}
+    >
       {children}
-    </Slide>
+    </StyledSlide>
   );
 }
 

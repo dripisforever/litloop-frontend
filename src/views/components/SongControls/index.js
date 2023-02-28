@@ -1,6 +1,6 @@
-import SongControls from "./SongControls";
-// import SongControlsStyled from "./SongControlsStyled";
-import { connect } from "react-redux";
+// import SongControls from "./SongControls";
+import SongControlsStyled from "./SongControlsStyled";
+import { connect, useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
 import { increaseSongTime } from "core/actions";
 
@@ -15,6 +15,7 @@ import { increaseSongTime } from "core/actions";
 //     songs: state.entities.playerTracks.songs
 //   };
 // };
+// const { songName, } = useSelector((state) => state.entities.playlistTracks )
 const mapStateToProps = state => {
   return {
     songName: state.entities.playlistTracks.songDetails ? state.entities.playlistTracks.songDetails.name : "",
@@ -37,5 +38,6 @@ const mapDispatchToProps = dispatch => {
   );
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(SongControls);
-// export default connect(mapStateToProps, mapDispatchToProps)(SongControlsStyled);
+export default connect(mapStateToProps, mapDispatchToProps)(SongControlsStyled);
+
+// export default connect(mapStateToProps, mapDispatchToProps)(SongControls);

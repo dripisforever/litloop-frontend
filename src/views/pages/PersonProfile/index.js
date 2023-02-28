@@ -1,13 +1,20 @@
 import React, { useEffect } from "react";
-import { Typography } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchPerson } from "core/actions";
 import { useParams } from "react-router-dom";
+
+
+// MATERIAL DONE
+// import { Typography } from "@mui/material";
+import { StyledTypography } from 'views/styledComponents';
+
 import Profile from "views/components/Profile";
 import PersonInfo from "./PersonInfo";
 import PersonIntroduction from "./PersonIntroduction";
 import PersonImageGridList from "./PersonImageGridList";
 import PersonCastingGridList from "./PersonCastingGridList";
+
+// CORE
+import { fetchPerson } from "core/actions";
 import { selectors } from "core/reducers/index";
 import { verifyCachedData } from "core/utils";
 
@@ -33,22 +40,22 @@ function PersonProfile() {
       introduction={<PersonIntroduction personId={personId} />}
       leftSide={
         <>
-          <Typography variant="h6" gutterBottom>
+          <StyledTypography variant="h6" gutterBottom>
             Personal Info
-          </Typography>
+          </StyledTypography>
           <PersonInfo personId={personId} />
         </>
       }
       main={
         <>
-          <Typography variant="h6" gutterBottom>
+          <StyledTypography variant="h6" gutterBottom>
             Images
-          </Typography>
+          </StyledTypography>
           <PersonImageGridList personId={personId} />
 
-          <Typography variant="h6" gutterBottom>
+          <StyledTypography variant="h6" gutterBottom>
             Castings
-          </Typography>
+          </StyledTypography>
           <PersonCastingGridList personId={personId} />
         </>
       }
