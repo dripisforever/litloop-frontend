@@ -107,6 +107,7 @@ const TextInput = ({
       return (
         <AreaInput
           {...others}
+          className={className}
           disabled={disabled}
           placeholder={hintText}
           fullWidth={fullWidth}

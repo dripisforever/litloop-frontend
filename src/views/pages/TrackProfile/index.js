@@ -29,17 +29,24 @@ import { verifyCachedData } from "core/utils";
 // STYLING
 const api_data = [
   {
-    url: "https://d1ca20q97pi6ei.cloudfront.net/%40onlymilitarycontent%3Avideo%3A7076002202753584390.mp4",
+    // url: "https://d1ca20q97pi6ei.cloudfront.net/%40onlymilitarycontent%3Avideo%3A7076002202753584390.mp4",
+    url: "https://cdn.coverr.co/videos/coverr-desert-in-california-329/1080p.mp4",
     viewsCount: "1M",
     likesCount: "30K",
-    thumbNail: "https://d1ca20q97pi6ei.cloudfront.net/thumbnail/jet.jpeg",
+    // thumbNail: "https://d1ca20q97pi6ei.cloudfront.net/thumbnail/jet.jpeg",
+    thumbNail: "https://images.unsplash.com/photo-1618595714505-cfc44411d4d4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80",
   },
   {
-    url: "https://d1ca20q97pi6ei.cloudfront.net/Crystal+Castles+-+Kerosene(American+Psycho).mp4",
+    // url: "https://d1ca20q97pi6ei.cloudfront.net/Crystal+Castles+-+Kerosene(American+Psycho).mp4",
+    url: "https://cdn.coverr.co/videos/coverr-golden-dunes-4546/1080p.mp4",
     viewsCount: "3.2M",
     likesCount: "100K",
     // thumbNail: "https://d1ca20q97pi6ei.cloudfront.net/thumbnail/Crystal+Castles+-+Kerosene(American+Psycho)+.jpeg",
-    thumbNail: "https%3A%2F%2Fd1ca20q97pi6ei.cloudfront.net%2Fthumbnail%2FCrystal%2BCastles%2B-%2BKerosene(American%2BPsycho)%2B.jpeg",
+
+    // thumbNail: "https%3A%2F%2Fd1ca20q97pi6ei.cloudfront.net%2Fthumbnail%2FCrystal%2BCastles%2B-%2BKerosene(American%2BPsycho)%2B.jpeg",
+    thumbNail: "https://images.unsplash.com/photo-1560440293-855922f9cc7d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1472&q=80",
+
+
     // thumbNail: "https://views-test-api.s3.us-west-1.amazonaws.com/thumbnail/Crystal+Castles+-+Kerosene(American+Psycho)+.jpeg",
   },
   {
@@ -114,6 +121,7 @@ function TrackProfile() {
                 <StyledVideoCard
                 // <VideoCard
                   url={item.url}
+                  key={index}
                   // light={item.url}
                   light={item.thumbNail}
                   viewsCount={item.viewsCount}

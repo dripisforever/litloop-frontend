@@ -6,10 +6,12 @@ import { useParams } from "react-router-dom";
 // import { Typography } from "@mui/material";
 import { StyledTypography } from "views/styledComponents";
 
+// VIEWS
 import Profile from "views/components/Profile";
 import MovieIntroduction from "./MovieIntroduction";
-import MovieImageGridList from "./MovieImageGridList";
-import MovieVideoList from "./MovieVideoList";
+import MovieIntroductionV2 from "./MovieIntroductionV2";
+// import MovieImageGridList from "./MovieImageGridList";
+// import MovieVideoList from "./MovieVideoList";
 import MovieCastGridList from "./MovieCastGridList";
 import Recommendations from "./Recommendations";
 
@@ -19,7 +21,7 @@ import { verifyCachedData } from "core/utils";
 
 const REQUIRED_FIELDS = ["tagline"];
 
-function MovieProfile() {
+function MovieProfile({stopSong, pauseSong, resumeSong, audioControl}) {
   const dispatch = useDispatch();
   const { movieId } = useParams();
   const isFetching = useSelector(state =>
@@ -36,21 +38,21 @@ function MovieProfile() {
   return (
     <Profile
       loading={loading}
-      introduction={<MovieIntroduction movieId={movieId} />}
+      introduction={<MovieIntroductionV2 movieId={movieId} />}
       main={
         <>
           <StyledTypography variant="h6" gutterBottom>
             Videos
           </StyledTypography>
-          <MovieVideoList movieId={movieId} />
+          {/*<MovieVideoList movieId={movieId} />*/}
           <StyledTypography variant="h6" gutterBottom>
             Images
           </StyledTypography>
-          <MovieImageGridList movieId={movieId} />
+          {/*<MovieImageGridList movieId={movieId} />*/}
           <StyledTypography variant="h6" gutterBottom>
             Recommendations
           </StyledTypography>
-          <Recommendations movieId={movieId} />
+          {/*<Recommendations movieId={movieId} />*/}
         </>
       }
 

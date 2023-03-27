@@ -8,7 +8,7 @@ import InfiniteGridList from "views/components/InfiniteGridList";
 
 function renderItem(albumId) {
   return (
-    <li>
+    <li className="AlbumFeedItem">
       <AlbumItem albumId={albumId} />
     </li>
   );

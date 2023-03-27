@@ -173,7 +173,7 @@ function PlaylistIntroduction({ playlistId, handleLikePhoto, handleUnLikePhoto }
       title={
         <>
           <StyledTypography variant="h5" gutterBottom={!playlist.tagline}>
-            {playlist.name} by {playlist.owner.display_name}
+            <h1>{playlist.name}</h1> by {playlist.owner.display_name}
 
 
           </StyledTypography>

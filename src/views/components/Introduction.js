@@ -74,7 +74,7 @@ function Introduction({ backgroundImageSrc, imageSrc, title, content }) {
 
   return (
     <StyledBox position="relative">
-      <BackdropDiv />
+      <BackdropDiv></BackdropDiv>
       <StyledBox
         // className={classes.container}
         display={"flex"}

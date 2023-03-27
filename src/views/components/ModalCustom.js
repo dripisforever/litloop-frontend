@@ -18,11 +18,34 @@ import { StyledDialog, StyledDialogContent } from 'views/styledComponents';
 // }));
 
 const ReStyledDialog = styled.div`
+  margin-top: 0;
+  position: fixed;
+  z-index: 10;
+  background: #191919cf;
 
+  /* top: 4em;
+  left: 10em;
+  height: 50vh;
+  width: 50vw; */
+
+
+  display: block;
+  /* padding: 0.75rem; */
+
+
+
+  top: 0;
+  left: 0;
+  height: 91vh;
+  
+
+  width: 93%;
+  padding: 2.75rem;
 `;
 
 const ReStyledDialogContent = styled.div`
-
+  background: black;
+  padding: 2.75rem;
 `;
 
 
@@ -58,7 +81,7 @@ function ModalCustom({ children, open, fullScreen, onExited, className, ...rest 
     //   <DialogContent>{children}</DialogContent>
     // </Dialog>
 
-    <StyledDialog
+    <ReStyledDialog
       {...rest}
       open={showModal}
       // className={classes.closesButton}
@@ -69,8 +92,8 @@ function ModalCustom({ children, open, fullScreen, onExited, className, ...rest 
       onExited={onExitAnimationEnd}
       transitionDuration={0}
     >
-      <StyledDialogContent>{children}</StyledDialogContent>
-    </StyledDialog>
+      <ReStyledDialogContent>{children}</ReStyledDialogContent>
+    </ReStyledDialog>
   );
 }
 

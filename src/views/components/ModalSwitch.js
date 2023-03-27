@@ -108,7 +108,7 @@ function ModalSwitch({  children, renderModal, stopSong, pauseSong, resumeSong, 
 
   const location = useLocation();
   const history = useHistory();
-  // useScrollRestoration();
+  useScrollRestoration();
   // useScrollMemory();
 
   const backgroundLocation = useRef(location);
@@ -301,6 +301,9 @@ function ModalSwitch({  children, renderModal, stopSong, pauseSong, resumeSong, 
     checkIfStartedWithModal
   ]);
 
+
+
+
   const redirectToBack = useCallback(() => {
     const prevLocation = backgroundLocation.current;
 
@@ -316,6 +319,11 @@ function ModalSwitch({  children, renderModal, stopSong, pauseSong, resumeSong, 
   const isModal = !!(location.state && location.state.modal && backgroundLocation.current !== backgroundLocation ); // not initial render
 
   const switchLocation = isModal ? backgroundLocation.current : location;
+
+  useEffect(() => {
+    if (isModal) document.body.style.overflow = 'hidden';
+    else document.body.style.overflow = 'visible';
+  }, [isModal]);
 
   const contextValue = useMemo(() => {
     return {
@@ -368,7 +376,7 @@ function ModalSwitch({  children, renderModal, stopSong, pauseSong, resumeSong, 
 
 
         {/*<Route exact path="/album" component={ModalMovies} />*/}
-        <Route path="/movies/:id" component={ModalMovie} />
+        {/*<Route path="/movies/:id" component={ModalMovie} />*/}
         {/*<Route path="/movies/:id" component={MovieCard} />*/}
         {/*<Route path="/album/:albumId" component={AlbumProfile}/>*/}
         {/*<Route path="/track/:trackId" component={TrackProfile}/>*/}
@@ -392,11 +400,21 @@ function ModalSwitch({  children, renderModal, stopSong, pauseSong, resumeSong, 
         <Route exact path="/searches/:type/:query" component={SearchesResults} />
 
         <Route path="/person/:personId">
-          <PersonProfile />
+          <PersonProfile
+            stopSong={stopSong}
+            pauseSong={pauseSong}
+            resumeSong={resumeSong}
+            audioControl={audioControl}
+          />
         </Route>
 
         <Route path="/artist/:artistId">
-          <ArtistProfile />
+          <ArtistProfile
+            stopSong={stopSong}
+            pauseSong={pauseSong}
+            resumeSong={resumeSong}
+            audioControl={audioControl}
+          />
         </Route>
 
         <Route exact path="/albums" component={ModalAlbums} />

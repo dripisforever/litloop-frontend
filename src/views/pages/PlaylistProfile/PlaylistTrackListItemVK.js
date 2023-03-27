@@ -17,6 +17,8 @@ import BaseCardHeader from "views/components/BaseCardHeader";
 import RouterLink from "views/components/RouterLink";
 import ModalLink from "views/components/ModalLink";
 import IconButton from "views/components/icon-button/IconButton";
+
+import { PlayIcon } from "views/components/Sidebar/Icons";
 import FormattedTime from "views/components/formatted-time/FormattedTime";
 import { getAspectRatioString } from "views/components/AspectRatio";
 import "views/components/track-card/track-card.css"
@@ -26,17 +28,19 @@ import "views/components/track-card/track-card.css"
 import { selectors } from "core/reducers/index";
 
 const HideIndexItem = styled.div`
-  padding: 0 16px;
+  padding: 10px 16px;
+  height: 22px;
   display: grid;
+
   /* grid-template-columns: 25px 40px 28fr 3fr minmax(531px,1fr); */
-
-
-  /* grid-template-columns: [index] 16px [first] 0fr [var1] 4fr [var2] 3fr [var3] 0fr [last] minmax(120px,1fr); */
-  grid-template-columns: [index] 16px [first] 6fr [var1] 4fr [var2] 3fr [last] minmax(120px,1fr);
+  /* grid-template-columns: [index] 16px [first] 0fr [var1] 1fr [var2] 28px [var3] 1fr [var4] 1fr [var5] 0fr [last] minmax(120px,1fr); */
+  /* grid-template-columns: [index] 16px [first] 0fr [var1] 1fr [var2] 2fr [var3] 28px [var4] 1fr [var5] 0fr [last] minmax(120px,1fr); */
+  grid-template-columns: [index] 16px [first] 1fr [var1] 1fr [var2] 0fr [var3] 0fr [var4] 0fr [var5] 0fr [last] minmax(120px,1fr);
   grid-gap: 16px;
 
   &:hover {
     background-color: rgba(255, 255, 255, 0.1);
+    cursor: pointer;
   }
 
   /* playButton */
@@ -48,13 +52,14 @@ const HideIndexItem = styled.div`
     display: inline-block;
   }
 
-  .trackNumber div {
+  .trackNumber div { /* PlayIcon */
     position: absolute;
     background: transparent;
     border: 0;
     padding: 0;
-    color: #fff;
-    display: none;
+    color: #404b8c;
+    /* display: none; */
+    cursor: pointer;
   }
   .trackNumber  {
     display: flex;
@@ -64,11 +69,13 @@ const HideIndexItem = styled.div`
 
   border-radius: 4px;
 `;
+
 const TrackNumber = styled.div`
   color: white;
 `;
 const ReStyledAvatar = styled(StyledAvatar)`
   margin-right: 16px;
+  width: 16px;
 `;
 const StyledLink = styled(Link)`
   color: white;
@@ -81,7 +88,8 @@ const StyledLink = styled(Link)`
   font-family: Verdana;
 `;
 const StyledArtistLink = styled(Link)`
-  color: grey;
+  align-items: center;
+  color: #404b8c;
   text-decoration: none;
   cursor: pointer;
   &:hover {
@@ -98,6 +106,69 @@ const StyledSpan = styled.span`
 const StyledDiv = styled.div`
   display: table;
 `;
+
+
+const StyledFormattedTime = styled(FormattedTime)`
+  span {
+    color: white;
+    font-family: Verdana;
+  }
+`;
+
+
+const Explicit = styled.span`
+  margin-right: 5px;
+  color: black;
+  padding: 3px 5px;
+  font-size: 9px;
+  font-family: Verdana;
+  background-color: hsla(0,0%,100%,.6);
+  border-radius: 3px;
+`;
+
+const StyledArtists = styled.div`
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+`;
+const StyledAlbum = styled.div`
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+`;
+const StyledDuration = styled.div`
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+`;
+
+const StyledTrackItem = styled.div`
+
+  display: flex;
+
+  align-items: center;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: inline-block;
+`;
+
 function LinkTrack(obj, id) {
   // const classes = useStyles();
   return (
@@ -131,7 +202,7 @@ function LinkTrack(obj, id) {
 function LinkAlbum(obj, id) {
   // const classes = useStyles();
   return (
-    <p>
+    <StyledAlbum>
       <StyledLink
         // className={classes.linkHoverz}
 
@@ -155,27 +226,19 @@ function LinkAlbum(obj, id) {
         {obj.track.album.name}
 
       </StyledLink>
-    </p>
+    </StyledAlbum>
   )
 }
 
-const StyledFormattedTime = styled(FormattedTime)`
-  span {
-    color: white;
-    font-family: Verdana;
+function ExplicitSignature(obj){
+  if (obj.track.explicit) {
+    return (
+      <Explicit>E</Explicit>
+    )
   }
-`;
+}
 
-const Explicit = styled.span`
-  margin-right: 5px;
-  color: black;
-  padding: 3px 5px;
-  font-size: 9px;
-  font-family: Verdana;
-  background-color: hsla(0,0%,100%,.6);
-  border-radius: 3px;
-`;
-function PlaylistTrackListItem({
+function PlaylistTrackListItemVK({
   playlistTrackId,
   key,
   songId,
@@ -217,7 +280,7 @@ function PlaylistTrackListItem({
     track.track.id === songId && songPlaying && songPaused ? resumeSong(): songPlaying && !songPaused && track.track.id === songId ? pauseSong(): audioControl(track);
   }
 
-  const secondaryDAMN = track.track.artists.map((artist, i) =>
+  const artists = track.track.artists.map((artist, i) =>
 
       <StyledSpan key={i}>
         {i > 0 && ", "}
@@ -237,57 +300,54 @@ function PlaylistTrackListItem({
   return (
     <HideIndexItem className="DRIPTA" onClick={doubleClickPlayTrack} key={key} dense {...rest} index={index}>
 
-      {/*<CardActionArea className={classes.root}>*/}
+
 
 
         <TrackNumber className="trackNumber">
-          <span
-            // className={
-            //   track.track.id === id ? `${classes.active}`: `${classes.linkHoverz}`
-            // }
-
-            >
+          {/*<span>
             {index+1}
-          </span>
+          </span>*/}
           <div
             className="play-song"
             onClick={singleClickPlayTrack}
             // style={mini_style}
           >
-            <i className={`fa ${buttonClass} play-btn`} aria-hidden="true"/>
+            {/*<i className={`fa ${buttonClass} play-btn`} />*/}
+            <PlayIcon />
           </div>
 
         </TrackNumber>
 
 
 
-        <StyledListItemAvatar
-          // style={album_cover}
-        >
-          <ReStyledAvatar src={track.track.album.images[2] ? track.track.album.images[2].url : ""}  variant={"rounded"} />
-          <StyledListItemText>
-            {LinkTrack(track, songId)}
-            <StyledDiv>
-              <Explicit>E</Explicit>
-              {secondaryDAMN}
-            </StyledDiv>
-          </StyledListItemText>
 
-        </StyledListItemAvatar>
+        {/*<ReStyledAvatar src={track.track.album.images[2] ? track.track.album.images[2].url : ""}  variant={"rounded"} />*/}
+        <StyledTrackItem>{artists}</StyledTrackItem>
+        <StyledTrackItem>
+          {LinkTrack(track, songId)}
+          <StyledDiv>
+
+
+          </StyledDiv>
+        </StyledTrackItem>
+
+        <StyledTrackItem>
+
+
+          {ExplicitSignature(track)}
+        </StyledTrackItem>
+
 
         {/*<StyledListItemText primary={LinkTrack(track, songId)} secondary={secondaryDAMN} />*/}
 
-        {LinkAlbum(track, songId)}
+        {/*<StyledTrackItem>{LinkAlbum(track, songId)}</StyledTrackItem>*/}
         <div className="Date"></div>
 
         <StyledFormattedTime value={track.track.duration_ms} unit={'ms'} />
-      {/*</CardActionArea>*/}
+        {/*<StyledDuration value={track.track.duration_ms} unit={'ms'} />*/}
+
 
     </HideIndexItem>
-
-    // <SongItem>
-    //
-    // </SongItem>
   );
 }
 
@@ -328,4 +388,4 @@ const mapPlaylistTrackListItemToProps = (dispatch) => {
 
 };
 
-export default connect(mapStateToProps, {})(PlaylistTrackListItem);
+export default connect(mapStateToProps, {})(PlaylistTrackListItemVK);

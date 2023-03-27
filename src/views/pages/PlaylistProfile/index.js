@@ -29,6 +29,10 @@ const SongHeaderContainer = styled.div`
 
   grid-template-columns: [index] 16px [first] 6fr [var1] 4fr [var2] 3fr [last] minmax(120px,1fr);
   justify-content: space-between;
+
+  p, i {
+    color: white;
+  }
 `;
 
 // const useStyles = makeStyles(theme => ({

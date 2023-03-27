@@ -48,6 +48,7 @@ import { FaEye } from 'react-icons/fa';
 import { FcLike, FcLikePlaceholder } from 'react-icons/fc';
 
 const StyledPlayer = styled.div`
+
   position: relative;
   /* aspect-ratio: 16/9; */
   border-radius: 8px;
@@ -95,7 +96,7 @@ const DoubleClickFullScreenWrapper = styled.div`
   height: 100%;
 `;
 const StyledContainer = styled.div`
-
+  color: white;
 `;
 const Stats = styled.div`
   display: grid;
@@ -151,7 +152,7 @@ const format = (seconds) => {
 
 let count = 0;
 
-function StyledVideoCard({url,light, viewsCount, likesCount}, props) {
+function StyledVideoCard({ url, light, viewsCount, likesCount }, props) {
   // const { url, light } = props;
   const [state, dispatch] = useReducer(reducer, INITIAL_STATE);
   const playerRef = useRef(null);

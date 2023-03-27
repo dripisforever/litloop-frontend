@@ -9,6 +9,7 @@ import { StyledTypography } from 'views/styledComponents';
 import Profile from "views/components/Profile";
 import ArtistInfo from "./ArtistInfo";
 import ArtistIntroduction from "./ArtistIntroduction";
+import ArtistIntroductionV2 from "./ArtistIntroductionV2";
 import ArtistImageGridList from "./ArtistImageGridList";
 import ArtistCastingGridList from "./ArtistCastingGridList";
 
@@ -43,7 +44,7 @@ function ArtistProfile() {
           <StyledTypography variant="h6" gutterBottom>
             Artistal Info
           </StyledTypography>
-          <ArtistInfo artistId={artistId} />
+          {/*<ArtistInfo artistId={artistId} />*/}
         </>
       }
       main={

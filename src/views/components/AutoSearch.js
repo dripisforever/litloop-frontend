@@ -88,10 +88,11 @@ const Container = styled.div`
 
 const SearchTx = styled(TextInput)`
   flex: 1;
-  margin: 0px 16px;
+  /* margin: 0px 16px; */
   width: 100%;
   border: 0;
   // margin-right: 25em;
+  font-family: Verdana;
 `;
 const StyledSearchIcon = styled.div`
 

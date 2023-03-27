@@ -2,13 +2,6 @@ import React, { useState, useEffect } from "react";
 import { connect, useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 
-// MATERIAL DONE
-// import { AppBar, Toolbar, Typography, Link, Box, IconButton, Button, } from "@mui/material";
-// import SearchIcon from "@mui/icons-material/Search";
-// import CloseIcon from "@mui/icons-material/Close";
-// import { fade } from '@mui/material/styles';
-// import { makeStyles } from '@mui/material/styles';
-
 // VIEWS
 import RouterLink from "./RouterLink";
 import MovieAndPersonAutoSearch from "views/components/MovieAndPersonAutoSearch";
@@ -22,30 +15,6 @@ import HideOnScroll from "./HideOnScroll";
 import { getState } from 'core/store';
 
 const authUser = getState().users;
-
-// const useStyles = makeStyles(theme => ({
-//   titleLink: {
-//     "&:hover": {
-//       textDecoration: "none"
-//     }
-//   },
-//   closeMobileSearchButton: {
-//     marginRight: theme.spacing(2)
-//   },
-//   searcher: {
-//     maxWidth: 680
-//   },
-//
-//   root: {
-//     flexGrow: 1,
-//   },
-//   toolbar: {
-//     height: '80px',
-//     // height: '50px',
-//     minHeight: '50px',
-//     backgroundColor: '#000000'
-//   }
-// }));
 
 // STYLED
 const StyledAppBar = styled.div`
@@ -64,7 +33,7 @@ const StyledToolbar = styled.div`
   justify-content: space-between;
   align-items: center;
 
-  grid-gap: 11em;
+  /* grid-gap: 11em; */
   /* grid-template-columns: 540px 600px 99px; */
   /* grid-gap: 100px; /*
 `;
@@ -76,6 +45,8 @@ const StyledLink = styled.a`
 `;
 const StyledBox = styled.div`
   width: 100%;
+  padding-left: 6em;
+  padding-right: 20em;
 `;
 const StyledIconButton = styled.button`
 
@@ -105,6 +76,7 @@ const LitLoopLogo = styled.img`
 
   /* margin-left: auto; */
   /* margin-right: auto; */
+
 `;
 const Logo = styled.div`
   display: flex;
@@ -120,6 +92,14 @@ const LinkStyled = styled(RouterLink)`
   color: white;
   text-decoration: none;
   font-family: Verdana;
+  height: 100%;
+
+  div.litloop_logo_title {
+    margin-left: 5px;
+    margin-top: auto;
+    margin-bottom: auto;
+  }
+
 `;
 const MyButton = styled(RouterLink)`
   /* background: linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%); */
@@ -134,21 +114,56 @@ const MyButton = styled(RouterLink)`
   text-decoration: none;
 `;
 const LoginBtn = styled(RouterLink)`
-
+  display: flex;
+  font-family: Verdana;
   color: white;
   /* background: linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%); */
   background: linear-gradient(45deg, #673ab7 30%, #3f51b5 90%);
-  border: 0;
-  border-radius: 18px;
+
+
   /* box-shadow: 0 3px 5px 2px rgba(255, 105, 135, .3); */
 
-
-  /* padding: 0 30px; */
-  padding: 15px 30px;
+  width: 52px;
+  border-radius: 13px;
+  padding: 12px 23px;
   text-decoration: none;
 
 `;
 
+const BurgerMenu = styled.div`
+  cursor: pointer;
+  margin-left: 1em;
+  svg.BurgerIcon {
+   fill: white;
+  }
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 0px;
+  }
+`;
+
+const BentoMenu = styled.div`
+  cursor: pointer;
+  margin-left: 2em;
+
+  .bento-menu {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    grid-column-gap: 2px;
+    grid-row-gap: 2px;
+    height : 22px;
+    width : 22px;
+  }
+
+  .bento-dot {
+    width : 4px;
+    height: 4px;
+    border-radius: 999px;
+    background: white;
+    overflow: hidden;
+  }
+`;
 
 const AppHeader = React.forwardRef((props, ref) => {
   // const classes = useStyles();
@@ -181,6 +196,46 @@ const AppHeader = React.forwardRef((props, ref) => {
         <StyledToolbar
           // className={classes.toolbar}
         >
+          <BurgerMenu>
+            <svg
+              width="24"
+              height="24"
+              class="BurgerIcon"
+              viewBox="0 0 24 24"
+              version="1.1"
+              aria-hidden="false">
+              <desc lang="en-US">navigation menu</desc>
+              <path d="M3 16h18v2H3v-2ZM3 6v2h18V6H3Zm0 7h18v-2H3v2Z"></path>
+            </svg>
+          </BurgerMenu>
+
+          {/*<BurgerMenu>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="100%"
+              height="100%"
+              viewBox="0 0 24 24"
+              fit=""
+              preserveAspectRatio="xMidYMid meet"
+              focusable="false">
+              <path d="M0 0h24v24H0z" fill="none"></path>
+              <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"></path>
+            </svg>
+          </BurgerMenu>*/}
+          {/*<BentoMenu>
+            <div class="bento-menu">
+              <div class="bento-dot"></div>
+              <div class="bento-dot"></div>
+              <div class="bento-dot"></div>
+              <div class="bento-dot"></div>
+              <div class="bento-dot"></div>
+              <div class="bento-dot"></div>
+              <div class="bento-dot"></div>
+              <div class="bento-dot"></div>
+              <div class="bento-dot"></div>
+            </div>
+          </BentoMenu>*/}
+
           {(!isMobile || !isMobileSearch) && (
             <Logo>
 
@@ -190,9 +245,9 @@ const AppHeader = React.forwardRef((props, ref) => {
                   color="inherit"
                 >
                   <LitLoopLogo src={litloopLogo} />
-                  <p className="litloop_logo_title">
+                  <div className="litloop_logo_title">
                     LitLoop
-                  </p>
+                  </div>
                 </LinkStyled>
               </LogoSpan>
             </Logo>
@@ -250,7 +305,7 @@ const AppHeader = React.forwardRef((props, ref) => {
                 variant="contained"
                 to="/login"
                 // onClick={()=> {fetchAuthUser(data)}}
-                >Login
+                >Log In
               </LoginBtn>
             </LoginWrapper>
           }

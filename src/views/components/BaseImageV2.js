@@ -21,12 +21,12 @@ const DEFAULT_ASPECT_RATIO = getAspectRatioString(1, 1);
 
 
 const StyledImg = styled.img`
-  width: 100%;
+  width: 20%;
   height: 100%
   object-fit: ${(props) => props.objectFit}
 `;
 
-function BaseImage({
+function BaseImageV2({
   src,
   alt = DEFAULT_ALT,
   aspectRatio = ORIGINAL,
@@ -97,4 +97,4 @@ function BaseImage({
   );
 }
 
-export default BaseImage;
+export default BaseImageV2;

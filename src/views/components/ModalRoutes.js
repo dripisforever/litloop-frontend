@@ -6,6 +6,7 @@ import MovieProfile  from "views/pages/MovieProfile";
 import AlbumProfile  from "views/pages/AlbumProfile";
 import TrackProfile  from "views/pages/TrackProfile";
 import PlaylistProfile  from "views/pages/PlaylistProfile";
+import ArtistProfile  from "views/pages/ArtistProfile";
 
 import PersonProfile from "views/pages/PersonProfile";
 import PopularPeople from "views/pages/PopularPeople";
@@ -35,11 +36,12 @@ function ModalRoutes({ stopSong, pauseSong, resumeSong, audioControl }) {
         <ModalCustom open={open} scroll="body" onExited={redirectToBack} location={location}>
           {/*<ModalRoute defaultParentPath="/movies" path="/movies/:id" component={ModalMovie}/>*/}
           {/*<ModalRoute defaultParentPath="/movies" path="/movies/:movieId" component={MovieCard}/>*/}
-          <ModalRoute defaultParentPath="/movies" path="/movies/:movieId" component={MovieProfile}/>
-          {/*<ModalRoute path="/movies/:movieId" component={MovieProfile}/>*/}
+          {/*<ModalRoute defaultParentPath="/movies" path="/movies/:movieId" component={MovieProfile}/>*/}
+          <ModalRoute path="/movies/:movieId" component={MovieProfile}/>
           <ModalRoute path="/album/:albumId" component={AlbumProfile}/>
           <ModalRoute path="/track/:trackId" component={TrackProfile}/>
           <ModalRoute path="/playlist/:playlistId" component={PlaylistProfile}/>
+          <ModalRoute path="/artist/:artistid" component={ArtistProfile}/>
           {/*<ModalRoute  path="/video/:videoId" component={VideoProfile}/>*/}
         </ModalCustom>
       )}

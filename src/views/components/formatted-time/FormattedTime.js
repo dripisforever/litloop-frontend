@@ -2,7 +2,7 @@ import React from 'react';
 // import PropTypes from 'prop-types';
 
 
-function FormattedTime({value = 0, unit}) {
+function FormattedTime({value = 0, unit, className}) {
   // HTMLAudioElement provides time in seconds
   // SoundCloud provides time in milliseconds
   if (unit === 'ms') {
@@ -22,9 +22,9 @@ function FormattedTime({value = 0, unit}) {
   }
 
   return (
-    <p>
+    <div className={className}>
       <span>{formattedTime}</span>
-    </p>
+    </div>
   )
 }
 

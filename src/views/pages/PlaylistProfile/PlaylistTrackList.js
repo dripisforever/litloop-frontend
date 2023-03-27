@@ -10,7 +10,10 @@ import TrackCard from "views/components/TrackCard";
 import InfiniteList from "views/components/InfiniteList";
 import InfiniteGridList from "views/components/InfiniteGridList";
 import LoadingIndicator from "views/components/LoadingIndicator";
+
 import PlaylistTrackListItem from "./PlaylistTrackListItem";
+import PlaylistTrackListItemVK from "./PlaylistTrackListItemVK";
+import PlaylistTrackListItemMinified from "./PlaylistTrackListItemMinified";
 
 import { audio, getPlayerIsPlaying, getPlayerTrackId, playerActions } from 'core/player';
 import { getCurrentTracklist, getTracksForCurrentTracklist, tracklistActions } from 'core/tracklists';
@@ -57,7 +60,9 @@ function PlaylistTrackList({
     // let isSelected = playlistTrackId.track.id === selectedTrackId;
     return (
 
-        <PlaylistTrackListItem
+        // <PlaylistTrackListItem
+        // <PlaylistTrackListItemVK
+        <PlaylistTrackListItemMinified
           playlistTrackId={playlistTrackId}
           resumeSong={resumeSong}
           pauseSong={pauseSong}

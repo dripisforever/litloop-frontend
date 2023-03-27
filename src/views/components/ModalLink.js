@@ -36,8 +36,8 @@ function AddModalStateToLink(to) {
   }
 }
 
-function ModalLink({ to, ...rest }) {
-  return <Link {...rest} to={AddModalStateToLink(to)} />;
+function ModalLink({ to, className, ...rest }) {
+  return <Link {...rest} className={className} to={AddModalStateToLink(to)} />;
 }
 
 // ModalLink.propTypes = Link.propTypes;

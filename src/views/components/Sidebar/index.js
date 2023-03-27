@@ -6,9 +6,12 @@ import { Link } from "react-router-dom";
 import { HomeIcon, TrendingIcon, SubIcon, LibIcon, HistoryIcon, VidIcon, LikeIcon, } from "./Icons";
 import { closeSidebar } from "core/reducers/sidebar";
 import { FiMessageCircle } from 'react-icons/fi';
+import { FiClock } from 'react-icons/fi';
+import { FiBookmark } from 'react-icons/fi';
 import { TbMessageCircle2 } from 'react-icons/tb';
 import { FaHistory } from 'react-icons/fa';
 import { MdVideoLibrary } from 'react-icons/md';
+import { MdAlbum } from 'react-icons/md';
 import { FaWpexplorer } from 'react-icons/fa';
 
 
@@ -35,9 +38,9 @@ const SidebarWrapper = styled.div`
   .icon {
     display: flex;
     align-items: center;
-    padding: 0.2rem 0;
+    padding: 0.7rem 0;
     padding-left: 1.5rem;
-    margin-bottom: 0.4rem;
+    /* margin-bottom: 0.4rem; */
   }
 
   .icon:not(.hover-disable):hover {
@@ -74,24 +77,29 @@ const SidebarWrapper = styled.div`
 const StyledUl = styled.ul`
   align-items: flex-start;
   list-style: none;
+  padding-right: 10px;
 `;
 
 const StyledLi = styled.li`
-
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
+  }
+  /* border-style: dotted */
 `;
 
 const LinkStyled = styled(Link)`
-
+  align-items: center;
   color: #FFF;
   text-decoration: none;
   &:hover: {
     text-decoration: underline;
   }
 
-  /* display: grid;
+  /* display: grid; */
 
-  grid-gap: 1em;
- grid-template-columns: 20px 29px minmax(81px,0fr); */
+  /* grid-gap: 1em; */
+   /* grid-template-columns: 20px 29px minmax(81px,0fr); */
   display: flex;
 
   span {
@@ -155,6 +163,8 @@ const StyledDivIcon = styled.div`
   }
 
 `;
+
+
 const Sidebar = () => {
   const dispatch = useDispatch();
 
@@ -166,7 +176,7 @@ const Sidebar = () => {
   return (
     <SidebarWrapper open={open}>
       <StyledUl>
-        <StyledLi>
+        <StyledLi id="Trending">
           <LinkStyled onClick={handleCloseSidebar} to="/feed/trending">
             <StyledDivIcon className="icon">
               <TrendingIcon />
@@ -176,7 +186,7 @@ const Sidebar = () => {
           </LinkStyled>
         </StyledLi>
 
-        <StyledLi>
+        <StyledLi id="Explore">
           <LinkStyled
             onClick={handleCloseSidebar}
             to="/explore"
@@ -191,7 +201,7 @@ const Sidebar = () => {
           </LinkStyled>
         </StyledLi>
 
-        <StyledLi>
+        <StyledLi id="Messages">
           <LinkStyled onClick={handleCloseSidebar} to="/feed/trending">
             <StyledDivIcon className="icon">
               {/*<MessagesIcon />*/}
@@ -215,21 +225,49 @@ const Sidebar = () => {
             <span>Library</span>
           </div>
         </LinkStyled>*/}
-        <StyledLi>
+        <StyledLi id="History">
           <LinkStyled
             onClick={handleCloseSidebar}
             to="/feed/history"
             // activeClassName="active"
           >
             <StyledDivIcon className="icon">
-              <HistoryIcon />
-              {/*<FaHistory />*/}
+
+              <FiClock />
+
 
             </StyledDivIcon>
             <span>History</span>
           </LinkStyled>
         </StyledLi>
 
+        <StyledLi id="Albums">
+          <LinkStyled
+            onClick={handleCloseSidebar}
+            to="/albums"
+          >
+            <StyledDivIcon className="icon">
+              <MdAlbum />
+
+
+            </StyledDivIcon>
+            <span>New Albums</span>
+          </LinkStyled>
+        </StyledLi>
+        <StyledLi id="Bookmarks">
+          <LinkStyled
+            onClick={handleCloseSidebar}
+            to="/bookmarks"
+            // activeClassName="active"
+          >
+            <StyledDivIcon className="icon">
+              <FiBookmark />
+              {/*<FaHistory />*/}
+
+            </StyledDivIcon>
+            <span>Bookmarks</span>
+          </LinkStyled>
+        </StyledLi>
         {/*<StyledLi>
           <LinkStyled
             onClick={handleCloseSidebar}
@@ -254,7 +292,7 @@ const Sidebar = () => {
           >
             <StyledDivIcon className="icon">
               {/*<LikeIcon />*/}
-              <h3>Playlists</h3>
+              <div>Playlists</div>
             </StyledDivIcon>
           </LinkStyled>
         </StyledLi>
