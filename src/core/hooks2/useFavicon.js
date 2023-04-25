@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 
 const useFavicon = (
-  faviconHref = `${process.env.PUBLIC_URL}/favicon-32x32.png`,
+  faviconHref = `${import.meta.env.PUBLIC_URL}/favicon-32x32.png`,
   restore = true
 ) => {
   const prevFavicon = useRef(document.querySelector("link[rel*='icon']").href);

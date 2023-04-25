@@ -1,6 +1,9 @@
-//@flow
 
-export default class APIError extends Error {
-  code: number;
-  errors: string;
+
+export default class APIError {
+  
+  construct(code, errors){
+    this.code = code
+    this.errors = errors
+  }
 }

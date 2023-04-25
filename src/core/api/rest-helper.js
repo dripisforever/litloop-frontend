@@ -130,7 +130,7 @@ export const getAxiosReq = (endpoint, headers = getHeaders()) =>
  * get headers for Multi Part requests
  * like upload image
  */
-export const getHeadersForMultiPart = (): Headers => {
+export const getHeadersForMultiPart = () => {
   const headers = new Headers();
   if (getState().user.isAuthorized) {
     headers.append(

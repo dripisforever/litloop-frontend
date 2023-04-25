@@ -6,7 +6,7 @@ const disconnectTwitch = async ({ setTwitchToken = () => {}, setEnableTwitch = (
   await axios
     .post(
       `https://id.twitch.tv/oauth2/revoke?
-      client_id=${process.env.REACT_APP_TWITCH_CLIENT_ID}&
+      client_id=${import.meta.env.REACT_APP_TWITCH_CLIENT_ID}&
       token=${getCookie('Twitch-access_token')}`
     )
     .catch((er) => console.error(er));

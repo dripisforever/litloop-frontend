@@ -28,7 +28,7 @@ import {
 import { normalize } from "normalizr";
 import { selectors } from "core/reducers/index";
 import axios from "axios";
-import { getReq, getHeaders, getState } from 'core/store';
+import { getHeaders, getState } from 'core/store';
 
 import history  from "core/services/history";
 
@@ -302,7 +302,7 @@ export function* fetcherAuthSaga({action, endpoint, params, schema, processData,
       // yield put(actions.setUserProfile(res))
       // console.log(data_current);
 
-      
+
       // useLocation().push('/movies')
       // historyPush('/');
       // useHistory().push('/')

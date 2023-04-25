@@ -4,7 +4,7 @@ import { getCookie } from 'views/utils';
 import API from '../navigation/API';
 import litloopAPI from '../litloop/API';
 
-const TWITCH_CLIENT_ID = process.env.REACT_APP_TWITCH_CLIENT_ID;
+const SPOTIFY_CLIENT_ID = "";
 // const validateController = new AbortController();
 let promise = null;
 
@@ -78,7 +78,7 @@ const validateFunction = async (token) => {
   // validateController.abort();
   const access_token = token || getCookie('Twitch-access_token');
   const res = await axios
-    .get('https://id.twitch.tv/oauth2/validate', {
+    .get('https://accounts.spotify.com/oauth2/validate', {
       headers: {
         Authorization: `OAuth ${access_token}`,
       },

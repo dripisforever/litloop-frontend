@@ -289,7 +289,7 @@ const Comment = ({
                   </>
                 ) : null}
 
-                {process.env.NODE_ENV === "development" ? (
+                {import.meta.env.NODE_ENV === "development" ? (
                   <Button
                     label="Log to console"
                     flat

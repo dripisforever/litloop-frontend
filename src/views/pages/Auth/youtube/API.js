@@ -11,7 +11,7 @@ YOUTUBE_INSTANCE.interceptors.request.use(
     const token = await validateToken();
     config.headers['Authorization'] = `Bearer ${token}`;
     config.headers['Accept'] = 'application/json';
-    config.params = { ...(config.params || {}), key: process.env.REACT_APP_YOUTUBE_API_KEY };
+    config.params = { ...(config.params || {}), key: import.meta.env.REACT_APP_YOUTUBE_API_KEY };
 
     return config;
   },

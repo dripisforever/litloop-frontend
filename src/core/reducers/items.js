@@ -39,7 +39,7 @@ export default (state = initialState, action) => {
     // action > setItems
     case 'items/SE_ITEMS': {
       // the payload === array of entity items
-      let newItems: Object = {};
+      let newItems = {};
       for (let i = 0; i < action.payload.length; i++) {
         let element = action.payload[i];
         // element = camelCaseKeys(element);
@@ -173,7 +173,7 @@ export default (state = initialState, action) => {
     // action > setItems
     case 'phot/SE_ITEMS': {
       // the payload === array of entity items
-      let newItems: Object = {};
+      let newItems = {};
       for (let i = 0; i < action.payload.results.length; i++) {
         let element = action.payload.results[i];
         // element = camelCaseKeys(element);

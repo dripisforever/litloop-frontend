@@ -1,6 +1,6 @@
 // https://dev.vk.com/api/api-requests
 const VKontakteBaseAuthUrl = `https://oauth.vk.com/authorize?
-  client_id=${process.env.REACT_APP_TWITCH_CLIENT_ID}&
+  client_id=${import.meta.env.REACT_APP_TWITCH_CLIENT_ID}&
   redirect_uri=http://localhost:3000/auth/vk/callback&
   scope=user:read:follows+clips:edit&
   response_type=code`;
