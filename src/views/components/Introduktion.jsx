@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from 'styled-components';
 // MATERIAL DONE
 // import { Box, Typography, makeStyles } from "@mui/material";
@@ -28,14 +28,17 @@ import { useConfiguration } from "./ConfigurationProvider";
 // }));
 
 const StyledDiv = styled.div`
-  width: 10%;
+  /* width: 10%; */
 `;
-function Introduktion({ backgroundImageSrc, imageSrc, title, content, likeButton, uploadButton }) {
+function Introduktion({ backgroundImageSrc, imageSrc, obj, title, content, likeButton, uploadButton }) {
   const { getImageUrl } = useConfiguration();
   // const classes = useStyles({
   //   backgroundImageSrc: getImageUrl(backgroundImageSrc)
   // });
 
+  useEffect(() => {
+    document.title = obj.name;
+  }, [])
   return (
     <StyledDiv className="position" position="relative">
       {/*<div className={classes.backdrop} />*/}

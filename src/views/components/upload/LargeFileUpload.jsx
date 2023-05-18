@@ -1,4 +1,4 @@
-// REFERENCE
+// REFERENCE https://medium.com/swlh/uploadig-large-files-as-chunks-using-reactjs-net-core-2e6e00e13875
 // LargeFileUpload-master/
 
 import React, { useEffect, useState } from 'react';
@@ -39,7 +39,7 @@ function LargeFileUpload() {
 
     const _totalCount = _file.size % chunkSize == 0 ? _file.size / chunkSize : Math.floor(_file.size / chunkSize) + 1; // Total count of chunks will have been upload to finish the file
     setChunkCount(_totalCount)
-
+    console.log(_totalCount);
     setFileToBeUpload(_file)
     const _fileID = uuidv4() + "." + _file.name.split('.').pop();
     setFileGuid(_fileID)
@@ -51,7 +51,8 @@ function LargeFileUpload() {
     if (counter <= chunkCount) {
       const formData = new FormData();
       var chunk = fileToBeUpload.slice(beginingOfTheChunk, endOfTheChunk);
-      formData.append("qqfile", chunk);
+
+      // formData.append("qqfile", chunk);
       // formData.append("qquuid", file);
       // formData.append("qqfilename", file);
 
@@ -145,17 +146,30 @@ function LargeFileUpload() {
   return (
     // <Jumbotron>
     <div>
-      <Form>
-        <Form>
-          <Form id="exampleFormControlFile1" onChange={getFileContext} label="Example file input" />
-        </Form>
-        <Form style={{ display: showProgress ? "block" : "none" }}>
+      <div>
+        <div>
+          <input type="file" id="exampleFormControlFile1" onChange={getFileContext} label="Example file input" />
+        </div>
+        <form style={{ display: showProgress ? "block" : "none" }}>
           {progressInstance}
-        </Form>
-      </Form>
+        </form>
+      </div>
     </div>
     // </Jumbotron >
   );
+
+  // return (
+  //   <div>
+  //     <Form>
+  //       <Form.Group>
+  //         <Form.File id="exampleFormControlFile1" onChange={getFileContext} label="Example file input" />
+  //       </Form.Group>
+  //       <Form.Group style={{ display: showProgress ? "block" : "none" }}>
+  //         {progressInstance}
+  //       </Form.Group>
+  //     </Form>
+  //   </div >
+  // )
 }
 
 

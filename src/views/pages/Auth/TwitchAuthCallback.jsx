@@ -15,7 +15,13 @@ const CLIENT_ID = "ec5ywfa209khvmx6yqpsaytocmlzr3";
 
 const TwitchAuthCallback = () => {
   const [error, setError] = useState();
-  const { setTwitchAccessToken, setTwitchRefreshToken, setTwitchUserId, setTwitchUsername, setTwitchProfileImage, } = useContext(TwitchContext) || {};
+  const {
+    setTwitchAccessToken,
+    setTwitchRefreshToken,
+    setTwitchUserId,
+    setTwitchUsername,
+    setTwitchProfileImage
+  } = useContext(TwitchContext) || {};
   // const setNavigationBarVisible = useSetRecoilState(navigationBarVisibleAtom);
   // const setFooterVisible = useSetRecoilState(footerVisibleAtom);
 
@@ -61,11 +67,11 @@ const TwitchAuthCallback = () => {
         //   accessToken,
         //   refreshToken
         // );
-        // return {
-        //   Username: user.login,
-        //   ProfileImg: user.profile_image_url,
-        //   userId: user.id,
-        // };
+        return {
+          // Username: user.login,
+          ProfileImg: user.profile_image_url,
+          // userId: user.id,
+        };
       });
 
       // const MyTwitch = await TwitchAPI.getMe({ accessToken: accessToken }).then(async (res) => {
@@ -91,16 +97,16 @@ const TwitchAuthCallback = () => {
       //   };
       // });
 
-      // return {
-      //   access_token: accessToken,
-      //   refresh_token: refreshToken,
-      //   ...MyTwitch
-      // };
-
       return {
         access_token: accessToken,
         refresh_token: refreshToken,
+        ...MyTwitch
       };
+
+      // return {
+      //   access_token: accessToken,
+      //   refresh_token: refreshToken,
+      // };
     },
     [
       setTwitchAccessToken,
@@ -121,7 +127,7 @@ const TwitchAuthCallback = () => {
         access_token: res.access_token,
         refresh_token: res.refresh_token,
         // username: res.Username,
-        // profileImg: res.ProfileImg,
+        profileImg: res.ProfileImg,
         // userId: res.userId,
       },
       '*'

@@ -93,7 +93,12 @@ const LikesCounter = styled.span`
   margin: 0px 6px;
 `;
 
-
+const ReStyledTypography = styled(StyledTypography)`
+  color: white;
+`;
+const ReBaseImage = styled.img`
+  width: 10%;
+`;
 function PlaylistIntroduction({ playlistId, handleLikePhoto, handleUnLikePhoto }) {
   const playlist = useSelector(state => selectors.selectPlaylist(state, playlistId));
   const tracks = useSelector(state => selectors.selectPlaylistTracks(state, playlistId));
@@ -163,20 +168,21 @@ function PlaylistIntroduction({ playlistId, handleLikePhoto, handleUnLikePhoto }
       imageSrc={
         <>
           <div flexBasis={100}>
-            <BaseImage
+            <ReBaseImage
               src={playlist.images[0] ? playlist.images[0].url : ""}
               aspectRatio={getAspectRatioString(1, 1)}
             />
           </div>
         </>
       }
+      obj={playlist}
       title={
         <>
-          <StyledTypography variant="h5" gutterBottom={!playlist.tagline}>
+          <ReStyledTypography variant="h5" gutterBottom={!playlist.tagline}>
             <h1>{playlist.name}</h1> by {playlist.owner.display_name}
 
 
-          </StyledTypography>
+          </ReStyledTypography>
           {playlist.tagline && (
             <StyledTypography
               // className={classes.tagline}

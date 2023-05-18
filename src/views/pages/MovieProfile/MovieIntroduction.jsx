@@ -63,6 +63,7 @@ function MovieIntroduction({ movieId }) {
 
   return (
     <Introduction
+      obj={movie}
       backgroundImageSrc={movie.backdrop_path}
       imageSrc={movie.poster_path}
       title={

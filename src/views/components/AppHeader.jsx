@@ -1,13 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { connect, useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 
 // VIEWS
 import RouterLink from "./RouterLink";
+import ModalLink from "views/components/ModalLink";
 import MovieAndPersonAutoSearch from "views/components/MovieAndPersonAutoSearch";
 import DrawerToggleButton from "views/components/DrawerToggleButton";
 import AvatarHover from "views/components/AvatarHover";
 import litloopLogo from "views/assets/litloopLogo3.png";
+import Dropdown from "views/components/Dropdown/Dropdown";
+
+import { TwitchContext, TwitchProvider } from 'views/pages/Auth/twitch/useToken';
 
 // CORE
 import useDetectMobile from "core/hooks/useDetectMobile";
@@ -20,6 +24,7 @@ const authUser = getState().users;
 const StyledAppBar = styled.div`
   width: 100%;
   background: #0a0a0a;
+  /* background: white; */
   height: 60px;
   z-index: 3;
   position: fixed;
@@ -113,7 +118,7 @@ const MyButton = styled(RouterLink)`
   padding: 15px 30px;
   text-decoration: none;
 `;
-const LoginBtn = styled(RouterLink)`
+const LoginBtn = styled(ModalLink)`
   display: flex;
   font-family: Verdana;
   color: white;
@@ -165,15 +170,27 @@ const BentoMenu = styled.div`
   }
 `;
 
+const StyledImg = styled.img`
+  width: 40px;
+  border-radius: 30px;
+  cursor: pointer;
+`;
 const AppHeader = React.forwardRef((props, ref) => {
   // const classes = useStyles();
   const isMobile = useDetectMobile();
+  const { twitchProfileImage } = useContext(TwitchContext) || {};
+  // const { twitchProfileImage } = useContext(TwitchContext);
   const [isMobileSearch, setIsMobileSearch] = useState(false);
+  const [childMessage, setChildMessage] = useState("");
+
   const { userProfile } = props;
 
   const user = useSelector((state) => state.users);
 
   const authed = getState().users.access_token;
+  const oauthed = getState().users.google_oauth.oauthed;
+
+
   useEffect(() => {
     if (!isMobile) {
       setIsMobileSearch(false);
@@ -188,6 +205,57 @@ const AppHeader = React.forwardRef((props, ref) => {
     setIsMobileSearch(false);
   }
 
+  useEffect(() => {
+    const childResponse = (event) => {
+      if (event?.data) {
+        console.log(event.data);
+        setChildMessage(event.data);
+        console.log(event.data.profileImg);
+        setChildMessage(event.data.profileImg)
+      }
+    };
+    window.addEventListener("message", childResponse);
+    return () => window.removeEventListener("message", childResponse);
+
+  }, []);
+
+  const [dropdownOpen, setDropdownOpen] = React.useState(false);
+
+  const handleDropdownOpen = () => {
+    setDropdownOpen(!dropdownOpen);
+  };
+  const handleMenuOne = () => {
+    console.log('clicked one');
+  };
+
+  const handleMenuTwo = () => {
+    console.log('clicked two');
+  };
+
+  useEffect(() => {
+
+
+  })
+  const is_authorized = () => {
+
+    console.log(oauthed);
+    console.log(authed);
+    if (oauthed) {
+      <AvatarHover avatarUrl={getState().users.google_oauth.profileImg} />
+    } else if (authed) {
+      <AvatarHover avatarUrl={getState().users.avatar} />
+    } else {
+      <LoginWrapper>
+        <LoginBtn
+          // color="secondary"
+          variant="contained"
+          to="/login"
+          // onClick={()=> {fetchAuthUser(data)}}
+          >Log In
+        </LoginBtn>
+      </LoginWrapper>
+    }
+  }
 
   return (
     // <HideOnScroll>
@@ -284,14 +352,29 @@ const AppHeader = React.forwardRef((props, ref) => {
           )}
 
 
-          {(!isMobileSearch && authed) ?
-            (<AvatarHover avatarUrl={getState().users?.response?.result?.avatar} />) :
+          {/*<Dropdown
+            trigger={<button onClick={handleDropdownOpen}>Dropdown</button>}
+            menu={[
+              <button >Menu 1</button>,
+              <button >Menu 2</button>,
+            ]}
+          />*/}
+
+          {is_authorized()}
+
+
+
+          {(!isMobileSearch && authed || oauthed) ?
+            // (<AvatarHover avatarUrl={getState().users?.response?.result?.avatar} />) :
+
+            // (<img title='Re-authenticate' src={twitchProfileImage} alt='' />):
+
 
             // (<AvatarHover avatarUrl={user.response.result.avatar} />) :
             // (<AvatarHover avatarUrl={getState().users.response.avatar} />) :
 
             // BACKUP
-            // (<AvatarHover avatarUrl={getState().users.avatar} />) :
+            (<AvatarHover avatarUrl={getState().users.avatar} />) :
             // <MyButton
             //   color="secondary"
             //   variant="contained"
@@ -309,6 +392,7 @@ const AppHeader = React.forwardRef((props, ref) => {
               </LoginBtn>
             </LoginWrapper>
           }
+
         </StyledToolbar>
       </StyledAppBar>
     // </HideOnScroll>

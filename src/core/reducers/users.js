@@ -5,7 +5,7 @@ import createByKey from "./higherOrderReducers/createByKey";
 import { REHYDRATE } from 'redux-persist/lib/constants';
 
 // import { USER_LOGGEDIN, USER_LOGGEDOUT } from '../config/actionTypes'
-const initialState = null
+// const initialState = null
 // import * as types from '../actions';
 
 // export const userReducer = (state = initialState, action) => {
@@ -25,10 +25,15 @@ const initialState = null
 
 
 
-// const initialState = {
-//     id: null,
-//     token: null,
-// }
+const initialState = {
+
+    google_oauth: {
+      service: null,
+      access_token: null,
+      profileImg: null,
+    },
+
+}
 
 export default function(state = initialState, action) {
   const response = action.payload;
@@ -45,6 +50,10 @@ export default function(state = initialState, action) {
 
     case actions.fetchAuthUser:
       return { ...state, response };
+
+    // case actions.popupData:
+      // return { ...state, response };
+
     // case actions.setAccessToken:
     case "setToken/fetch":
       console.log("setToken/fetch");
@@ -80,6 +89,32 @@ export default function(state = initialState, action) {
         },
       });
     }
+    case "user/oauth/setUserProfile":
+      console.log("OAuth SET");
+
+      const { scope, ...others } = action.payload;
+      // return { ...state, ...response };
+
+      // return Object.assign({}, state, {
+      //   isAuthorized: true,
+      //   google_oauth: {
+      //     ...state,
+      //     ...response,
+      //     // user_scope: scope.split(' '),
+      //   },
+      // });
+
+      const new_obj = Object.assign({}, state, {
+
+        google_oauth: {
+          oauthed: true,
+          ...response,
+          // user_scope: scope.split(' '),
+        },
+        // ...state, ...response
+      });
+
+      return new_obj;
     // setUserProfile
     // case 'user/SE_USER_PROFILE': {
     //   const { links, ...others } = action.payload;

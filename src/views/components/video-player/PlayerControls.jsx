@@ -147,7 +147,8 @@ const WrapperDiv = styled.div`
 
 
   bottom: 58px;
-  left: 14em;
+  /* left: 14em; */
+  /* left: 77%; */
   position: absolute;
   background: #ffffff40;
   border-radius: 10px;
@@ -199,6 +200,10 @@ const StyledInput = styled.input`
   }
 `;
 
+const ReStyledGrid = styled.div`
+  display: flex;
+  position: relative;
+`;
 const PlayerControls = (props, {doubleClickToggleFullScreen}) => {
   const { state, dispatch, wrapperRef, playerRef } = props;
 
@@ -257,7 +262,7 @@ const PlayerControls = (props, {doubleClickToggleFullScreen}) => {
       // const yourData = // whatever your data is
       setIsShown(false)
 
-    }, 500))
+    }, 2500))
 
     clearTimeout(delayHandler)
   }
@@ -265,7 +270,7 @@ const PlayerControls = (props, {doubleClickToggleFullScreen}) => {
 
   const renderSoundSlider = () => {
     return (
-      <StyledGrid
+      <ReStyledGrid
         id="SLIDER-VOL"
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
@@ -296,7 +301,7 @@ const PlayerControls = (props, {doubleClickToggleFullScreen}) => {
           />
         )}
 
-      </StyledGrid>
+      </ReStyledGrid>
     );
   };
 

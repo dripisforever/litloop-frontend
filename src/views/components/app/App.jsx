@@ -1,10 +1,12 @@
-import React, { useEffect, useContext } from "react";
+import React, { useEffect, useContext, useCallback, useState } from "react";
+import ReactDOM from 'react-dom';
 import { bindActionCreators } from 'redux';
 import { Route, useLocation } from 'react-router-dom';
 import { connect, useDispatch, useSelector } from "react-redux";
 import { RecoilRoot } from 'recoil';
 import styled from 'styled-components';
-
+import useKeyboardShortcut from 'use-keyboard-shortcut';
+import './index.css';
 // VIEWS
 import LoginPage from "views/pages/LoginPage";
 import Container from "views/styles/Container";
@@ -32,12 +34,12 @@ import Sidebar from "views/components/Sidebar";
 
 // CORE
 import { playSong, stopSong, pauseSong, resumeSong, } from 'core/actions/index';
-import { fetchGenres } from "core/actions";
+import { fetchGenres, fetchOAuthUser } from "core/actions";
 import { selectors } from "core/reducers/index";
 import history  from "core/services/history";
 
 // CONTEXT PRO
-import { AccountProvider } from 'views/pages/account/AccountContext';
+// import { AccountContextProvider } from 'views/pages/account/AccountContext';
 import { TwitchContext, TwitchProvider } from 'views/pages/Auth/twitch/useToken';
 import { GoogleContext, GoogleProvider } from 'views/pages/Auth/google/useToken';
 import { SpotifyContext, SpotifyProvider } from 'views/pages/Auth/spotify/useToken';
@@ -86,22 +88,135 @@ const LeftSide = styled.div`
 const StyledWrapper = styled.div`
 
 `;
+
+const ModalContext = React.createContext();
+
+function Modal({ children, onModalClose }) {
+  // ESCAPE BUTTON
+
+  // React.useEffect(() => {
+  //   function keyListener(e) {
+  //     const listener = keyListenersMap.get(e.keyCode);
+  //     return listener && listener(e);
+  //   }
+  //   document.addEventListener("keydown", keyListener);
+  //
+  //   return () => document.removeEventListener("keydown", keyListener);
+  // });
+
+  const modalRef = React.createRef();
+
+  const handleTabKey = e => {
+    const focusableModalElements = modalRef.current.querySelectorAll(
+      'a[href], button, textarea, input[type="text"], input[type="radio"], input[type="checkbox"], select'
+    );
+    const firstElement = focusableModalElements[0];
+    const lastElement = focusableModalElements[focusableModalElements.length - 1];
+
+    if (!e.shiftKey && document.activeElement !== firstElement) {
+      firstElement.focus();
+      return e.preventDefault();
+    }
+
+    if (e.shiftKey && document.activeElement !== lastElement) {
+      lastElement.focus();
+      e.preventDefault();
+    }
+
+    if (e.shiftKey && e.key === 'Tab') {
+      e.preventDefault();
+      setIsModalVisible(true)
+    }
+  };
+
+  const keyListenersMap = new Map([
+    [27, onModalClose],
+    [9, handleTabKey],
+    // [],
+    // []
+  ]);
+
+  return ReactDOM.createPortal(
+    <div className="AYOO">
+
+      <div className="modal-content-1" ref={modalRef}>
+        <ModalContext.Provider value={{ onModalClose }}>
+          {children}
+        </ModalContext.Provider>
+      </div>
+      <div className="modal-content-2" ref={modalRef}>
+        <ModalContext.Provider value={{ onModalClose }}>
+          <Modal.Header>Feed</Modal.Header>
+          <Modal.Body>Pitchfork</Modal.Body>
+
+        </ModalContext.Provider>
+      </div>
+      <div className="modal-content-3" ref={modalRef}>
+        <ModalContext.Provider value={{ onModalClose }}>
+          <Modal.Header>Music Player</Modal.Header>
+          <Modal.Body>Pitchfork</Modal.Body>
+
+        </ModalContext.Provider>
+      </div>
+
+      <div className="modal-container" role="dialog" aria-modal="true">
+
+      </div>
+
+    </div>,
+    document.body
+  );
+}
+
+Modal.Header = function ModalHeader(props) {
+  const { onModalClose } = React.useContext(ModalContext);
+
+  return (
+    <div className="modal-header">
+      {props.children}
+      {/*<button className="cross-btn" title="close modal" onClick={onModalClose}>
+        ✕
+      </button>*/}
+    </div>
+  );
+};
+
+Modal.Body = function ModalBody(props) {
+  return <div className="modal-body">{props.children}</div>;
+};
+
+Modal.Footer = function ModalFooter(props) {
+  return <div className="modal-footer">{props.children}</div>;
+};
+
+Modal.Footer.CloseBtn = function CloseBtn(props) {
+  const { onModalClose } = React.useContext(ModalContext);
+  return (
+    <button
+      {...props}
+      className="close-btn"
+      title="close modal"
+      onClick={onModalClose}
+    />
+  );
+};
+
 const AppRoutesContainer = () => {
   return (
     <React.StrictMode>
     <RecoilRoot>
 
-          {/*<AccountProvider>
-            <TwitchProvider>
-              <GoogleProvider>
+          {/*<AccountContextProvider>*/}
+            {/*<TwitchProvider>*/}
+              {/*<GoogleProvider>
                 <MusicPlayerProvider>*/}
 
                   <App />
 
                 {/*</MusicPlayerProvider>
-              </GoogleProvider>
-            </TwitchProvider>
-          </AccountProvider>*/}
+              </GoogleProvider>*/}
+            {/*</TwitchProvider>*/}
+          {/*</AccountContextProvider>*/}
 
     </RecoilRoot>
     </React.StrictMode>
@@ -116,6 +231,36 @@ const App = () => {
   const genres = useSelector(state => selectors.selectGenres(state));
   // const genresCount = Object.keys(genres).length;
 
+  // OVERLAY
+  const [isModalVisible, setIsModalVisible] = React.useState(false);
+  const keys = ['Shift', 'Tab']
+  const counter_strike = ['B']
+
+  useEffect(() => {
+    if (isModalVisible) document.body.style.overflow = 'hidden';
+    else document.body.style.overflow = 'visible';
+  }, [isModalVisible]);
+
+  const handleKeyboardShortcut = useCallback(keys => { setIsModalVisible(currentShowImage => !currentShowImage)}, [setIsModalVisible])
+  useKeyboardShortcut(
+    keys,
+    handleKeyboardShortcut,
+    {
+      overrideSystem: true,
+      ignoreInputFields: false,
+      repeatOnHold: false
+    }
+  )
+  useKeyboardShortcut(
+    counter_strike,
+    handleKeyboardShortcut,
+    {
+      overrideSystem: true,
+      ignoreInputFields: false,
+      repeatOnHold: false
+    }
+  )
+
   useEffect(() => {
     dispatch(fetchGenres());
 
@@ -124,12 +269,13 @@ const App = () => {
 
 
   const { stopSongz, pauseSongz, resumeSongz, audioControlz } = useContext(MusicPlayerContext) || {};
-  const { setTwitchAccessToken, setTwitchRefreshToken, setTwitchUserId, setTwitchUsername, setTwitchProfileImage, } = useContext(TwitchContext) || {};
+  const { setTwitchAccessToken, setTwitchRefreshToken, setTwitchUserId, setTwitchUsername, setTwitchProfileImage } = useContext(TwitchContext) || {};
   const { setGoogleAccessToken, setGoogleRefreshToken, setGoogleUsername, setGoogleProfileImage } = useContext(GoogleContext) || {};
   const { setSpotifyAccessToken, setSpotifyRefreshToken, setSpotifyUsername, setSpotifyProfileImage } = useContext(SpotifyContext) || {};
   // const { setUnsplashAccessToken, setUnsplashRefreshToken, setUnsplashUsername, setUnsplashProfileImage } = useContext(UnsplashContext) || {};
   // const { setYoutubeAccessToken, setYoutubeRefreshToken, setYoutubeUsername, setYoutubeProfileImage } = useContext(YoutubeContext) || {};
 
+  const [childMessage, setChildMessage] = useState("");
   useEventListenerMemo('message', receiveMessage, window, true, { capture: false });
   // useEventListenerMemo('message', receiveMessage2, window, true, { capture: false });
 
@@ -144,17 +290,27 @@ const App = () => {
       if (e.data.service === 'twitch') {
         console.log("Receive postMessage TOKEN");
         console.log(e.data);
-        if (setTwitchAccessToken) setTwitchAccessToken(e.data.access_token);
-        if (setTwitchRefreshToken) setTwitchRefreshToken(e.data.refresh_token);
-        if (setTwitchUsername) setTwitchUsername(e.data.username);
-        if (setTwitchUserId) setTwitchUserId(e.data.userId);
-        if (setTwitchProfileImage) setTwitchProfileImage(e.data.profileImg);
+        // if (setTwitchAccessToken) setTwitchAccessToken(e.data.access_token);
+        // if (setTwitchRefreshToken) setTwitchRefreshToken(e.data.refresh_token);
+        // if (setTwitchUsername) setTwitchUsername(e.data.username);
+        // if (setTwitchUserId) setTwitchUserId(e.data.userId);
+        // if (setTwitchProfileImage) setTwitchProfileImage(e.data.profileImg);
+        setChildMessage(e.data.profileImg);
         // RELOAD
+
+        // // redux-saga
+        // store.dispatch(receiveOpenerPostMessageData(event.data));
+        // dispatch(receiveOpenerPostMessageData(event.data));
+        dispatch(fetchOAuthUser(event.data));
+
         history.push('/');
       } else if (e.data.service === 'google') {
         if (e.data.access_token && setGoogleAccessToken) setGoogleAccessToken(e.data.access_token);
         if (e.data.username && setGoogleUsername) setGoogleUsername(e.data.username);
         if (e.data.profileImg && setGoogleProfileImage) setGoogleProfileImage(e.data.profileImg);
+
+        dispatch(fetchOAuthUser(event.data));
+        
         // toggleEnabled('youtube', true);
       } else if (e.data.service === 'spotify') {
         if (e.data.access_token && setSpotifyAccessToken) setSpotifyAccessToken(e.data.access_token);
@@ -179,7 +335,7 @@ const App = () => {
         <TwitchProvider>
           <GoogleProvider>
             <MusicPlayerProvider>*/}
-      {(pathname === '/login') ? null : (<AppHeader />)}
+      {(pathname === '/login') ? null : (<AppHeader imgSrc={childMessage}/>)}
 
       {/*<AppDrawer />*/}
 
@@ -261,6 +417,22 @@ const App = () => {
       {/*</RecoilRoot>*/}
     {/*</React.Fragment>*/}
     </StyledWrapper>
+
+    {isModalVisible && (
+      <div>
+      <Modal onModalClose={() => setIsModalVisible(false)}>
+        <Modal.Header>Chat</Modal.Header>
+        <Modal.Body>Online</Modal.Body>
+        <Modal.Footer>
+          Group Chats
+          {/*<Modal.Footer.CloseBtn>Close</Modal.Footer.CloseBtn>*/}
+        </Modal.Footer>
+      </Modal>
+
+      {/*<Modal onModalClose={() => setIsModalVisible(false)}>
+      </Modal>*/}
+      </div>
+    )}
     </>
   );
 }

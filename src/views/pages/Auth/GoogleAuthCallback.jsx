@@ -66,7 +66,7 @@ const GoogleAuthCallback = () => {
         return {
           Email: user.email,
           // Username: user.givenName,
-          ProfileImg: user.picture,
+          picture: user.picture,
           userId: user.sub,
         };
       });
@@ -97,14 +97,15 @@ const GoogleAuthCallback = () => {
         access_token: res.access_token,
         // refresh_token: res.refresh_token,
         // username: res.Username,
-        // profileImg: res.ProfileImg,
+        profileImg: res.picture,
         // userId: res.userId,
       },
       '*'
     );
 
     if (res.access_token) {
-      setTimeout(() => window.close(), 100);
+      // setTimeout(() => window.close(), 100);
+      window.close()
     }
   }
 

@@ -1,11 +1,13 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import { viteCommonjs, esbuildCommonjs } from '@originjs/vite-plugin-commonjs';
-
+import dns from 'dns'
 // https://vitejs.dev/config/
 // export default defineConfig({
 //   plugins: [react()],
 // })
+
+dns.setDefaultResultOrder('verbatim')
 
 export default defineConfig({
   plugins: [react()],
@@ -30,6 +32,7 @@ export default defineConfig({
     },
   },
   server: {
+    host: 'localhost',
     open: '/',
     port: 3001,
   },

@@ -21,7 +21,7 @@ function useEscapeKey(handleClose) {
     }
   }, [handleOverlayToggle]);
 
-}
+
   useEffect(() => {
     document.addEventListener(KEY_EVENT_TYPE, handleEscKey, false);
 

@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useRef, useState } from 'react';
 // import { Amplify, Auth, Hub, Logger } from 'aws-amplify';
 // import { toast } from 'react-toastify';
 
-import LogsContext from 'views/pages/logs/LogsContext';
+// import LogsContext from 'views/pages/logs/LogsContext';
 import litloopAPI from 'views/pages/Auth/litloop/API';
 
 // Amplify.configure({
@@ -13,9 +13,11 @@ import litloopAPI from 'views/pages/Auth/litloop/API';
 //   },
 // });
 
-const AccountContext = React.createContext();
+// const AccountContext = React.createContext();
+export const AccountContext = React.createContext();
 
-export const AccountProvider = ({ children }) => {
+const AccountContextProvider = ({ children }) => {
+// export const AccountProvider = ({ children }) => {
   const [user, setUser] = useState();
   const [loading, setLoading] = useState(true);
   // const { addLog } = useContext(LogsContext);
@@ -38,9 +40,11 @@ export const AccountProvider = ({ children }) => {
       // } else {
       //   // other situations
       // }
-      setUser(user);
+      setUser(user_litloop);
+      // setUser(user);
       setLoading(false);
-      return user;
+      // return user;
+      return user_litloop;
     } catch (error) {
       console.log('error signing in', error);
       setUser(null);
@@ -82,7 +86,8 @@ export const AccountProvider = ({ children }) => {
       try {
         // const user = await Auth.currentAuthenticatedUser();
         const uset_litloop = await litloopAPI.currentAuthenticatedUser();
-        setUser(user);
+        setUser(user_litloop);
+        // setUser(user);
       } catch (error) {}
 
       setLoading(false);
@@ -158,4 +163,6 @@ export const AccountProvider = ({ children }) => {
     </AccountContext.Provider>
   );
 };
-export default AccountContext;
+// export default AccountContext;
+
+export default AccountContextProvider;

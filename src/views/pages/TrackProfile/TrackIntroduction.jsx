@@ -94,13 +94,22 @@ const LikesCounter = styled.span`
   margin: 0px 6px;
 `;
 
+const ReStyledTypography = styled(StyledTypography)`
+  color: white;
+`;
 
+const ReBaseImage = styled.img`
+  width: 10%;
+`;
 function TrackIntroduction({ trackId, handleLikePhoto, handleUnLikePhoto }) {
   const [name, setName] = useState(null);
   const track = useSelector(state => selectors.selectTrack(state, trackId));
   // const classes = useStyles();
 
   // useDocumentTitle(track.name)
+  // useDocumentTitle(track)
+
+  
 
   // const releaseYear = getTrackReleaseYear(track);
 
@@ -125,13 +134,14 @@ function TrackIntroduction({ trackId, handleLikePhoto, handleUnLikePhoto }) {
 
   return (
     <Introduktion
+      obj={track}
       backgroundImageSrc={track.album.images[0] ? track.album.images[0].url : ""}
       imageSrc={
         <>
 
           {/*<SC.Box flexBasis={100}>*/}
           <StyledBox flexBasis={100}>
-            <BaseImage
+            <ReBaseImage
               src={track.album.images[0] ? track.album.images[0].url : ""}
               aspectRatio={getAspectRatioString(1, 1)}
             />
@@ -141,7 +151,7 @@ function TrackIntroduction({ trackId, handleLikePhoto, handleUnLikePhoto }) {
       }
       title={
         <>
-          <StyledTypography variant="h5" gutterBottom={!track.tagline}>
+          <ReStyledTypography variant="h5" gutterBottom={!track.tagline}>
             {track.name}  <br/>{track.artists.map((artist, i) =>
                 <span key={i}>
                   {i > 0 && ", "}
@@ -163,7 +173,7 @@ function TrackIntroduction({ trackId, handleLikePhoto, handleUnLikePhoto }) {
               )
             }
 
-          </StyledTypography>
+          </ReStyledTypography>
           {track.tagline && (
             <StyledTypography
               // className={classes.tagline}

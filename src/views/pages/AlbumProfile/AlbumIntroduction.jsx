@@ -93,6 +93,13 @@ const LikesCounter = styled.span`
   margin: 0px 6px;
 `;
 
+const StyledImg = styled.img`
+  width: 400px;
+`;
+const ReStyledTypography = styled.p`
+  color: #673ab7;
+  font-family: Verdana;
+`;
 
 function AlbumIntroduction({ albumId, handleLikePhoto, handleUnLikePhoto }) {
   const album = useSelector(state => selectors.selectAlbum(state, albumId));
@@ -192,11 +199,13 @@ function AlbumIntroduction({ albumId, handleLikePhoto, handleUnLikePhoto }) {
 
   return (
     <Introduktion
+      obj={album}
       backgroundImageSrc={album.images[0] ? album.images[0].url : ""}
       imageSrc={
         <>
           <StyledBox flexBasis={500}>
-            <BaseImage
+            <StyledImg
+
               src={album.images[0] ? album.images[0].url : ""}
               aspectRatio={getAspectRatioString(1, 1)}
             />
@@ -205,7 +214,7 @@ function AlbumIntroduction({ albumId, handleLikePhoto, handleUnLikePhoto }) {
       }
       title={
         <>
-          <StyledTypography variant="h5" gutterBottom={!album.tagline}>
+          <ReStyledTypography variant="h5" gutterBottom={!album.tagline}>
             {album.name} by {album.artists.map((artist, i) =>
                 <span key={i}>
                   {i > 0 && ", "}
@@ -229,7 +238,7 @@ function AlbumIntroduction({ albumId, handleLikePhoto, handleUnLikePhoto }) {
             {/*{linkList}*/}
 
 
-          </StyledTypography>
+          </ReStyledTypography>
           {album.tagline && (
             <StyledTypography
               // className={classes.tagline}

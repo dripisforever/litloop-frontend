@@ -41,13 +41,15 @@
     "screenfull": "^6.0.2",
     "styled-components": "^5.3.6",
     "uniqid": "^5.4.0",
+    "use-keyboard-shortcut": "^1.1.6",
     "uuid": "^9.0.0"
   },
   "scripts": {
     "vite": "vite",
     "start": "vite",
     "preview": "vite preview",
-    "build": "vite build"
+    "build": "vite build",
+    "dev": "vite --host"
   },
   "eslintConfig": {
     "extends": "react-app"

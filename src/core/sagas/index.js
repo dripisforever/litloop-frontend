@@ -929,7 +929,8 @@ function* fetchLogout() {
     yield put(actions.fetchUserLoggedOut())
     // history.push('/')
     // useHistory().push('/')
-    yield call(history.push, '/login');
+
+    // yield call(history.push, '/login');
 }
 
 export function* watchLogoutUser() {

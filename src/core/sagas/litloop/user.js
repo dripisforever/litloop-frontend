@@ -26,6 +26,19 @@ export function* fetchAuthUserSaga(action) {
   });
 }
 
+export function* fetchOAuthUserSaga(action) {
+  const { email, password } = action.payload;
+  yield call(fetcherPostAuthSaga, {
+    action: action,
+    endpoint: "/users/signin/",
+    params: {
+      email: email,
+      password: password
+    },
+    schema: { results: [schemas.authSchema] }
+  });
+}
+
 export function* setAccessTokenSaga() {
   while (true) {
     const { access_token } = yield take(SET_ACCESS_TOKEN);
@@ -91,6 +104,9 @@ export function* watchFetchCurrentUser() {
 
 export function* watchFetchAuthUser() {
   yield takeEvery(actions.fetchAuthUser, fetchAuthUserSaga);
+}
+export function* watchFetchOAuthUser() {
+  yield takeEvery(actions.fetchOAuthUser, fetchOAuthUserSaga);
 }
 
 const userSagas = [

@@ -66,12 +66,15 @@ const StyledTypography = styled.p`
 
 `;
 
-function Introduction({ backgroundImageSrc, imageSrc, title, content }) {
+function Introduction({ backgroundImageSrc, obj, imageSrc, title, content }) {
   const { getImageUrl } = useConfiguration();
   // const classes = useStyles({
   //   backgroundImageSrc: getImageUrl(backgroundImageSrc)
   // });
 
+  useEffect(() => {
+    document.title = obj.title;
+  })
   return (
     <StyledBox position="relative">
       <BackdropDiv></BackdropDiv>

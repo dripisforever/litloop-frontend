@@ -435,6 +435,27 @@ function LoginForm () {
 
       <OAuthWrapper>
 
+        <ReAuthenticateButton
+          disconnect={() =>
+            disconnectTwitch({
+              setTwitchAccessToken,
+              setEnableTwitch: () => toggleEnabled('google'),
+            })
+          }
+          serviceName='Google'
+        />
+        
+        <ReAuthenticateButton
+          disconnect={() =>
+            disconnectTwitch({
+              setTwitchAccessToken,
+              setEnableTwitch: () => toggleEnabled('twitch'),
+            })
+          }
+          serviceName='Twitch'
+        />
+
+
         <OAuthLoginButton
           onClick={(e) => handleSpotifyButtonClick(e)}
         >
@@ -452,24 +473,7 @@ function LoginForm () {
         <br style={{ height: '24px' }} />
 
 
-        <ReAuthenticateButton
-          disconnect={() =>
-            disconnectTwitch({
-              setTwitchAccessToken,
-              setEnableTwitch: () => toggleEnabled('twitch'),
-            })
-          }
-          serviceName='Twitch'
-        />
-        <ReAuthenticateButton
-          disconnect={() =>
-            disconnectTwitch({
-              setTwitchAccessToken,
-              setEnableTwitch: () => toggleEnabled('google'),
-            })
-          }
-          serviceName='Google'
-        />
+
 
         {/*<ReAuthenticateButton
           disconnect={() =>

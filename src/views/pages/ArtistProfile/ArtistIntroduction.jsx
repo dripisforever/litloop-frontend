@@ -26,7 +26,9 @@ import { getImdbProfileUrl } from "core/utils";
 const ReStyledTypography = styled.p`
    white-space: pre-wrap;
 `;
-
+const ReBaseImage = styled.img`
+  width: 10%;
+`;
 function ArtistIntroduction({ artistId }) {
   const artist = useSelector(state => selectors.selectArtist(state, artistId));
   // const classes = useStyles();
@@ -37,10 +39,11 @@ function ArtistIntroduction({ artistId }) {
 
   return (
     <Introduktion
+      obj={artist}
       imageSrc={
         <>
           <StyledBox flexBasis={100}>
-            <BaseImage
+            <ReBaseImage
               src={artist.images[0] ? artist.images[0].url : ""}
               aspectRatio={getAspectRatioString(1, 1)}
             />

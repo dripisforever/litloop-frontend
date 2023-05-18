@@ -30,6 +30,7 @@ import RouterLink from "views/components/RouterLink";
 import { toggleDrawer } from "core/actions";
 import ListItemWithAvatarFromSpotify from "views/components/ListItemWithAvatarFromSpotify";
 import { getState } from "core/store";
+import { fetchLogout } from "core/actions";
 
 // const StyledMenuOld = withStyles({
 //   paper: {
@@ -67,14 +68,26 @@ import { getState } from "core/store";
 
 
 
+const StyledFlex = styled.div`
+  display: flex;
+  margin-right: 2em;
+`;
 
-
-
+const StyledImg = styled.img`
+  width: 40px;
+  border-radius: 30px;
+  cursor: pointer;
+`;
 
 function AvatarHover({avatarUrl}) {
   const [anchorEl, setAnchorEl] = useState(null);
   const dispatch = useDispatch();
+
+
   const authUser = getState().users
+  const oauthed = getState().users.google_oauth.profileImg;
+  const oauthed_img = getState().users.profileImg;
+
 
   function handleClick() {
     dispatch(toggleDrawer());
@@ -87,11 +100,20 @@ function AvatarHover({avatarUrl}) {
   const handleClose = () => {
     setAnchorEl(null);
   };
-
+  function handleLogOut(){
+    dispatch(fetchLogout())
+  }
   // const authUser = getState().users
 
+  const is_oauth = () => {
+    if(oauthed) {
+      return <StyledImg src={oauthed || null} alt="dablya"/>
+    } else {
+      return <StyledAvatar src={avatarUrl ? `http://localhost:8000${avatarUrl}` : null}  variant={"circular"} alt="dablya" />
+    }
+  }
   return (
-    <div>
+    <StyledFlex className="AvatarHoverz">
       {/*<Button onClick={handleClick}>
         <Avatar src={avatarUrl}  variant={"circle"} />
 
@@ -110,17 +132,23 @@ function AvatarHover({avatarUrl}) {
         <MenuItem onClick={handleClose}>Logout</MenuItem>
       </Menu>*/}
 
-      <StyledIconButton
+      {/*<StyledIconButton
         aria-controls="customized-menu"
         aria-haspopup="true"
         variant="contained"
         color="primary"
         onClick={handleClick}
       >
-        <StyledAvatar src={avatarUrl}  variant={"circular"} />
 
-      </StyledIconButton>
-      <StyledMenu
+
+      </StyledIconButton>*/}
+
+
+      {/*<StyledImg src={oauthed || null} />*/}
+      {is_oauth()}
+
+      <StyledIconButton onClick={handleLogOut}>Logout</StyledIconButton>
+      {/*<StyledMenu
         id="customized-menu"
         anchorEl={anchorEl}
         keepMounted
@@ -136,7 +164,7 @@ function AvatarHover({avatarUrl}) {
         { authUser.access_token &&
           <StyledListItem button to={'/liked'} component={RouterLink}>
             <StyledListItemIcon><StyledFavoriteIcon/></StyledListItemIcon>
-            <StyledListItemText primary={"Liked"} />
+            <StyledListItemText primary={"Liked"}>Liked</StyledListItemText>
           </StyledListItem>
         }
         <StyledMenuItem>
@@ -153,8 +181,8 @@ function AvatarHover({avatarUrl}) {
           <StyledListItemText primary="Logout" />
         </StyledMenuItem>
 
-      </StyledMenu>
-    </div>
+      </StyledMenu>*/}
+    </StyledFlex>
 
   );
 }

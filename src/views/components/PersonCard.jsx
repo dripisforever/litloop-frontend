@@ -8,6 +8,8 @@ import styled from "styled-components";
 import BaseImage from "views/components/BaseImage";
 import BaseCard from "views/components/BaseCard";
 import RouterLink from "views/components/RouterLink";
+import ModalLink from "views/components/ModalLink";
+
 import BaseCardHeader from "views/components/BaseCardHeader";
 
 import { getAspectRatioString } from "./AspectRatio";
@@ -21,7 +23,7 @@ import { selectors } from "core/reducers/index";
 //   }
 // }));
 
-
+// const StyledRouterLink = styled(ModalLink)`
 const StyledRouterLink = styled(RouterLink)`
   text-decoration: none;
 `;

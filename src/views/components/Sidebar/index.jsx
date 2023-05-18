@@ -21,7 +21,8 @@ const SidebarWrapper = styled.div`
   top: 0;
   padding-top: 4em;
   left: 0;
-  height: 100vh;
+  /* height: 100vh; */
+  height: 100%;
   width: 240px;
   background: ${(props) => props.theme.grey};
   background: #212121;
@@ -30,7 +31,7 @@ const SidebarWrapper = styled.div`
 
   /* overflow: auto; */
   overflow-y: auto;
-  
+
   padding-bottom: 1.5rem;
   transition: all 0.3s;
   z-index: 2;

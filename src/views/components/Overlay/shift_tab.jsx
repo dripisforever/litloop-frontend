@@ -25,6 +25,7 @@ function App() {
 const modalContext = React.createContext();
 
 function Modal({ children, onModalClose }) {
+  // ESCAPE BUTTON
   React.useEffect(() => {
     function keyListener(e) {
       const listener = keyListenersMap.get(e.keyCode);
@@ -41,8 +42,7 @@ function Modal({ children, onModalClose }) {
       'a[href], button, textarea, input[type="text"], input[type="radio"], input[type="checkbox"], select'
     );
     const firstElement = focusableModalElements[0];
-    const lastElement =
-      focusableModalElements[focusableModalElements.length - 1];
+    const lastElement = focusableModalElements[focusableModalElements.length - 1];
 
     if (!e.shiftKey && document.activeElement !== firstElement) {
       firstElement.focus();

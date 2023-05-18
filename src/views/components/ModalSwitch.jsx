@@ -345,10 +345,11 @@ function ModalSwitch({  children, renderModal, stopSong, pauseSong, resumeSong, 
         {/*<Route exact path="/movies" component={PopularMovies} />*/}
 
         <Route path="/login" render={props => auth ? ( <Redirect to={{pathname: '/movies',}} /> ) : ( <LoginPage {...props} /> )} />
-
+        {/*<Route exact path="/login" component={LoginPage} />*/}
         {/*<Route path="/auth/twitch/callback" element={<TwitchAuthCallback />} />*/}
-        {/*<Route path="/auth/twitch/callback" component={TwitchAuthCallback} />*/}
-        {/*<Route path="/auth/google/callback" component={GoogleAuthCallback} />*/}
+        <Route path="/auth/twitch/callback" component={TwitchAuthCallback} />
+
+        <Route path="/auth/google/callback" component={GoogleAuthCallback} />
         {/*<Route exact path="/auth/spotify/callback" component={SpotifyAuthCallback} />*/}
 
         {/*<Route exact path="/auth/youtube/callback" component={YoutubeAuthCallback} />*/}
@@ -385,6 +386,8 @@ function ModalSwitch({  children, renderModal, stopSong, pauseSong, resumeSong, 
 
 
         <Route path="/movies/:movieId" component={MovieProfile} />
+        {/*<Route path="/person/:personId" component={PersonProfile} />*/}
+
         {/*<Route path="/movies/:movieId">
           <MovieProfile
             stopSong={stopSong}

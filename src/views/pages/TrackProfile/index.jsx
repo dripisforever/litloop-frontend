@@ -92,6 +92,9 @@ const VideoWrapper = styled.div`
   /* grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); */
 `;
 
+const ReStyledTypography = styled(StyledTypography)`
+  color: white;
+`;
 const REQUIRED_FIELDS = ["tagline"];
 
 function TrackProfile() {
@@ -116,7 +119,7 @@ function TrackProfile() {
       main={
         <>
 
-          <StyledTypography variant="h6" gutterBottom>Videos</StyledTypography>
+          <ReStyledTypography variant="h6" gutterBottom>Videos</ReStyledTypography>
           <VideoWrapper>
             {api_data.map((item, index) =>
                 <StyledVideoCard

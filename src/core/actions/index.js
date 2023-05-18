@@ -13,6 +13,25 @@ export const fetchAuthUser = createAction(
   })
 );
 
+export const fetchOAuthUser = createAction(
+  "user/oauth/setUserProfile",
+  (data) => ({
+    payload: {
+      ...data
+    }
+  })
+);
+
+export const popupData = createAction(
+  "popup_login/fetch",
+  (data) => ({
+    payload: {
+      email: data.email,
+      password: data.password
+    }
+  })
+);
+
 export const fetchLikeAlbumOld = createAction(
   "like_album/fetch",
   (data) => ({

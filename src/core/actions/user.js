@@ -21,6 +21,14 @@ export const setUserProfile = createAction(
   })
 );
 
+// window.opener.postmessage
+export const fetchOAuthUser = createAction(
+  "user/oauth/setUserProfile",
+  (payload) => ({
+    ...payload
+  })
+);
+
 export const fetchUserLoggedOut = createAction(
   "USER_LOGGEDOUT",
   () => ({
