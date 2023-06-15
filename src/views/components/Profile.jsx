@@ -18,7 +18,7 @@ function Profile({ introduction, main, leftSide, rightSide, loading }) {
     // <LoadingIndicator loading={loading}>
       <StyledBox>
         <StyledBox padding={1}>{introduction}</StyledBox>
-        <StyledBox  display="flex" >
+        <StyledBox  display="grid" >
           {leftSide && (
             <StyledBox flex={1} flexBasis={240} padding={1}>
               {leftSide}

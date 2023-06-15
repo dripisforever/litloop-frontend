@@ -61,6 +61,32 @@ function BaseAlterList({
   // if (isFetching) {
   //   return <Skeleton />;
   // }
+
+  // useEffect(() => {
+  //
+  //   const observer = new IntersectionObserver(
+  //     entries => {
+  //       entries.forEach(entry => {
+  //
+  //         if (entry.intersectionRatio) {
+  //           // callback('WOW-------------------' + entry.target);
+  //           console.log('WOW-------------------' );
+  //
+  //           const url = 'http://localhost:8000/';
+  //
+  //
+  //           fetch(url)
+  //           observer.unobserve(entry.target);
+  //         }
+  //
+  //
+  //       });
+  //     },
+  //     { threshold: 1.00 }
+  //   );
+  //   paragraphObserver.current = observer;
+  // }, []);
+
   return (
     <React.Fragment>
       {/*<div className={classes.flexList}>*/}

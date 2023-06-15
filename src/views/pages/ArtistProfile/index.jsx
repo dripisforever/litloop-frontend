@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import styled from 'styled-components';
 
 // MATERIAL DONE
 // import { Typography } from "@mui/material";
@@ -21,6 +22,9 @@ import { fetchArtist } from "core/actions";
 
 const REQUIRED_FIELDS = ["biography", "imdb_id"];
 
+const ReStyledTypography = styled(StyledTypography)`
+  color: white;
+`;
 function ArtistProfile() {
   const dispatch = useDispatch();
   const { artistId } = useParams();
@@ -41,22 +45,22 @@ function ArtistProfile() {
       introduction={<ArtistIntroduction artistId={artistId} />}
       leftSide={
         <>
-          <StyledTypography variant="h6" gutterBottom>
-            Artistal Info
-          </StyledTypography>
+          <ReStyledTypography variant="h6" gutterBottom>
+            Artist Info
+          </ReStyledTypography>
           {/*<ArtistInfo artistId={artistId} />*/}
         </>
       }
       main={
         <>
-          <StyledTypography variant="h6" gutterBottom>
+          <ReStyledTypography variant="h6" gutterBottom>
             Images
-          </StyledTypography>
+          </ReStyledTypography>
 
 
-          <StyledTypography variant="h6" gutterBottom>
+          <ReStyledTypography variant="h6" gutterBottom>
             Albums
-          </StyledTypography>
+          </ReStyledTypography>
           <ArtistAlbums artistId={artistId}/>
         </>
       }

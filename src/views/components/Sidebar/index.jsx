@@ -207,7 +207,7 @@ const Sidebar = () => {
         </StyledLi>
 
         <StyledLi id="Messages">
-          <LinkStyled onClick={handleCloseSidebar} to="/feed/trending">
+          <LinkStyled onClick={handleCloseSidebar} to="/messages">
             <StyledDivIcon className="icon">
               {/*<MessagesIcon />*/}
               {/*<FiMessageCircle />*/}

@@ -30,6 +30,11 @@ import { useConfiguration } from "./ConfigurationProvider";
 const StyledDiv = styled.div`
   /* width: 10%; */
 `;
+
+const ReStyledTypography = styled(StyledTypography)`
+  color: white;
+`;
+
 function Introduktion({ backgroundImageSrc, imageSrc, obj, title, content, likeButton, uploadButton }) {
   const { getImageUrl } = useConfiguration();
   // const classes = useStyles({
@@ -59,9 +64,9 @@ function Introduktion({ backgroundImageSrc, imageSrc, obj, title, content, likeB
         {imageSrc}
         <StyledBox padding={2} flex={1} flexBasis={300}>
           {typeof title === "string" ? (
-            <StyledTypography variant="h5" gutterBottom>
+            <ReStyledTypography variant="h5" gutterBottom>
               {title}
-            </StyledTypography>
+            </ReStyledTypography>
           ) : (
             title
           )}

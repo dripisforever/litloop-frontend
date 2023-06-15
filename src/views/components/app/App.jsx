@@ -310,7 +310,7 @@ const App = () => {
         if (e.data.profileImg && setGoogleProfileImage) setGoogleProfileImage(e.data.profileImg);
 
         dispatch(fetchOAuthUser(event.data));
-        
+
         // toggleEnabled('youtube', true);
       } else if (e.data.service === 'spotify') {
         if (e.data.access_token && setSpotifyAccessToken) setSpotifyAccessToken(e.data.access_token);
@@ -335,7 +335,7 @@ const App = () => {
         <TwitchProvider>
           <GoogleProvider>
             <MusicPlayerProvider>*/}
-      {(pathname === '/login') ? null : (<AppHeader imgSrc={childMessage}/>)}
+      {(pathname === '/login' || pathname === '/auth/twitch/callback' || pathname === '/auth/google/callback') ? null : (<AppHeader imgSrc={childMessage}/>)}
 
       {/*<AppDrawer />*/}
 
@@ -420,14 +420,14 @@ const App = () => {
 
     {isModalVisible && (
       <div>
-      <Modal onModalClose={() => setIsModalVisible(false)}>
-        <Modal.Header>Chat</Modal.Header>
-        <Modal.Body>Online</Modal.Body>
-        <Modal.Footer>
-          Group Chats
-          {/*<Modal.Footer.CloseBtn>Close</Modal.Footer.CloseBtn>*/}
-        </Modal.Footer>
-      </Modal>
+        <Modal onModalClose={() => setIsModalVisible(false)}>
+          <Modal.Header>Chat</Modal.Header>
+          <Modal.Body>Online</Modal.Body>
+          <Modal.Footer>
+            Group Chats
+            {/*<Modal.Footer.CloseBtn>Close</Modal.Footer.CloseBtn>*/}
+          </Modal.Footer>
+        </Modal>
 
       {/*<Modal onModalClose={() => setIsModalVisible(false)}>
       </Modal>*/}

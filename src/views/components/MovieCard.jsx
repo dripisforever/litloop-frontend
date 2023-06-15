@@ -34,9 +34,11 @@ function MovieCard({ movieId, subheader }) {
 
         <BaseCard hasActionArea>
           <BaseImage
-            src={getImageUrl(movie.poster_path, { original: false })}
+            src={getImageUrl(movie.poster_path, { original: true })}
             alt={movie.title}
-            aspectRatio={getAspectRatioString(2, 3)}
+            // aspectRatio={getAspectRatioString(2, 3)}
+            // aspectRatio={getAspectRatioString(3, 3)}
+            aspectRatio={getAspectRatioString(1, 1)}
           />
           {/*<div style={{ position: "absolute", top: 0, left: 0 }}>
             <MovieRatingTag movieId={movieId} />

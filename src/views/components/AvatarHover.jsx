@@ -25,6 +25,8 @@ import { StyledMenuIcon, StyledInboxIcon, StyledDraftsIcon, StyledSendIcon, Styl
 
 // VIEWS
 import RouterLink from "views/components/RouterLink";
+import DropdownV2 from "views/components/Dropdown/DropdownV2";
+import ModalLink from "views/components/ModalLink";
 
 // CORE
 import { toggleDrawer } from "core/actions";
@@ -78,13 +80,33 @@ const StyledImg = styled.img`
   border-radius: 30px;
   cursor: pointer;
 `;
+const LoginWrapper = styled.div`
+  padding-right: 1em;
+`;
+
+const LoginBtn = styled(ModalLink)`
+  display: flex;
+  font-family: Verdana;
+  color: white;
+  /* background: linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%); */
+  background: linear-gradient(45deg, #673ab7 30%, #3f51b5 90%);
+
+
+  /* box-shadow: 0 3px 5px 2px rgba(255, 105, 135, .3); */
+
+  width: 52px;
+  border-radius: 13px;
+  padding: 12px 23px;
+  text-decoration: none;
+
+`;
 
 function AvatarHover({avatarUrl}) {
   const [anchorEl, setAnchorEl] = useState(null);
   const dispatch = useDispatch();
 
 
-  const authUser = getState().users
+  const authUser = getState().users.access_token
   const oauthed = getState().users.google_oauth.profileImg;
   const oauthed_img = getState().users.profileImg;
 
@@ -107,9 +129,19 @@ function AvatarHover({avatarUrl}) {
 
   const is_oauth = () => {
     if(oauthed) {
-      return <StyledImg src={oauthed || null} alt="dablya"/>
+      return <StyledImg src={oauthed || null} alt="dablee"/>
+    } else if (authUser){
+      return <StyledAvatar src={avatarUrl ? `http://localhost:8000${avatarUrl}` : null}  variant={"circular"} alt="daMN" />
     } else {
-      return <StyledAvatar src={avatarUrl ? `http://localhost:8000${avatarUrl}` : null}  variant={"circular"} alt="dablya" />
+      return (
+        <LoginWrapper>
+          <LoginBtn
+            variant="contained"
+            to="/login"
+            >Log In
+          </LoginBtn>
+        </LoginWrapper>
+      )
     }
   }
   return (
@@ -146,8 +178,11 @@ function AvatarHover({avatarUrl}) {
 
       {/*<StyledImg src={oauthed || null} />*/}
       {is_oauth()}
+      {/*<DropdownV2 />*/}
 
-      <StyledIconButton onClick={handleLogOut}>Logout</StyledIconButton>
+      {/*<StyledIconButton onClick={handleLogOut}>Logout</StyledIconButton>*/}
+
+
       {/*<StyledMenu
         id="customized-menu"
         anchorEl={anchorEl}

@@ -10,6 +10,10 @@ import DrawerToggleButton from "views/components/DrawerToggleButton";
 import AvatarHover from "views/components/AvatarHover";
 import litloopLogo from "views/assets/litloopLogo3.png";
 import Dropdown from "views/components/Dropdown/Dropdown";
+import DropdownV2 from "views/components/Dropdown/DropdownV2";
+import DropdownPortal from "views/components/Dropdown/DropdownPortal";
+import DropDown from "views/components/DropDownV2/DropDown";
+
 
 import { TwitchContext, TwitchProvider } from 'views/pages/Auth/twitch/useToken';
 
@@ -175,6 +179,11 @@ const StyledImg = styled.img`
   border-radius: 30px;
   cursor: pointer;
 `;
+
+const DropdownToggle = styled.div`
+  color: white;
+  cursor: pointer;
+`;
 const AppHeader = React.forwardRef((props, ref) => {
   // const classes = useStyles();
   const isMobile = useDetectMobile();
@@ -191,6 +200,19 @@ const AppHeader = React.forwardRef((props, ref) => {
   const oauthed = getState().users.google_oauth.oauthed;
 
 
+  const [isOpen, setIsOpen] = useState(false);
+  const [state, setState] = useState(1);
+
+  const changeState = (optionName) => {
+    setState(optionName);
+  };
+
+
+  const toggleDropdown = () => {
+    setIsOpen(!isOpen);
+  };
+
+
   useEffect(() => {
     if (!isMobile) {
       setIsMobileSearch(false);
@@ -205,19 +227,19 @@ const AppHeader = React.forwardRef((props, ref) => {
     setIsMobileSearch(false);
   }
 
-  useEffect(() => {
-    const childResponse = (event) => {
-      if (event?.data) {
-        console.log(event.data);
-        setChildMessage(event.data);
-        console.log(event.data.profileImg);
-        setChildMessage(event.data.profileImg)
-      }
-    };
-    window.addEventListener("message", childResponse);
-    return () => window.removeEventListener("message", childResponse);
-
-  }, []);
+  // useEffect(() => {
+  //   const childResponse = (event) => {
+  //     if (event?.data) {
+  //       // console.log(event.data);
+  //       // setChildMessage(event.data);
+  //       console.log(event.data.profileImg);
+  //       setChildMessage(event.data.profileImg)
+  //     }
+  //   };
+  //   window.addEventListener("message", childResponse);
+  //   return () => window.removeEventListener("message", childResponse);
+  //
+  // }, []);
 
   const [dropdownOpen, setDropdownOpen] = React.useState(false);
 
@@ -360,38 +382,26 @@ const AppHeader = React.forwardRef((props, ref) => {
             ]}
           />*/}
 
-          {is_authorized()}
+          {/*{is_authorized()}*/}
 
+          <DropDown
+            options={['Profile', 'Switch Accounts', 'Liked', 'Settings']}
+            defaultText={<AvatarHover avatarUrl={getState().users.avatar} />}
+            changeOptionName={changeState}
+          />
 
+          {/*{(!isMobileSearch && authed || oauthed) ?
 
-          {(!isMobileSearch && authed || oauthed) ?
-            // (<AvatarHover avatarUrl={getState().users?.response?.result?.avatar} />) :
-
-            // (<img title='Re-authenticate' src={twitchProfileImage} alt='' />):
-
-
-            // (<AvatarHover avatarUrl={user.response.result.avatar} />) :
-            // (<AvatarHover avatarUrl={getState().users.response.avatar} />) :
-
-            // BACKUP
             (<AvatarHover avatarUrl={getState().users.avatar} />) :
-            // <MyButton
-            //   color="secondary"
-            //   variant="contained"
-            //   to="/login"
-            //   // onClick={()=> {fetchAuthUser(data)}}
-            //   >Login
-            // </MyButton>
+
             <LoginWrapper>
               <LoginBtn
-                // color="secondary"
                 variant="contained"
                 to="/login"
-                // onClick={()=> {fetchAuthUser(data)}}
                 >Log In
               </LoginBtn>
             </LoginWrapper>
-          }
+          }*/}
 
         </StyledToolbar>
       </StyledAppBar>
