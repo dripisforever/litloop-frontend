@@ -31,7 +31,7 @@ const SongHeaderContainer = styled.div`
   justify-content: space-between;
 
   p, i {
-    color: white;
+    color: ${props => props.theme.text};
   }
 `;
 

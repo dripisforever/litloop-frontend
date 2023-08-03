@@ -29,6 +29,7 @@ import * as serviceWorker from "./serviceWorker";
 // CORE
 import { store, persistor, sagaMiddleware } from 'core/store';
 
+import 'views/components/Toggle/Themes.scss';
 
 
 import rootSaga from "core/sagas/index";
@@ -74,7 +75,7 @@ root.render(
         {/*<ThemeProvider theme={theme}>*/}
         {/*<Theme>*/}
           {/*<CssBaseline />*/}
-          <GlobalStyle />
+          {/*<GlobalStyle />*/}
           <ConfigurationProvider>
 
             {/*<BrowserRouter>*/}

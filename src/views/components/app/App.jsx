@@ -4,7 +4,9 @@ import { bindActionCreators } from 'redux';
 import { Route, useLocation } from 'react-router-dom';
 import { connect, useDispatch, useSelector } from "react-redux";
 import { RecoilRoot } from 'recoil';
-import styled from 'styled-components';
+import styled, { ThemeProvider } from 'styled-components';
+import { useThemeMode } from "views/components/Toggle/useThemeMode"
+
 import useKeyboardShortcut from 'use-keyboard-shortcut';
 import './index.css';
 // VIEWS
@@ -24,6 +26,14 @@ import SideMenu from "views/components/SideMenu";
 import UserPlaylists from "views/components/UserPlaylists";
 import Footer from 'views/components/footer/Footer';
 import { maxWidthContent } from 'views/style/util';
+
+import GlobalStyle from 'views/styles/GlobalStyle';
+import GlobalStyleThemeMode from 'views/styles/GlobalStyleThemeMode';
+import Toggle from 'views/components/Toggle/Toggler';
+// import GlobalStyleThemeMode from 'views/components/Toggle/GlobalStyleThemeMode';
+
+import { lightTheme, darkTheme } from "views/components/Toggle/Themes"
+
 // import { stopSongz, pauseSongz, resumeSongz, audioControlz } from './control';
 
 import TwitchAuthCallback from "views/pages/Auth/TwitchAuthCallback";
@@ -224,6 +234,10 @@ const AppRoutesContainer = () => {
 };
 
 const App = () => {
+
+
+
+
   let audio;
   const { pathname } = useLocation();
   const dispatch = useDispatch();
@@ -251,15 +265,15 @@ const App = () => {
       repeatOnHold: false
     }
   )
-  useKeyboardShortcut(
-    counter_strike,
-    handleKeyboardShortcut,
-    {
-      overrideSystem: true,
-      ignoreInputFields: false,
-      repeatOnHold: false
-    }
-  )
+  // useKeyboardShortcut(
+  //   counter_strike,
+  //   handleKeyboardShortcut,
+  //   {
+  //     overrideSystem: true,
+  //     ignoreInputFields: false,
+  //     repeatOnHold: false
+  //   }
+  // )
 
   useEffect(() => {
     dispatch(fetchGenres());
@@ -321,119 +335,135 @@ const App = () => {
     }
   }
 
+
+  const [theme, themeToggler, mountedComponent] = useThemeMode();
+  const themeMode = theme === 'light' ? lightTheme : darkTheme;
+  
   return (
-    <>
-    <StyledWrapper>
-    {/*<React.Fragment>*/}
-      {/*<Route path="/login" component={LoginPage} />*/}
+    <ThemeProvider theme={themeMode}>
+      <>
+      {/*<GlobalStyle />*/}
+      <GlobalStyleThemeMode />
+      <StyledWrapper>
+      {/*<React.Fragment>*/}
+        {/*<Route path="/login" component={LoginPage} />*/}
 
 
-      {/*<RecoilRoot>*/}
+        {/*<RecoilRoot>*/}
 
 
-      {/*<AccountProvider>
-        <TwitchProvider>
-          <GoogleProvider>
-            <MusicPlayerProvider>*/}
-      {(pathname === '/login' || pathname === '/auth/twitch/callback' || pathname === '/auth/google/callback') ? null : (<AppHeader imgSrc={childMessage}/>)}
+        {/*<AccountProvider>
+          <TwitchProvider>
+            <GoogleProvider>
+              <MusicPlayerProvider>*/}
+        {(pathname === '/login' || pathname === '/auth/twitch/callback' || pathname === '/auth/google/callback') ? null : (
+          <AppHeader
+            imgSrc={childMessage}
+            themeToggler={themeToggler}
+            themez={theme}
+            >
+            <Toggle theme={theme} toggleTheme={themeToggler} />
+          </AppHeader>
+        )}
 
-      {/*<AppDrawer />*/}
+        {/*<AppDrawer />*/}
 
-      {/*REFERENCE*/}
-      {/*/Users/driptamine/Desktop/frontend/Spotify/react-spotify-pau1fitz/src/App.js*/}
+        {/*REFERENCE*/}
+        {/*/Users/driptamine/Desktop/frontend/Spotify/react-spotify-pau1fitz/src/App.js*/}
 
-      {/*<LeftSide className="left-side-section">
-        <Wrapperz>
-          <SideMenu />
-          <UserPlaylists />
-        </Wrapperz>
-      </LeftSide>*/}
+        {/*<LeftSide className="left-side-section">
+          <Wrapperz>
+            <SideMenu />
+            <UserPlaylists />
+          </Wrapperz>
+        </LeftSide>*/}
 
-      {(pathname === '/login' && '/signup') ? null : (<Sidebar />)}
+        {(pathname === '/login' && '/signup') ? null : (<Sidebar />)}
 
 
-      {(pathname === '/login' && '/signup') ? (
-        <SidebarContainer>
-          {/*<Route path="auth/twitch/callback" element={<TwitchAuthCallback />} />*/}
+        {(pathname === '/login' && '/signup') ? (
+          <SidebarContainer>
+            {/*<Route path="auth/twitch/callback" element={<TwitchAuthCallback />} />*/}
 
-          <ModalRoutes
-            // stopSong={stopSong}
-            // pauseSong={pauseSong}
-            // resumeSong={resumeSong}
-            // audioControl={audioControl}
+            <ModalRoutes
+              // stopSong={stopSong}
+              // pauseSong={pauseSong}
+              // resumeSong={resumeSong}
+              // audioControl={audioControl}
 
+              stopSong={stopSongz}
+              pauseSong={pauseSongz}
+              resumeSong={resumeSongz}
+              audioControl={audioControlz}
+              // videoControl={videoControlz}
+            />
+            {/*<LegacyRoutes />*/}
+          </SidebarContainer>
+        ) : (
+          <Container gotsidebar={true} >
+
+            {/*<Route path="auth/twitch/callback" element={<TwitchAuthCallback />} />*/}
+
+            <ModalRoutes
+              // stopSong={stopSong}
+              // pauseSong={pauseSong}
+              // resumeSong={resumeSong}
+              // audioControl={audioControl}
+
+              stopSong={stopSongz}
+              pauseSong={pauseSongz}
+              resumeSong={resumeSongz}
+              audioControl={audioControlz}
+              // videoControl={videoControlz}
+            />
+            {/*<LegacyRoutes />*/}
+          </Container>
+        )}
+
+
+
+        {/*REFERENCE pau1fitz/react-spotify-master*/}
+
+        {/*{(pathname === '/login' && '/signup') ? null : (
+          <Footer
             stopSong={stopSongz}
             pauseSong={pauseSongz}
             resumeSong={resumeSongz}
             audioControl={audioControlz}
-            // videoControl={videoControlz}
           />
-          {/*<LegacyRoutes />*/}
-        </SidebarContainer>
-      ) : (
-        <Container gotsidebar={true} >
+        )}*/}
 
-          {/*<Route path="auth/twitch/callback" element={<TwitchAuthCallback />} />*/}
+        <Player />
 
-          <ModalRoutes
-            // stopSong={stopSong}
-            // pauseSong={pauseSong}
-            // resumeSong={resumeSong}
-            // audioControl={audioControl}
+        {/*<BackToTopButton />*/}
 
-            stopSong={stopSongz}
-            pauseSong={pauseSongz}
-            resumeSong={resumeSongz}
-            audioControl={audioControlz}
-            // videoControl={videoControlz}
-          />
-          {/*<LegacyRoutes />*/}
-        </Container>
+        {/*</YoutubeProvider>*/}
+
+          {/*</MusicPlayerProvider>
+          </GoogleProvider>
+          </TwitchProvider>
+          </AccountProvider>*/}
+        {/*</RecoilRoot>*/}
+      {/*</React.Fragment>*/}
+      </StyledWrapper>
+
+      {isModalVisible && (
+        <div>
+          <Modal onModalClose={() => setIsModalVisible(false)}>
+            <Modal.Header>Chat</Modal.Header>
+            <Modal.Body>Online</Modal.Body>
+            <Modal.Footer>
+              Group Chats
+              {/*<Modal.Footer.CloseBtn>Close</Modal.Footer.CloseBtn>*/}
+            </Modal.Footer>
+          </Modal>
+
+        {/*<Modal onModalClose={() => setIsModalVisible(false)}>
+        </Modal>*/}
+        </div>
       )}
-
-
-
-      {/*REFERENCE pau1fitz/react-spotify-master*/}
-
-      {/*{(pathname === '/login' && '/signup') ? null : (
-        <Footer
-          stopSong={stopSongz}
-          pauseSong={pauseSongz}
-          resumeSong={resumeSongz}
-          audioControl={audioControlz}
-        />
-      )}*/}
-
-      <Player />
-
-      {/*<BackToTopButton />*/}
-
-      {/*</YoutubeProvider>*/}
-
-        {/*</MusicPlayerProvider>
-        </GoogleProvider>
-        </TwitchProvider>
-        </AccountProvider>*/}
-      {/*</RecoilRoot>*/}
-    {/*</React.Fragment>*/}
-    </StyledWrapper>
-
-    {isModalVisible && (
-      <div>
-        <Modal onModalClose={() => setIsModalVisible(false)}>
-          <Modal.Header>Chat</Modal.Header>
-          <Modal.Body>Online</Modal.Body>
-          <Modal.Footer>
-            Group Chats
-            {/*<Modal.Footer.CloseBtn>Close</Modal.Footer.CloseBtn>*/}
-          </Modal.Footer>
-        </Modal>
-
-      {/*<Modal onModalClose={() => setIsModalVisible(false)}>
-      </Modal>*/}
-      </div>
-    )}
-    </>
+      </>
+    </ThemeProvider>
   );
 }
 

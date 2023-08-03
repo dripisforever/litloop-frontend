@@ -1,6 +1,13 @@
 import React, { useState, useEffect, useContext } from "react";
 import { connect, useDispatch, useSelector } from 'react-redux';
-import styled from 'styled-components';
+
+import styled, { css, keyframes } from 'styled-components';
+
+import { FaUpload } from 'react-icons/fa';
+import { ImContrast } from 'react-icons/im';
+
+
+// import { useDarkMode } from "./components/useDarkMode"
 
 // VIEWS
 import RouterLink from "./RouterLink";
@@ -14,6 +21,9 @@ import DropdownV2 from "views/components/Dropdown/DropdownV2";
 import DropdownPortal from "views/components/Dropdown/DropdownPortal";
 import DropDown from "views/components/DropDownV2/DropDown";
 
+
+import Toggle from "views/components/Toggle/Toggler";
+import { useThemeMode } from "views/components/Toggle/useThemeMode"
 
 import { TwitchContext, TwitchProvider } from 'views/pages/Auth/twitch/useToken';
 
@@ -32,7 +42,16 @@ const StyledAppBar = styled.div`
   height: 60px;
   z-index: 3;
   position: fixed;
+  background-color: ${(props) => props.theme.navBg};
 
+`;
+const StyledAppBarCSS = css`
+  width: 100%;
+
+  background: var(--navigationbarBackground);
+  height: 60px;
+  z-index: 3;
+  position: fixed;
 
 `;
 const StyledToolbar = styled.div`
@@ -91,6 +110,7 @@ const Logo = styled.div`
   display: flex;
   height: 100%;
   padding-left: 1em;
+
 `;
 const LogoSpan = styled.span`
   /* display: flex; */
@@ -107,6 +127,7 @@ const LinkStyled = styled(RouterLink)`
     margin-left: 5px;
     margin-top: auto;
     margin-bottom: auto;
+    color: ${props => props.theme.text};
   }
 
 `;
@@ -143,7 +164,7 @@ const BurgerMenu = styled.div`
   cursor: pointer;
   margin-left: 1em;
   svg.BurgerIcon {
-   fill: white;
+   fill: ${props => props.theme.text};
   }
   &:hover {
     background-color: rgba(255, 255, 255, 0.1);
@@ -180,11 +201,28 @@ const StyledImg = styled.img`
   cursor: pointer;
 `;
 
+const UploadButton = styled(FaUpload)`
+  /* font-size: 20px; */
+  color: white;
+  margin-right: 3em;
+  cursor: pointer;
+`;
+const ThemeToggler = styled(ImContrast)`
+  font-size: 40px;
+  color: white;
+  margin-right: 3em;
+  cursor: pointer;
+`;
+
 const DropdownToggle = styled.div`
   color: white;
   cursor: pointer;
 `;
 const AppHeader = React.forwardRef((props, ref) => {
+  const [theme, themeToggler, mountedComponent] = useThemeMode();
+
+  // const { themesArray, setActiveTheme, activeTheme } = useContext(ThemeContext);
+
   // const classes = useStyles();
   const isMobile = useDetectMobile();
   const { twitchProfileImage } = useContext(TwitchContext) || {};
@@ -286,7 +324,7 @@ const AppHeader = React.forwardRef((props, ref) => {
         <StyledToolbar
           // className={classes.toolbar}
         >
-          <BurgerMenu>
+          {/*<BurgerMenu>
             <svg
               width="24"
               height="24"
@@ -297,7 +335,7 @@ const AppHeader = React.forwardRef((props, ref) => {
               <desc lang="en-US">navigation menu</desc>
               <path d="M3 16h18v2H3v-2ZM3 6v2h18V6H3Zm0 7h18v-2H3v2Z"></path>
             </svg>
-          </BurgerMenu>
+          </BurgerMenu>*/}
 
           {/*<BurgerMenu>
             <svg
@@ -334,7 +372,7 @@ const AppHeader = React.forwardRef((props, ref) => {
                   to={"/movies"}
                   color="inherit"
                 >
-                  <LitLoopLogo src={litloopLogo} />
+                  <LitLoopLogo src={props.theme  ? 'nuk' : litloopLogo } />
                   <div className="litloop_logo_title">
                     LitLoop
                   </div>
@@ -383,6 +421,19 @@ const AppHeader = React.forwardRef((props, ref) => {
           />*/}
 
           {/*{is_authorized()}*/}
+
+
+          {/*<ThemeSelector />*/}
+          {/*<ThemeToggler />*/}
+          {/*<Toggle theme={props.themez} toggleTheme={props.themeToggler} />*/}
+          {props.children}
+
+          <RouterLink to="/lu">
+            <UploadButton />
+          </RouterLink>
+
+
+
 
           <DropDown
             options={['Profile', 'Switch Accounts', 'Liked', 'Settings']}

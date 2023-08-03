@@ -8,7 +8,7 @@ import { inputBgColor, textColor2, errorColor, warnColor, successColor, } from '
 const Input = styled.input`
   /* background-color: ${inputBgColor}; */
   border: none;
-  background-color: #2b2b2b;
+  background-color: ${props => props.theme.searchBarColor};
   /* background-color: ${props => props.msgColor ? lighten(0.27, props.msgColor) : inputBgColor};
   border: ${props => props.msgColor ? `1px solid${darken(0.1, props.msgColor)}`: '1px solid transparent'}; */
   box-shadow: none;
@@ -30,6 +30,9 @@ const Input = styled.input`
     border-color: ${darken(0.1, inputBgColor)};
     color: black;
     background-color: ${props => props.msgColor ? lighten(0.27, props.msgColor) : lighten(0.07, inputBgColor)};
+
+    /* background-color: ${props => props.theme.searchBar}; */
+
     -webkit-box-shadow: 0 0 0 1000px ${props => props.msgColor ? lighten(0.27, props.msgColor) : lighten(0.07, inputBgColor)} inset !important;
   }
   &:-webkit-autofill {

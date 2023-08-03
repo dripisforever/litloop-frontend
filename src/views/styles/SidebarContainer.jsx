@@ -6,7 +6,7 @@ const SidebarContainer = styled.div`
 
   body {
     margin: 0px;
-    
+
   }
   padding-top: 1em;
   padding-left: 1em;

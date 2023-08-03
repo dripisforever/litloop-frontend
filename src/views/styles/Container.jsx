@@ -13,7 +13,11 @@ const Container = styled.div`
   padding-left: 1em;
   padding-bottom: 6em;
   /* background-color: #181818; */
-  background-color: #131313;
+
+
+  /* background-color: #131313; */
+
+
   /* background-color: #111111; */
 
   @media screen and (max-width: 1093px) {

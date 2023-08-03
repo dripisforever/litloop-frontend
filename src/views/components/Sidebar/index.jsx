@@ -24,8 +24,9 @@ const SidebarWrapper = styled.div`
   /* height: 100vh; */
   height: 100%;
   width: 240px;
-  background: ${(props) => props.theme.grey};
-  background: #212121;
+  /* background: ${(props) => props.theme.grey}; */
+  /* background: #212121; */
+  background: ${(props) => props.theme.sideBarColor};
   /* padding-top: 1rem; */
 
 
@@ -87,7 +88,7 @@ const StyledUl = styled.ul`
 
 const StyledLi = styled.li`
   &:hover {
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: ${props => props.theme.sideBarHoverColor};
     border-radius: 6px;
   }
   /* border-style: dotted */
@@ -95,7 +96,7 @@ const StyledLi = styled.li`
 
 const LinkStyled = styled(Link)`
   align-items: center;
-  color: #FFF;
+  color: ${props => props.theme.text};
   text-decoration: none;
   &:hover: {
     text-decoration: underline;
@@ -165,7 +166,17 @@ const StyledDivIcon = styled.div`
   svg {
     height: 16px;
     width: 16px;
+    color: ${props => props.theme.text};
   }
+
+`;
+const SCTrendingIcon = styled(TrendingIcon)`
+
+
+    height: 16px;
+    width: 16px;
+    fill: ${props => props.theme.text};
+
 
 `;
 
@@ -184,7 +195,7 @@ const Sidebar = () => {
         <StyledLi id="Trending">
           <LinkStyled onClick={handleCloseSidebar} to="/feed/trending">
             <StyledDivIcon className="icon">
-              <TrendingIcon />
+              <SCTrendingIcon />
 
             </StyledDivIcon>
             <span>Trending</span>
@@ -230,7 +241,8 @@ const Sidebar = () => {
             <span>Library</span>
           </div>
         </LinkStyled>*/}
-        <StyledLi id="History">
+        
+        {/*<StyledLi id="History">
           <LinkStyled
             onClick={handleCloseSidebar}
             to="/feed/history"
@@ -244,7 +256,7 @@ const Sidebar = () => {
             </StyledDivIcon>
             <span>History</span>
           </LinkStyled>
-        </StyledLi>
+        </StyledLi>*/}
 
         <StyledLi id="Albums">
           <LinkStyled

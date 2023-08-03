@@ -24,6 +24,7 @@ function ListItemWithAvatarFromSpotify({
   avatarUrl,
   primaryText,
   secondaryText,
+  artistName,
   ...rest
 }) {
   // const classes = useStyles();
@@ -56,18 +57,29 @@ function ListItemWithAvatarFromSpotify({
   // );
 
   return (
-    <StyledListItem alignItems="flex-start" dense {...rest}>
+    <StyledListItem hover alignItems="flex-start" dense {...rest}>
       <StyledListItemAvatar>
         <StyledAvatar src={avatarUrl}  variant={"circular"} />
       </StyledListItemAvatar>
 
-      <StyledListItemText
-        // classes={{
-        //   secondary: classes.secondaryText
-        // }}
+      {/*<StyledListItemText
+
         primary={primaryText}
         secondary={secondaryText}
-      />
+      />*/}
+      <StyledListItemText
+
+        // primary={primaryText}
+        // secondary={secondaryText}
+      >
+      {primaryText} <br/>
+
+      {artistName.map((item, index) => {
+        return item.name
+      })} <br/>
+
+      {/*{secondaryText}*/}
+      </StyledListItemText>
     </StyledListItem>
   );
 

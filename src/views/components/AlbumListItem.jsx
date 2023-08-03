@@ -55,6 +55,7 @@ function AlbumListItem({ albumId }) {
       avatarUrl={album.images[0] ? album.images[0].url : ""}
       primaryText={album.name}
       secondaryText={album.release_date}
+      artistName={album.artists}
       // {...props}
     />
   );

@@ -1,19 +1,15 @@
 import { createGlobalStyle } from "styled-components";
 
-const GlobalStyle = createGlobalStyle`
+const GlobalStyleThemeMode = createGlobalStyle`
 	body {
 		margin: 0;
 		// background: #181818;
-		background: red;
+		// background: red;
+		background: ${({ theme }) => theme.body};
+		color: ${({ theme }) => theme.text};
 	}
 
-	div#dropdown-root {
-    position: absolute;
-    z-index: 2121212;
-    top: 8%;
-    right: 6%;
-    color: red;
-	}
+
 
 	::-webkit-scrollbar {
 	  /* display: none; */
@@ -30,4 +26,4 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 
-export default GlobalStyle;
+export default GlobalStyleThemeMode;

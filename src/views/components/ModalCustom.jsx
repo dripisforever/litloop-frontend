@@ -46,7 +46,8 @@ const ReStyledDialog = styled.div`
 `;
 
 const ReStyledDialogContent = styled.div`
-  background: #09161c;
+  /* background: #09161c; */
+  background: ${props => props.theme.navBg};
   padding-right: 2.75rem;
   padding-left: 2.75rem;
 `;

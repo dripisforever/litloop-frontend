@@ -36,7 +36,8 @@ const HideIndexItem = styled.div`
   grid-gap: 16px;
 
   &:hover {
-    background-color: rgba(255, 255, 255, 0.1);
+    /* background-color: rgba(255, 255, 255, 0.1); */
+    background-color: ${props => props.theme.sideBarHoverColor};
   }
 
   /* playButton */
@@ -65,14 +66,14 @@ const HideIndexItem = styled.div`
   border-radius: 4px;
 `;
 const TrackNumber = styled.div`
-  color: white;
+  color: ${props => props.theme.text};
 `;
 const ReStyledAvatar = styled(StyledAvatar)`
   margin-right: 16px;
   width: 16px;
 `;
 const StyledLink = styled(Link)`
-  color: white;
+  color: ${props => props.theme.text};
   text-decoration: none;
   cursor: pointer;
   &:hover {
@@ -93,7 +94,7 @@ const StyledArtistLink = styled(Link)`
   font-family: Verdana;
 `;
 const StyledSpan = styled.span`
-  color: white;
+  color: ${props => props.theme.text};
   cursor: pointer;
 `;
 
@@ -104,7 +105,7 @@ const StyledDiv = styled.div`
 
 const StyledFormattedTime = styled(FormattedTime)`
   span {
-    color: white;
+    color: ${props => props.theme.text};
     font-family: Verdana;
   }
 `;

@@ -94,7 +94,7 @@ const LikesCounter = styled.span`
 `;
 
 const ReStyledTypography = styled(StyledTypography)`
-  color: white;
+  color: ${props => props.theme.text};
 `;
 const ReBaseImage = styled.img`
   width: 10%;
