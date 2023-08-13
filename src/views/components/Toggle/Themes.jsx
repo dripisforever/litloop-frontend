@@ -9,6 +9,7 @@ export const lightTheme = {
     searchBarColor: "#dadada",
     sideBarColor: "#edeef0",
     sideBarHoverColor: "#b5b5b5",
+    togglerColor: "#e5e8ec",
 }
 
 export const darkTheme = {
@@ -22,6 +23,7 @@ export const darkTheme = {
     searchBarColor: "#2b2b2b",
     sideBarColor: "#212121",
     sideBarHoverColor: "rgba(255, 255, 255, 0.1)",
+    togglerColor: "white",
 }
 
 
