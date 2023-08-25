@@ -10,6 +10,8 @@ export const lightTheme = {
     sideBarColor: "#edeef0",
     sideBarHoverColor: "#b5b5b5",
     togglerColor: "#e5e8ec",
+    searchBarFocus: '#dfdfdf',
+    autoCompleteBackgroundColor: 'white'
 }
 
 export const darkTheme = {
@@ -24,6 +26,8 @@ export const darkTheme = {
     sideBarColor: "#212121",
     sideBarHoverColor: "rgba(255, 255, 255, 0.1)",
     togglerColor: "white",
+    searchBarFocus: 'white',
+    autoCompleteBackgroundColor: "#292929"
 }
 
 

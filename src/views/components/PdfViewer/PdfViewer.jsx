@@ -9,7 +9,7 @@ import '@react-pdf-viewer/default-layout/lib/styles/index.css';
 const defaultLayoutPluginInstance = defaultLayoutPlugin();
 
 <Viewer
-  fileUrl='/assets/pdf-open-parameters.pdf'
+  fileUrl='https://softwareengineeringdaily.com/wp-content/uploads/2019/07/SED866-Listen-Notes.pdf'
   plugins={[
       // Register plugins
       defaultLayoutPluginInstance,

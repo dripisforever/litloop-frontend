@@ -16,7 +16,10 @@ import { StyledCircularProgress, StyledAvatar } from 'views/styledComponents';
 //   }
 // }));
 const RatingNumber = styled.span`
-  color: white;
+  color: ${props => props.theme.text};
+  font-family: Helvetica;
+  margin-left: 30px;
+  margin-right: 30px;
 `;
 function Rating({ value }) {
   // const classes = useStyles();

@@ -6,7 +6,7 @@ function LoadingIndicator({ loading, children }) {
   if (loading) {
     return (
       <StyledBox display="flex" justifyContent="center" my={2} flexGrow={1}>
-        <StyledCircularProgress size={48}  />
+        <StyledCircularProgress size={48}>LOADING</StyledCircularProgress>
       </StyledBox>
     );
   }

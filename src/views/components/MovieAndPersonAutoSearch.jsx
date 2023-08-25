@@ -93,9 +93,9 @@ function MovieAndPersonAutoSearch({ className, autoFocus }) {
   let suggestions = [
     ...movies.slice(0, 3).map(movie => ({ ...movie, suggestionType: "movie" })),
     ...people.slice(0, 3).map(person => ({ ...person, suggestionType: "person" })),
-    ...albums.slice(0, 5).map(album => ({ ...album, suggestionType: "album" })),
+    ...albums.slice(0, 3).map(album => ({ ...album, suggestionType: "album" })),
     ...tracks.slice(0, 3).map(track => ({ ...track, suggestionType: "track" })),
-    ...artists.slice(0, 10).map(artist => ({ ...artist, suggestionType: "artist" })),
+    ...artists.slice(0, 3).map(artist => ({ ...artist, suggestionType: "artist" })),
   ];
 
   // suggestions = suggestions.sort((a, b) =>

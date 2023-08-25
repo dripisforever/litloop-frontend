@@ -24,8 +24,14 @@ const StyledImg = styled.img`
   /* width: ${(props) => props.width}; */
 
   /* width: ${(props) => (props.width ? `${props.width} px` : `100%`)}; */
+
   width: 100%;
   height: 100%;
+
+
+  /* width: 20%;
+  height: 100% */
+
   object-fit: ${(props) => props.objectFit}
 `;
 

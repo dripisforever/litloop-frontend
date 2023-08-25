@@ -7,6 +7,7 @@ import LoadingIndicator from "views/components/LoadingIndicator";
 // import { makeStyles } from "@mui/material/styles";
 // import { Typography } from "@mui/material";
 import { StyledTypography } from "views/styledComponents";
+import Skeleton from "views/skeletons/HomeSkeleton";
 
 const DEFAULT_ITEMS = [];
 
@@ -58,8 +59,8 @@ function BaseAlterList({
     return listEmptyMessage;
   }
 
-  // if (isFetching) {
-  //   return <Skeleton />;
+  // if (loading) {
+  //   return <Skeleton title={true} />;
   // }
 
   // useEffect(() => {

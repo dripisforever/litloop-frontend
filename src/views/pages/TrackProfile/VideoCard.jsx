@@ -4,25 +4,7 @@
 // import screenful from "screenfull";
 // import styled from "styled-components";
 //
-// // MATERIAL
-// import AppBar from "@mui/material/AppBar";
-// import Toolbar from "@mui/material/Toolbar";
-// import Typography from "@mui/material/Typography";
-// import Container from "@mui/material/Container";
-// import Slider from "@mui/material/Slider";
-// import Tooltip from "@mui/material/Tooltip";
-// import Grid from "@mui/material/Grid";
-// import Paper from "@mui/material/Paper";
-// import Popover from "@mui/material/Popover";
-//
-// import PlayArrowIcon from "@mui/icons-material/PlayArrow";
-// import VolumeUp from "@mui/icons-material/VolumeUp";
-// import VolumeDown from "@mui/icons-material/VolumeDown";
-// import VolumeMute from "@mui/icons-material/VolumeOff";
-// import FullScreen from "@mui/icons-material/Fullscreen";
-// import { makeStyles, withStyles } from "@mui/material/styles";
-//
-//
+
 // // VIEWS
 // import Controls from "./Controls";
 // import { INITIAL_STATE, reducer } from 'views/components/video-player/reducer.js';

@@ -1,11 +1,5 @@
 import React from "react";
-// import {
-//   ListItem,
-//   ListItemAvatar,
-//   Avatar,
-//   ListItemText,
-//   makeStyles
-// } from "@mui/material";
+
 import {
   StyledListItem,
   StyledListItemAvatar,
@@ -14,11 +8,7 @@ import {
 } from 'views/styledComponents';
 import { useConfiguration } from "./ConfigurationProvider";
 
-// const useStyles = makeStyles(theme => ({
-//   secondaryText: {
-//     wordBreak: "break-word"
-//   }
-// }));
+
 
 function ListItemWithAvatarFromSpotify({
   avatarUrl,
@@ -27,7 +17,7 @@ function ListItemWithAvatarFromSpotify({
   artistName,
   ...rest
 }) {
-  // const classes = useStyles();
+
   const { getImageUrlz } = useConfiguration();
 
   function renderItem(avatarUrl) {
@@ -40,21 +30,13 @@ function ListItemWithAvatarFromSpotify({
     }
   }
 
-  // return (
-  //   <ListItem alignItems="flex-start" dense {...rest}>
-  //     <ListItemAvatar>
-  //       <Avatar src={renderItem}  variant={"circle"} />
-  //     </ListItemAvatar>
-  //
-  //     <ListItemText
-  //       classes={{
-  //         secondary: classes.secondaryText
-  //       }}
-  //       primary={primaryText}
-  //       secondary={secondaryText}
-  //     />
-  //   </ListItem>
-  // );
+  function renderArtistNames(artistNames) {  
+    return artistNames.map((item, index) => {
+      return item.name
+    })
+  }
+
+
 
   return (
     <StyledListItem hover alignItems="flex-start" dense {...rest}>
@@ -62,42 +44,21 @@ function ListItemWithAvatarFromSpotify({
         <StyledAvatar src={avatarUrl}  variant={"circular"} />
       </StyledListItemAvatar>
 
-      {/*<StyledListItemText
 
-        primary={primaryText}
-        secondary={secondaryText}
-      />*/}
-      <StyledListItemText
+      <StyledListItemText>
 
-        // primary={primaryText}
-        // secondary={secondaryText}
-      >
-      {primaryText} <br/>
 
-      {artistName.map((item, index) => {
-        return item.name
-      })} <br/>
+        {primaryText} <br></br>
 
-      {/*{secondaryText}*/}
+
+
+        {artistName && renderArtistNames(artistName)} <br></br>
+        {/*{secondaryText}*/}
       </StyledListItemText>
     </StyledListItem>
   );
 
-  // return (
-  //   <ListItem alignItems="flex-start" dense {...rest}>
-  //     <ListItemAvatar>
-  //       <Avatar src={getImageUrlz(renderItem)}  variant={"circle"} />
-  //     </ListItemAvatar>
-  //
-  //     <ListItemText
-  //       classes={{
-  //         secondary: classes.secondaryText
-  //       }}
-  //       primary={primaryText}
-  //       secondary={secondaryText}
-  //     />
-  //   </ListItem>
-  // );
+
 }
 
 export default ListItemWithAvatarFromSpotify;

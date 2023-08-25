@@ -1,7 +1,8 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useParams, useLocation } from "react-router-dom";
+import { Link, useParams, useLocation } from "react-router-dom";
 
+import styled from 'styled-components';
 // MATERIAL UNDONE
 // import { Tabs, Tab, Box } from "@mui/material";
 import { StyledTabs, StyledTab, StyledBox } from 'views/styledComponents';
@@ -19,6 +20,9 @@ import { selectors } from "core/reducers/index";
 import useHistoryPush from "core/hooks/useHistoryPush";
 import useQueryString from "core/hooks/useQueryString";
 
+const ReStyledLink = styled(Link)`
+  text-decoration: none;
+`;
 
 function SearchResults() {
   const { query } = useQueryString();
@@ -68,11 +72,37 @@ function SearchResults() {
   return (
     <>
       <StyledTabs value={searchType} onChange={handleChange}>
-        <StyledTab value="movie" label={`Movies (${totalMovieCount})`}>movie {totalMovieCount}</StyledTab>
-        <StyledTab value="person" label={`People (${totalPersonCount})`}>person {totalPersonCount}</StyledTab>
-        <StyledTab value="artist" label={`Artist (${totalArtistCount})`}>artist {totalArtistCount}</StyledTab>
-        <StyledTab value="album" label={`Album (${totalAlbumCount})`}>album {totalAlbumCount}</StyledTab>
-        <StyledTab value="track" label={`Track (${totalTrackCount})`}>track {totalTrackCount}</StyledTab>
+        <StyledTab value="movie" label={`Movies (${totalMovieCount})`}>
+
+          <ReStyledLink to={`movie?query=${query}`}>
+            movie {totalMovieCount}
+          </ReStyledLink>
+        </StyledTab>
+
+        <StyledTab value="person" label={`People (${totalPersonCount})`}>
+          <ReStyledLink to={`person?query=${query}`}>
+            person {totalPersonCount}
+          </ReStyledLink>
+        </StyledTab>
+
+        <StyledTab value="artist" label={`Artist (${totalArtistCount})`}>
+          <ReStyledLink to={`artist?query=${query}`}>
+            artist {totalArtistCount}
+          </ReStyledLink>
+        </StyledTab>
+
+        <StyledTab value="album" label={`Album (${totalAlbumCount})`}>
+          <ReStyledLink to={`album?query=${query}`}>
+            album {totalAlbumCount}
+          </ReStyledLink>
+        </StyledTab>
+
+        <StyledTab value="track" label={`Track (${totalTrackCount})`}>
+          <ReStyledLink to={`track?query=${query}`}>
+            track {totalTrackCount}
+          </ReStyledLink>
+        </StyledTab>
+
       </StyledTabs>
       <StyledBox marginTop={2}>
         <SearchResultsHeader

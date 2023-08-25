@@ -801,6 +801,7 @@ function* fetchTrackSearchSaga(action) {
   });
 }
 
+// IMPORTANT
 function* fetchSearchSaga(action) {
   const { type, payload } = action;
   const { requestType, successType, errorType, cancelType } = getFetchTypes(
@@ -821,10 +822,12 @@ function* fetchSearchSaga(action) {
         //   ...action,
         //   type: actions.fetchPersonSearch
         // }),
-        // call(fetchArtistSearchSaga, {
-        //   ...action,
-        //   type: actions.fetchArtistSearch
-        // }),
+
+        call(fetchArtistSearchSaga, {
+          ...action,
+          type: actions.fetchArtistSearch
+        }),
+        
         call(fetchAlbumSearchSaga, {
           ...action,
           type: actions.fetchAlbumSearch

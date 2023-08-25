@@ -98,6 +98,9 @@ export const selectors = {
   selectIsFetchingTrack: (state, trackId) => state.tracksById[trackId],
 
   selectIsFetchingPopularMovies: state => state.popularMovies,
+
+  selectIsFetchingPopularMagazines: state => state.popularMagazines,
+
   selectIsFetchingPopularPeople: state => state.popularPeople,
 
   selectIsFetchingPopularAlbums: state => state.popularAlbums,

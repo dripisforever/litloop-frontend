@@ -21,7 +21,7 @@ const Wrapper = styled.div`
 
   .videos {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    /* grid-template-columns: repeat(3, 1fr); */
     grid-gap: 2rem;
     margin: 0 auto;
     margin-top: 2rem;

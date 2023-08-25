@@ -42,13 +42,16 @@ function ListItemWithAvatar({
       <StyledListItemAvatar>
         <StyledAvatar src={getImageUrl(avatarUrl)} alt={"Avatar"} variant={"circular"}/>
       </StyledListItemAvatar>
+      
       <StyledListItemText
         classes={{
           // secondary: classes.secondaryText
         }}
         primary={primaryText}
         secondary={secondaryText}
-      >{primaryText}</StyledListItemText>
+      >
+        {primaryText}
+      </StyledListItemText>
     </StyledListItem>
   );
 }

@@ -2,14 +2,12 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from 'styled-components';
 
-import { fetchPopularMovies } from "core/actions";
+import { fetchPopularMagazines } from "core/actions";
 import { selectors } from "core/reducers/index";
-import MovieFeedCard from "views/components/MovieFeedCard";
-import MovieCard from "views/components/MovieCard";
+// import MagazineFeedCard from "views/components/MagazineFeedCard";
+import MagazineCard from "views/components/MagazineCard";
 import InfiniteGridList from "views/components/InfiniteGridList";
 import InfiniteList from "views/components/InfiniteList";
-
-import Skeleton from "views/skeletons/HomeSkeleton";
 
 const StyledLi = styled.li`
   width: 550px;
@@ -57,41 +55,41 @@ const Impressions = styled.div`
 
 `;
 
-// function renderItem(movieId) {
+// function renderItem(magazineId) {
 //   // https://chayanit-chaisri.medium.com/react-create-a-show-more-less-button-aa0e9cd0f927
 //   return (
 //     <StyledLi>
 //
-//       <MovieFeedCard movieId={movieId} />
+//       <MagazineFeedCard magazineId={magazineId} />
 //
 //     </StyledLi>
 //   );
 // }
 
-function renderGridItem(movieId) {
+function renderGridItem(magazineId) {
   return (
     <li>
-      <MovieCard movieId={movieId} />
+      <MagazineCard magazineId={magazineId} />
 
     </li>
   );
 }
 
-function PopularMovies() {
+function PopularMagazines() {
 
   const paragraphObserver = React.useRef(null);
 
   const dispatch = useDispatch();
   const isFetching = useSelector(state =>
-    selectors.selectIsFetchingPopularMovies(state)
+    selectors.selectIsFetchingPopularMagazines(state)
   );
   const nextPage = useSelector(state =>
-    selectors.selectPopularMoviesNextPage(state)
+    selectors.selectPopularMagazinesNextPage(state)
   );
-  const movieIds = useSelector(state => selectors.selectPopularMovieIds(state));
+  const magazineIds = useSelector(state => selectors.selectPopularMagazineIds(state));
 
   function handleLoadMore() {
-    dispatch(fetchPopularMovies(nextPage));
+    dispatch(fetchPopularMagazines(nextPage));
   }
 
   useEffect(() => {
@@ -102,7 +100,7 @@ function PopularMovies() {
 
           if (entry.intersectionRatio) {
             // callback('WOW-------------------' + entry.target);
-            console.log('WOW---Skeleton' );
+            console.log('WOW-------------------' );
             const url = 'http://localhost:8000/';
             fetch(url)
             observer.unobserve(entry.target);
@@ -114,36 +112,26 @@ function PopularMovies() {
     paragraphObserver.current = observer;
   }, []);
 
-  if (isFetching) {
-    return <Skeleton title={true} />;
-  }
-
-  function renderItem(movieId) {
+  function renderItem(magazineId) {
 
     // https://chayanit-chaisri.medium.com/react-create-a-show-more-less-button-aa0e9cd0f927
-
-
     return (
       // <StyledLi>
-      <div>
-        {!isFetching &&
-          <MovieFeedCard
-          // <MovieCard
-            movieId={movieId}
-            observer={paragraphObserver.current}
-          />
-        }
 
-      </div>
+        // <MagazineFeedCard
+        <MagazineCard
+          magazineId={magazineId}
+          observer={paragraphObserver.current}
+        />
 
       // </StyledLi>
     );
   }
 
   return (
-    <InfiniteList
-    // <InfiniteGridList
-      items={movieIds}
+    // <InfiniteList
+    <InfiniteGridList
+      items={magazineIds}
       loading={isFetching}
       hasNextPage={!!nextPage}
       onLoadMore={handleLoadMore}
@@ -152,4 +140,4 @@ function PopularMovies() {
   );
 }
 
-export default PopularMovies;
+export default PopularMagazines;

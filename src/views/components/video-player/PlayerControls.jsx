@@ -5,25 +5,10 @@ import screenfull from 'screenfull';
 import { findDOMNode } from 'react-dom';
 import  styled  from 'styled-components';
 
-
-// import PauseRounded from '@mui/icons-material/PauseRounded';
-// import PlayArrowRounded from '@mui/icons-material/PlayArrowRounded';
-// import PlayArrowIcon from "@mui/icons-material/PlayArrow";
-// import PauseIcon from "@mui/icons-material/Pause";
-// import { Typography, IconButton, Grid, Slider } from '@mui/material';
-
-
-
-
-// import { IconButton, Slider, Stack, styled, Typography } from '@mui/material/material';
 import { StyledIconButton, StyledSlider, StyledStack, StyledTypography } from 'views/styledComponents';
 import { StyledPauseIcon, StyledPlayArrowIcon, StyledVolumeUpIcon } from 'views/styledComponents/icons';
-// import { FullscreenRounded, VolumeDownRounded, VolumeUpRounded } from '@mui/icons-material';
+import { StyledRail, StyledTrack, StyledThumb, StyledThumbMUI, StyledThumbWrapper } from 'views/styledComponents/VideoPlayer';
 
-// import VolumeUp from "@mui/icons-material/VolumeUp";
-// import VolumeDown from "@mui/icons-material/VolumeDown";
-// import VolumeMute from "@mui/icons-material/VolumeOff";
-// import FullScreen from "@mui/icons-material/Fullscreen";
 
 import { TbArrowsDiagonal } from 'react-icons/tb';
 import { FiPlay } from 'react-icons/fi';
@@ -59,7 +44,9 @@ const StyledPlayerControls = styled.div`
   bottom: 0;
   left: 0;
   width: 100%;
-  background-color: rgba(0, 0, 0, 0.6);
+
+  /* background-color: rgba(0, 0, 0, 0.6); */
+
   border-bottom-left-radius: 8px;
   border-bottom-right-radius: 8px;
   opacity: 0;
@@ -127,22 +114,16 @@ const format = (seconds) => {
 };
 
 
-const StyledSliderz = () => {
 
-  return (
-    <WrapperDiv>
-      <span rail></span>
-      <span track></span>
-      <StyledInput type="range" orient="vertical" />
-    </WrapperDiv>
-  )
-}
+// const StyledSliderzUpd = styled(StyledSliderz)`
+//
+//
+// `;
 
-const StyledSliderzUpd = styled(StyledSliderz)`
-
-
+const WrapperDivRail = styled.div`
+  width: 100%;
+  display: inline-block;
 `;
-
 const WrapperDiv = styled.div`
 
 
@@ -178,6 +159,9 @@ const WrapperDiv = styled.div`
   }
 `;
 
+const StyledInputHorizontal = styled.input`
+
+`;
 const StyledInput = styled.input`
   -webkit-appearance: slider-vertical;
   appearance: slider-vertical;
@@ -204,6 +188,80 @@ const ReStyledGrid = styled.div`
   display: flex;
   position: relative;
 `;
+const ProgressWrapper = styled.div`
+  display: flex;
+  position: relative;
+`;
+
+const StyledSliderz = () => {
+
+  return (
+    <WrapperDiv>
+      <span rail></span>
+      <span track></span>
+      <StyledInput
+        type="range"
+        orient="vertical"
+      />
+    </WrapperDiv>
+  )
+}
+
+const StyledSliderRail = ({value, max, propgressWidth, seek }) => {
+
+  const progressValue = (value / max)*100;
+  return (
+    <WrapperDivRail>
+      <StyledRail rail />
+      <StyledTrack
+        value={value}
+        progress={propgressWidth}
+        onChange={seek}
+      />
+
+      {/*<StyledThumbWrapper>*/}
+
+
+        <StyledThumb
+        // <StyledThumbMUI
+        // <StyledInputHorizontal
+          // type="range"
+          orient="horizontal"
+          // type='range'
+          step='any'
+          onChange={seek}
+          // onMouseUp={handleSeekMouseUp}
+
+          // onMouseUp={seek}
+
+          min={0}
+          // max={0.999999}
+          max={max}
+          // value={propgressWidth}
+          value={value}
+
+
+          // IMPORTANT
+          // onMouseDown={handleSeekMouseDown}
+          // onChange={handleSeekChange}
+          // onMouseUp={handleSeekMouseUp}
+        />
+
+        {/*<input
+          type="range"
+          min={0}
+          max={1}
+          step="any"
+          value={played}
+          onMouseDown={handleSeekMouseDown}
+          onChange={handleSeekChange}
+          onMouseUp={handleSeekMouseUp}
+        />*/}
+      {/*</StyledThumbWrapper>*/}
+    </WrapperDivRail>
+  )
+}
+
 const PlayerControls = (props, {doubleClickToggleFullScreen}) => {
   const { state, dispatch, wrapperRef, playerRef } = props;
 
@@ -256,7 +314,8 @@ const PlayerControls = (props, {doubleClickToggleFullScreen}) => {
 
     }, 1500))
     setIsShown(true)
-  }
+  };
+
   const handleMouseLeave = () => {
     setDelayHandler(setTimeout(() => {
       // const yourData = // whatever your data is
@@ -265,7 +324,7 @@ const PlayerControls = (props, {doubleClickToggleFullScreen}) => {
     }, 2500))
 
     clearTimeout(delayHandler)
-  }
+  };
 
 
   const renderSoundSlider = () => {
@@ -289,7 +348,7 @@ const PlayerControls = (props, {doubleClickToggleFullScreen}) => {
 
         </StyledIconButton>
         {isShown && (
-          <StyledSliderzUpd
+          <StyledSliderz
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
             aria-label="Volume"
@@ -305,17 +364,53 @@ const PlayerControls = (props, {doubleClickToggleFullScreen}) => {
     );
   };
 
-  // const renderDurationText = () => {
-  //   return (
-  //     <Grid spacing={2} direction="row" sx={{ mb: 1, px: 1 }} alignItems="center">
-  //       <Typography variant="body2" color="white">
-  //         {format(new Date(state.progress.playedSeconds * 1000), 'mm:ss')}
-  //         {' / '}
-  //         {format(new Date(state.duration * 1000), 'mm:ss')}
-  //       </Typography>
-  //     </Grid>
-  //   );
-  // };
+  const renderProgressBar = () => {
+    const percentage = (state.progress.playedSeconds / state.duration) * 100
+    return (
+      <ProgressWrapper
+        id="SLIDER-PROGRESS"
+        // onMouseEnter={handleMouseEnter}
+        // onMouseLeave={handleMouseLeave}
+        // spacing={2}
+        // direction="row"
+        // sx={{ mb: 1, px: 1 }}
+        // alignItems="center"
+        >
+
+        {/*{isShown && (*/}
+          <StyledSliderRail
+            // onMouseEnter={handleMouseEnter}
+            // onMouseLeave={handleMouseLeave}
+            aria-label="Time"
+            className={'video-player__slider video-player__slider--seek'}
+            min={0}
+            max={state.duration}
+            step={0.01}
+            value={state.progress.playedSeconds}
+
+
+            propgressWidth={percentage}
+            onChange={handleSeek}
+            seek={handleSeek}
+
+          />
+        {/*)}*/}
+
+      </ProgressWrapper>
+    );
+  };
+
+  const renderDurationText = () => {
+    return (
+      <div spacing={2} direction="row" sx={{ mb: 1, px: 1 }} alignItems="center">
+        <StyledTypography variant="body2" color="white">
+          {format(new Date(state.progress.playedSeconds ), 'mm:ss')}
+          {' / '}
+          {format(new Date(state.duration ), 'mm:ss')}
+        </StyledTypography>
+      </div>
+    );
+  };
 
   // const renderFullscreenButton = () => {
   //   return (
@@ -337,22 +432,28 @@ const PlayerControls = (props, {doubleClickToggleFullScreen}) => {
 
   return (
     <StyledPlayerControls className={'video-player__controls'}>
-      <DarkDivPlayToggle onClick={doubleClickToggleFullScreen} />
-      <div direction="row" alignItems="center">
-        {renderSeekSlider()}
+      {renderProgressBar()}
+
+      <div>
+        <DarkDivPlayToggle onClick={doubleClickToggleFullScreen} />
+        <div direction="row" alignItems="center">
+          {renderSeekSlider()}
+        </div>
+        <StyledPlayerControlsBottom>
+          <PlayAndSound >
+            {renderPlayButton()}
+
+          </PlayAndSound>
+
+
+
+          <StyledFullScreen>
+            {renderDurationText()}
+            {renderSoundSlider()}
+            {renderFullscreenButton()}
+          </StyledFullScreen>
+        </StyledPlayerControlsBottom>
       </div>
-      <StyledPlayerControlsBottom>
-        <PlayAndSound >
-          {renderPlayButton()}
-          {/*{renderDurationText()}*/}
-        </PlayAndSound>
-
-
-        <StyledFullScreen>
-          {renderSoundSlider()}
-          {renderFullscreenButton()}
-        </StyledFullScreen>
-      </StyledPlayerControlsBottom>
     </StyledPlayerControls>
   );
 };

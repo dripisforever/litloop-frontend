@@ -203,7 +203,7 @@ const StyledImg = styled.img`
 
 const UploadButton = styled(FaUpload)`
   /* font-size: 20px; */
-  color: white;
+  color: ${props => props.theme.text};
   margin-right: 3em;
   cursor: pointer;
 `;
@@ -304,6 +304,34 @@ const AppHeader = React.forwardRef((props, ref) => {
       <AvatarHover avatarUrl={getState().users.google_oauth.profileImg} />
     } else if (authed) {
       <AvatarHover avatarUrl={getState().users.avatar} />
+    } else {
+      <LoginWrapper>
+        <LoginBtn
+          // color="secondary"
+          variant="contained"
+          to="/login"
+          // onClick={()=> {fetchAuthUser(data)}}
+          >Log In
+        </LoginBtn>
+      </LoginWrapper>
+    }
+  }
+  const is_oauthorized = () => {
+
+    console.log(oauthed);
+    console.log(authed);
+    if (oauthed) {
+      <DropDown
+        options={['Profile', 'Switch Accounts', 'Liked', 'Settings']}
+        defaultText={<AvatarHover avatarUrl={getState().users.avatar} />}
+        changeOptionName={changeState}
+      />
+    } else if (authed) {
+      <DropDown
+        options={['Profile', 'Switch Accounts', 'Liked', 'Settings']}
+        defaultText={<AvatarHover avatarUrl={getState().users.avatar} />}
+        changeOptionName={changeState}
+      />
     } else {
       <LoginWrapper>
         <LoginBtn
@@ -434,7 +462,7 @@ const AppHeader = React.forwardRef((props, ref) => {
 
 
 
-
+          {/*{is_oauthorized()}*/}
           <DropDown
             options={['Profile', 'Switch Accounts', 'Liked', 'Settings']}
             defaultText={<AvatarHover avatarUrl={getState().users.avatar} />}

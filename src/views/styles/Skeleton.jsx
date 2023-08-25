@@ -34,9 +34,10 @@ export const SkeletonLine = styled(SkeletonPulse)`
 `;
 
 export const VideoCardSkeleton = styled(SkeletonLine)`
-  width: 100%;
-  height: 180px;
-
+	width: ${(props) => props.width};
+	height: ${(props) => props.height};
+	animation: ${pulse} 1s linear;
+	
   @media screen and (max-width: 600px) {
     height: 250px;
   }

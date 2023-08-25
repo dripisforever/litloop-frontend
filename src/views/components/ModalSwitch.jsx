@@ -18,6 +18,7 @@ import ModalRoute from "views/components/ModalRoute";
 import ModalMovie from "views/components/ModalMovie";
 import ModalMovies from "views/components/ModalMovies";
 import ModalPeople from "views/components/ModalPeople";
+import ModalMagazines from "views/components/ModalMagazines";
 // import ModalPhotos from "views/components/ModalPhotos";
 import ModalAlbums from "views/components/ModalAlbums";
 import MovieCard from "views/components/MovieCard";
@@ -372,6 +373,10 @@ function ModalSwitch({  children, renderModal, stopSong, pauseSong, resumeSong, 
         <Route exact path="/movies" component={ModalMovies} />
         <Route exact path="/feed" component={ModalMovies} />
         <Route exact path="/people" component={ModalPeople} />
+
+        <Route exact path="/magazines" component={ModalMagazines} />
+
+
         {/*<Route exact path="/feed" component={ModalPhotos} />*/}
         <Route exact path="/" component={ModalMovies} />
 
@@ -386,7 +391,7 @@ function ModalSwitch({  children, renderModal, stopSong, pauseSong, resumeSong, 
 
 
         <Route path="/movies/:movieId" component={MovieProfile} />
-        {/*<Route path="/person/:personId" component={PersonProfile} />*/}
+        <Route path="/person/:personId" component={PersonProfile} />
 
         {/*<Route path="/movies/:movieId">
           <MovieProfile
@@ -404,14 +409,14 @@ function ModalSwitch({  children, renderModal, stopSong, pauseSong, resumeSong, 
         <Route exact path="/searches/:query" component={SearchesResults} />
         <Route exact path="/searches/:type/:query" component={SearchesResults} />
 
-        <Route path="/person/:personId">
+        {/*<Route path="/person/:personId">
           <PersonProfile
             stopSong={stopSong}
             pauseSong={pauseSong}
             resumeSong={resumeSong}
             audioControl={audioControl}
           />
-        </Route>
+        </Route>*/}
 
         <Route path="/artist/:artistId">
           <ArtistProfile

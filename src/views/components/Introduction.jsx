@@ -3,6 +3,9 @@ import styled, { css } from "styled-components";
 
 
 import BaseImage from "views/components/BaseImage";
+import BaseImageV2 from "views/components/BaseImageV2";
+
+import { StyledBox, StyledTypography } from 'views/styledComponents';
 // import { makeStyles, Box, Typography } from "@mui/material";
 import { getAspectRatioString } from "./AspectRatio";
 import { useConfiguration } from "./ConfigurationProvider";
@@ -25,6 +28,9 @@ import { useConfiguration } from "./ConfigurationProvider";
 //   }
 // }));
 
+const BaseImageV3 = styled(BaseImageV2)`
+  width: 50%;
+`;
 const BackdropDiv = styled.div`
   background-image: ${(props) => `url(${props.backgroundImageSrc})`},
 
@@ -40,7 +46,12 @@ const BackdropDiv = styled.div`
   height: 100%;
 `;
 
-const StyledBox = styled.div`
+// const StyledBox = styled.div`
+//   background-image: radial-gradient(circle at 20% 50%, rgba(12.55%, 24.71%, 34.51%, 0.98) 0%, rgba(12.55%, 24.71%, 34.51%, 0.88) 100%);
+//
+//
+// `;
+const Styled = styled.div`
   background-image: radial-gradient(circle at 20% 50%, rgba(12.55%, 24.71%, 34.51%, 0.98) 0%, rgba(12.55%, 24.71%, 34.51%, 0.88) 100%);
 
   ${(props) =>
@@ -52,6 +63,7 @@ const StyledBox = styled.div`
       position: ${(props) => props.position};
       z-index: ${(props) => props.zIndex}
     `}
+
   ${(props) =>
     props.flexBasis &&
     css`
@@ -60,11 +72,10 @@ const StyledBox = styled.div`
       justify-content: ${(props) => props.flexWrap};
       position: ${(props) => props.position};
       z-index: ${(props) => props.zIndex}
-    `}
+    `
+   }
 `;
-const StyledTypography = styled.p`
 
-`;
 
 function Introduction({ backgroundImageSrc, obj, imageSrc, title, content }) {
   const { getImageUrl } = useConfiguration();
@@ -72,9 +83,10 @@ function Introduction({ backgroundImageSrc, obj, imageSrc, title, content }) {
   //   backgroundImageSrc: getImageUrl(backgroundImageSrc)
   // });
 
-  useEffect(() => {
-    document.title = obj.title;
-  })
+  // useEffect(() => {
+  //   document.title = obj.title;
+  // })
+
   return (
     <StyledBox position="relative">
       <BackdropDiv></BackdropDiv>
@@ -87,7 +99,7 @@ function Introduction({ backgroundImageSrc, obj, imageSrc, title, content }) {
         zIndex={1}
       >
         <StyledBox flexBasis={300}>
-          <BaseImage
+          <BaseImageV3
             src={getImageUrl(imageSrc)}
             aspectRatio={getAspectRatioString(2, 3)}
           />

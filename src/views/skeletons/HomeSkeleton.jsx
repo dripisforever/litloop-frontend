@@ -9,15 +9,15 @@ const HomeSkeleton = ({ title }) => {
       {title && <SkeletonLine width="350px" height="30px" mb="30px" />}
       {!title && <div style={{ marginTop: "2rem" }} />}
       <VideoGrid>
-        <VideoCardSkeleton />
-        <VideoCardSkeleton />
-        <VideoCardSkeleton />
-        <VideoCardSkeleton />
-        <VideoCardSkeleton />
-        <VideoCardSkeleton />
-        <VideoCardSkeleton />
-        <VideoCardSkeleton />
-        <VideoCardSkeleton />
+        <VideoCardSkeleton width="350px" height="350px"/>
+        <VideoCardSkeleton width="350px" height="350px"/>
+        <VideoCardSkeleton width="350px" height="350px"/>
+        <VideoCardSkeleton width="350px" height="350px"/>
+        <VideoCardSkeleton width="350px" height="350px"/>
+        <VideoCardSkeleton width="350px" height="350px"/>
+        <VideoCardSkeleton width="350px" height="350px"/>
+        <VideoCardSkeleton width="350px" height="350px"/>
+        <VideoCardSkeleton width="350px" height="350px"/>
       </VideoGrid>
     </div>
   );

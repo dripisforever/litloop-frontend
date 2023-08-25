@@ -182,6 +182,15 @@ export const fetchPopularMovies = createAction(
   })
 );
 
+export const fetchPopularMagazines = createAction(
+  "magazine/fetchPopular",
+  (page) => ({
+    payload: {
+      page
+    }
+  })
+);
+
 export const fetchPopularAlbums = createAction(
   "album/fetchPopular",
   (page) => ({

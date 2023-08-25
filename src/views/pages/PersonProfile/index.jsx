@@ -10,6 +10,7 @@ import { StyledTypography } from 'views/styledComponents';
 import Profile from "views/components/Profile";
 import PersonInfo from "./PersonInfo";
 import PersonIntroduction from "./PersonIntroduction";
+import PersonIntroductionV2 from "./PersonIntroductionV2";
 import PersonImageGridList from "./PersonImageGridList";
 import PersonCastingGridList from "./PersonCastingGridList";
 
@@ -37,7 +38,7 @@ function PersonProfile() {
   return (
     <Profile
       loading={loading}
-      introduction={<PersonIntroduction personId={personId} />}
+      introduction={<PersonIntroductionV2 personId={personId} />}
       // leftSide={
       //   <>
       //     <StyledTypography variant="h6" gutterBottom>

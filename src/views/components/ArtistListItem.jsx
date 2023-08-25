@@ -41,6 +41,7 @@ function ArtistListItem({ artistId, ...props }) {
   // if (!artist.images) {
   //   return null
   // }
+
   return (
     <ListItemWithAvatarFromSpotify
       avatarUrl={artist.images[0] ? artist.images[0].url : ""}

@@ -21,7 +21,11 @@ const DEFAULT_ASPECT_RATIO = getAspectRatioString(1, 1);
 
 
 const StyledImg = styled.img`
-  width: 20%;
+  /* width: 20%; */
+
+  width: ${props => props.width}%;
+
+
   height: 100%
   object-fit: ${(props) => props.objectFit}
 `;
@@ -32,7 +36,8 @@ function BaseImageV2({
   aspectRatio = ORIGINAL,
   lazyLoad = true,
   objectFit = "contain",
-  showFallbackWhileLoading
+  showFallbackWhileLoading,
+  width,
 }) {
   // const classes = useStyles({ objectFit });
   // const theme = useTheme();
@@ -80,6 +85,7 @@ function BaseImageV2({
               src={src || placeholderPng}
               alt={alt}
               onLoad={handleLoad}
+              width={width}
             />
           </StyledBox>
           {!isImgLoaded && showFallbackWhileLoading && (

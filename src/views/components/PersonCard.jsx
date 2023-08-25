@@ -34,7 +34,8 @@ function PersonCard({ personId }) {
   const { getImageUrl } = useConfiguration();
 
   return (
-    <StyledRouterLink to={`/person/${personId}`}>
+    <ModalLink to={`/person/${personId}`}>
+    {/*<StyledRouterLink to={`/person/${personId}`}>*/}
       <BaseCard hasActionArea>
         <BaseImage
           src={getImageUrl(person.profile_path)}
@@ -43,7 +44,8 @@ function PersonCard({ personId }) {
         />
         <BaseCardHeader title={person.name} />
       </BaseCard>
-    </StyledRouterLink>
+    {/*</StyledRouterLink>*/}
+    </ModalLink>
   );
 }
 

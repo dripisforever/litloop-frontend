@@ -24,16 +24,16 @@ const Input = styled.input`
   font-weight: normal;
   outline: none;
   line-height: 16px;
-  color: white;
+  color: ${props => props.theme.text};
   /* color: ${textColor2}; */
   ${props => props.disabled ? `opacity: 0.6;` : ``} &:focus {
     border-color: ${darken(0.1, inputBgColor)};
     color: black;
-    background-color: ${props => props.msgColor ? lighten(0.27, props.msgColor) : lighten(0.07, inputBgColor)};
+    /* background-color: ${props => props.msgColor ? lighten(0.27, props.msgColor) : lighten(0.07, inputBgColor)}; */
 
-    /* background-color: ${props => props.theme.searchBar}; */
+    background-color: ${props => props.theme.searchBarFocus};
 
-    -webkit-box-shadow: 0 0 0 1000px ${props => props.msgColor ? lighten(0.27, props.msgColor) : lighten(0.07, inputBgColor)} inset !important;
+    /* -webkit-box-shadow: 0 0 0 1000px ${props => props.msgColor ? lighten(0.27, props.msgColor) : lighten(0.07, inputBgColor)} inset !important; */
   }
   &:-webkit-autofill {
     -webkit-box-shadow: 0 0 0 1000px ${props => props.msgColor ? lighten(0.27, props.msgColor) : inputBgColor} inset;
@@ -57,7 +57,9 @@ const AreaInput = styled.textarea`
   color: ${textColor2};
   ${props => props.disabled ? `opacity: 0.6;` : ``} &:focus {
     outline: ${`${darken(0.35, inputBgColor)} auto 1px !important`};
-    background-color: ${props => props.msgColor ? `${props.msgColor} !important` : `${lighten(0.07, inputBgColor)} !important`};
+    /* background-color: ${props => props.msgColor ? `${props.msgColor} !important` : `${lighten(0.07, inputBgColor)} !important`}; */
+
+    background-color: ${props => props.theme.searchBarFocus};
   }
 `;
 

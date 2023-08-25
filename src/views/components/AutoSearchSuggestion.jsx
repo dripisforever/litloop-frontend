@@ -5,9 +5,10 @@ import styled from 'styled-components';
 // import { makeStyles } from "@mui/material";
 
 const StyledMenuItem = styled.div`
-  background-color: black;
+  background-color: ${props => props.theme.autoCompleteBackgroundColor};
   font-weight: ${props => props.isSelected ? 600: 400 };
   padding: 0;
+  font-color: ${props => props.theme.text};
 `;
 
 // const useStyles = makeStyles(theme => ({

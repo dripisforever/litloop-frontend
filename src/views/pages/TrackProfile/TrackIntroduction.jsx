@@ -95,12 +95,24 @@ const LikesCounter = styled.span`
 `;
 
 const ReStyledTypography = styled(StyledTypography)`
-  color: white;
+  color: ${props => props.theme.text};
+`;
+const StyledLink = styled(Link)`
+  color: ${props => props.theme.text};
+
+  font-weight: bold;
+  
+  text-decoration: none;
+
+  &:hover: {
+    text-decoration: underline;
+  }
 `;
 
 const ReBaseImage = styled.img`
   width: 10%;
 `;
+
 function TrackIntroduction({ trackId, handleLikePhoto, handleUnLikePhoto }) {
   const [name, setName] = useState(null);
   const track = useSelector(state => selectors.selectTrack(state, trackId));
@@ -109,7 +121,7 @@ function TrackIntroduction({ trackId, handleLikePhoto, handleUnLikePhoto }) {
   // useDocumentTitle(track.name)
   // useDocumentTitle(track)
 
-  
+
 
   // const releaseYear = getTrackReleaseYear(track);
 
@@ -155,20 +167,20 @@ function TrackIntroduction({ trackId, handleLikePhoto, handleUnLikePhoto }) {
             {track.name}  <br/>{track.artists.map((artist, i) =>
                 <span key={i}>
                   {i > 0 && ", "}
-                  <Link
+                  <StyledLink
                     to={`/artist/${artist.id}/`}
-                    style={{
-                      fontWeight: "bold",
-                      color: '#FFF',
-                      textDecoration: 'none',
-                      "&:hover": {
-                        textDecoration: "underline"
-                      }
-                    }}
+                    // style={{
+                    //   fontWeight: "bold",
+                    //   color: '#FFF',
+                    //   textDecoration: 'none',
+                    //   "&:hover": {
+                    //     textDecoration: "underline"
+                    //   }
+                    // }}
                     >
 
                     {artist.name}
-                  </Link>
+                  </StyledLink>
                 </span>
               )
             }

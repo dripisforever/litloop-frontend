@@ -157,55 +157,7 @@ const format = (seconds) => {
 let count = 0;
 
 function StyledVideoCard({ url, light, viewsCount, likesCount }, props) {
-  // const { url, light } = props;
-  const [state, dispatch] = useReducer(reducer, INITIAL_STATE);
-  const playerRef = useRef(null);
-  const playerContainerRef = useRef(null);
-  const wrapperRef = useRef(null);
-
-  const handlePreview = () => {
-    dispatch({ type: 'PLAY' });
-    dispatch({ type: 'LIGHT', payload: false });
-  };
-
-  const doubleClickToggleFullScreen = (event) => {
-    if (event.detail === 2) { // Double Click toggles screen
-      console.log('double click');
-      screenful.toggle(playerContainerRef.current);
-    } else { // Single Click activates Play/Pause
-      // handlePlayPause();
-    }
-  }
-  const handlePause = () => {
-    dispatch({ type: 'PAUSE' });
-  };
-
-  const handlePlay = () => {
-    dispatch({ type: 'PLAY' });
-  };
-
-  const handleEnded = () => {
-    dispatch({ type: 'LIGHT', payload: true });
-    // playerRef.current?.showPreview();
-    if (playerRef && playerRef?.current) {
-			playerRef.current.showPreview();
-		}
-  };
-
-  const handleProgress = (progress) => {
-    dispatch({ type: 'SEEK', payload: progress.playedSeconds });
-  };
-
-  const handleDuration = (duration) => {
-    dispatch({ type: 'DURATION', payload: duration });
-  };
-
-  const seekHandler = (e, value) => {
-    setVideoState({ ...videoState, played: parseFloat(value) / 100 });
-  };
-
-  const [seekedTime, setSeekedTime] = useState(0);
-  const seekBar = useRef(null);
+  
 
   return (
 
@@ -235,25 +187,11 @@ function StyledVideoCard({ url, light, viewsCount, likesCount }, props) {
           playbackRate={state.playbackRate}
           volume={state.volume}
           onPlay={handlePlay}
-          // onEnded={handleEnded}
-          onEnded={handlePause}
+          onEnded={handleEnded}
           onPause={handlePause}
           onDuration={handleDuration}
           onProgress={handleProgress}
           onClickPreview={handlePreview}
-
-          // onSeek={() => {
-          //   console.log("onSeek");
-          // }}
-
-          // onSeek={(time) => {
-          //   setSeekedTime(time);
-          //   seekBar.current.value = time;
-          // }}
-
-          onSeek={(time) => {
-            player.seekTo(time);
-          }}
         />
         {/*<DoubleClickFullScreenWrapper onClick={doubleClickToggleFullScreen} className="DoubleClick" />*/}
         <PlayerOverlay state={state} />
@@ -264,7 +202,6 @@ function StyledVideoCard({ url, light, viewsCount, likesCount }, props) {
             playerRef={playerRef}
             wrapperRef={wrapperRef}
             doubleClickToggleFullScreen={doubleClickToggleFullScreen}
-            // onSeek={}
             />
         )}
 

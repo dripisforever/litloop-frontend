@@ -51,7 +51,9 @@ const PlayerOverlay = (props) => {
             2022
           </Typography>
         </Fade>*/}
+
       </StyledBox>
+      {/*<span>{state.duration}</span>*/}
     </StyledPlayerOverlay>
   );
 };

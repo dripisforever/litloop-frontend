@@ -13,6 +13,7 @@ import { FaHistory } from 'react-icons/fa';
 import { MdVideoLibrary } from 'react-icons/md';
 import { MdAlbum } from 'react-icons/md';
 import { FaWpexplorer } from 'react-icons/fa';
+import { BsBook } from 'react-icons/bs';
 
 
 const SidebarWrapper = styled.div`
@@ -241,7 +242,7 @@ const Sidebar = () => {
             <span>Library</span>
           </div>
         </LinkStyled>*/}
-        
+
         {/*<StyledLi id="History">
           <LinkStyled
             onClick={handleCloseSidebar}
@@ -258,7 +259,7 @@ const Sidebar = () => {
           </LinkStyled>
         </StyledLi>*/}
 
-        <StyledLi id="Albums">
+        {/*<StyledLi id="Albums">
           <LinkStyled
             onClick={handleCloseSidebar}
             to="/albums"
@@ -270,7 +271,8 @@ const Sidebar = () => {
             </StyledDivIcon>
             <span>New Albums</span>
           </LinkStyled>
-        </StyledLi>
+        </StyledLi>*/}
+
         <StyledLi id="Bookmarks">
           <LinkStyled
             onClick={handleCloseSidebar}
@@ -283,6 +285,21 @@ const Sidebar = () => {
 
             </StyledDivIcon>
             <span>Bookmarks</span>
+          </LinkStyled>
+        </StyledLi>
+        <StyledLi id="Magazines">
+          <LinkStyled
+            onClick={handleCloseSidebar}
+            to="/magazines"
+            // activeClassName="active"
+          >
+            <StyledDivIcon className="icon">
+              {/*<FiBookmark />*/}
+              <BsBook />
+              {/*<FaHistory />*/}
+
+            </StyledDivIcon>
+            <span>Magazines</span>
           </LinkStyled>
         </StyledLi>
         {/*<StyledLi>

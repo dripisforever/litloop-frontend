@@ -1,3 +1,4 @@
+// REFERENCE pieecia/react-netflix-player
 // import { ReactPlayerProps } from 'react-player';
 
 const INITIAL_STATE = {

@@ -65,7 +65,8 @@ export const AutoCompleteItem = styled.li`
   width: 100%;
   box-sizing: border-box;
   &:hover {
-    background-color: #ebf4ff;
+    /* background-color: #ebf4ff; */
+    background-color: ${props => props.theme.sideBarHoverColor};
   }
 `;
 

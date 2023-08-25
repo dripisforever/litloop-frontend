@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { useSelector } from "react-redux";
 
 
@@ -20,36 +20,22 @@ import { getAspectRatioString } from "views/components/AspectRatio";
 import { useConfiguration } from "views/components/ConfigurationProvider";
 
 
+// function MovieIntroductionV2({ movieId, obj }) {
 function MovieIntroductionV2({ movieId }) {
   const movie = useSelector(state => selectors.selectMovie(state, movieId));
   // const classes = useStyles();
   const { getImageUrl } = useConfiguration();
   const releaseYear = getMovieReleaseYear(movie);
 
-  if (!movie) {
-    return null;
-  }
+  // if (!movie) {
+  //   return null;
+  // }
 
-  // const linkList = album.artists.map((artist) => {
-  //   return (
-  //     // <li key={artist.id}>
-  //       <Link
-  //         // key={.id}
-  //         to={`/person/${artist.artist_uri}/`}
-  //         style={{
-  //           fontWeight: "bold",
-  //           color: '#FFF',
-  //           textDecoration: 'none',
-  //           "&:hover": {
-  //             textDecoration: "underline"
-  //           }
-  //         }}
-  //         >
-  //         {artist.name}, {'       '}
-  //       </Link>
-  //     // </li>
-  //   );
-  // });
+
+  // useEffect(() => {
+  //   obj && document.title = obj.title;
+  //   document.title = obj.title;
+  // }, [])
 
   return (
     <div>
@@ -59,6 +45,7 @@ function MovieIntroductionV2({ movieId }) {
         <BaseImageV2
           src={getImageUrl(movie.poster_path)}
           aspectRatio={getAspectRatioString(2, 3)}
+          width={50}
         />
         {/*<a target="_blank" href={`https://rezka.ag/search/?q=${movie.title}&do=search&subaction=search`}>rezka</a>*/}
       {/*</StyledBox>*/}
