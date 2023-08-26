@@ -59,6 +59,7 @@ function PersonIntroductionV2({ personId }) {
         <BaseImageV2
           src={getImageUrl(person.profile_path)}
           aspectRatio={getAspectRatioString(2, 3)}
+          width={20}
         />
         {/*<a target="_blank" href={`https://rezka.ag/search/?q=${person.title}&do=search&subaction=search`}>rezka</a>*/}
       {/*</StyledBox>*/}
@@ -72,7 +73,7 @@ function PersonIntroductionV2({ personId }) {
           >
             <ImdbLogo />
           </StyledLink>
-          
+
 
           {/*<a
             target="_blank"

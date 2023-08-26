@@ -44,9 +44,9 @@ function MovieProfile({stopSong, pauseSong, resumeSong, audioControl}) {
   return (
     <Profile
       loading={loading}
-      // introduction={<MovieIntroductionV2 movieId={movieId} obj={movie} />}
+      introduction={<MovieIntroductionV2 movieId={movieId} obj={movie} />}
       // introduction={<MovieIntroductionV2 movieId={movieId}  />}
-      introduction={<MovieIntroduction movieId={movieId} />}
+      // introduction={<MovieIntroduction movieId={movieId} />}
       main={
         <>
           <StyledTypography variant="h6" gutterBottom>

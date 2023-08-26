@@ -126,13 +126,13 @@ function PopularMovies() {
     return (
       // <StyledLi>
       <div>
-        {!isFetching &&
+        {/*{!isFetching &&*/}
           <MovieFeedCard
           // <MovieCard
             movieId={movieId}
             observer={paragraphObserver.current}
           />
-        }
+        {/*}*/}
 
       </div>
 

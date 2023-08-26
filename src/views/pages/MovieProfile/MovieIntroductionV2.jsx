@@ -20,20 +20,20 @@ import { getAspectRatioString } from "views/components/AspectRatio";
 import { useConfiguration } from "views/components/ConfigurationProvider";
 
 
-// function MovieIntroductionV2({ movieId, obj }) {
-function MovieIntroductionV2({ movieId }) {
+function MovieIntroductionV2({ movieId, obj }) {
+// function MovieIntroductionV2({ movieId }) {
   const movie = useSelector(state => selectors.selectMovie(state, movieId));
   // const classes = useStyles();
   const { getImageUrl } = useConfiguration();
   const releaseYear = getMovieReleaseYear(movie);
 
-  // if (!movie) {
-  //   return null;
-  // }
+  if (!movie) {
+    return null;
+  }
 
 
   // useEffect(() => {
-  //   obj && document.title = obj.title;
+  //   // obj && document.title = obj.title;
   //   document.title = obj.title;
   // }, [])
 
@@ -45,7 +45,7 @@ function MovieIntroductionV2({ movieId }) {
         <BaseImageV2
           src={getImageUrl(movie.poster_path)}
           aspectRatio={getAspectRatioString(2, 3)}
-          width={50}
+          width={20}
         />
         {/*<a target="_blank" href={`https://rezka.ag/search/?q=${movie.title}&do=search&subaction=search`}>rezka</a>*/}
       {/*</StyledBox>*/}
