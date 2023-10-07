@@ -40,6 +40,7 @@ import TrackProfile from "views/pages/TrackProfile";
 import LinksProfile from "views/pages/LinksProfile";
 
 import LoginPage from "views/pages/LoginPage";
+import SignUpPage from "views/pages/SignUpPage";
 import GoogleCallback from "views/pages/LoginPage/oauth/GoogleCallback";
 import OAuthCallback from "views/pages/LoginPage/oauth/OAuthCallback";
 import OAuthPopup from "views/pages/LoginPage/pocket/oauth2popup";
@@ -346,6 +347,7 @@ function ModalSwitch({  children, renderModal, stopSong, pauseSong, resumeSong, 
         {/*<Route exact path="/movies" component={PopularMovies} />*/}
 
         <Route path="/login" render={props => auth ? ( <Redirect to={{pathname: '/movies',}} /> ) : ( <LoginPage {...props} /> )} />
+        <Route path="/signup" render={props => auth ? ( <Redirect to={{pathname: '/movies',}} /> ) : ( <SignUpPage {...props} /> )} />
         {/*<Route exact path="/login" component={LoginPage} />*/}
         {/*<Route path="/auth/twitch/callback" element={<TwitchAuthCallback />} />*/}
         <Route path="/auth/twitch/callback" component={TwitchAuthCallback} />

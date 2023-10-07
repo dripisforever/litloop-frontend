@@ -114,9 +114,9 @@ function PopularMovies() {
     paragraphObserver.current = observer;
   }, []);
 
-  if (isFetching) {
-    return <Skeleton title={true} />;
-  }
+  // if (isFetching) {
+  //   return <Skeleton title={true} />;
+  // }
 
   function renderItem(movieId) {
 

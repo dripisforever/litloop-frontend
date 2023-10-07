@@ -123,6 +123,7 @@ const format = (seconds) => {
 const WrapperDivRail = styled.div`
   width: 100%;
   display: inline-block;
+  cursor: pointer;
 `;
 const WrapperDiv = styled.div`
 
@@ -207,7 +208,15 @@ const StyledSliderz = () => {
   )
 }
 
-const StyledSliderRail = ({value, max, propgressWidth, seek }) => {
+const StyledSliderRail = ({
+  value,
+  max,
+  propgressWidth,
+  seek,
+  onMouseDown,
+  onMouseUp,
+  onChange,
+}) => {
 
   const progressValue = (value / max)*100;
   return (
@@ -217,6 +226,12 @@ const StyledSliderRail = ({value, max, propgressWidth, seek }) => {
         value={value}
         progress={propgressWidth}
         onChange={seek}
+
+        // onMouseDown={onMouseDown}
+        //
+        // onMouseUp={onMouseUp}
+        // onChange={onChange}
+
       />
 
       {/*<StyledThumbWrapper>*/}
@@ -390,9 +405,12 @@ const PlayerControls = (props, {doubleClickToggleFullScreen}) => {
 
 
             propgressWidth={percentage}
-            onChange={handleSeek}
+            // onChange={handleSeek}
             seek={handleSeek}
 
+            onMouseDown={props.onMouseDown}
+            onMouseUp={props.onMouseUp}
+            onChange={props.onChange}
           />
         {/*)}*/}
 

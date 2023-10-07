@@ -43,7 +43,7 @@ import litloopLogo from "views/assets/litloopLogo3.png";
 
 // CORE
 import history  from "core/services/history";
-import { fetchAuthUser,  } from 'core/actions'
+import { fetchAuthUser, fetchSignUpUser  } from 'core/actions'
 import useHistoryPush from "core/hooks/useHistoryPush";
 // import { selectAuth } from 'core/reducers/authSlice';
 import { selectors } from "core/reducers/index";
@@ -168,7 +168,7 @@ const ReStyledGrid = styled(StyledGrid)`
 
 `
 
-function LoginForm () {
+function SignUpForm () {
   const {
     setAutoRefreshEnabled,
     autoRefreshEnabled,
@@ -220,8 +220,9 @@ function LoginForm () {
   const handleSubmit = (e) => {
     e.preventDefault()
 
-    dispatch(fetchAuthUser({
+    dispatch(fetchSignUpUser({
       email: email,
+      username: username,
       password: password
     }))
 
@@ -363,6 +364,10 @@ function LoginForm () {
         <LitLoopTitle>
           LitLoop
         </LitLoopTitle>
+        <LitLoopTitle>
+          Sign Up
+        </LitLoopTitle>
+
 
 
       </LitLoopDiv>
@@ -394,7 +399,27 @@ function LoginForm () {
                     autoComplete: 'on'
                   }}
                     // error={username}
-                  placeholder="Email or Username"
+                  placeholder="Email"
+                />
+              </ReStyledGrid>
+              <ReStyledGrid
+                // class={classes.input}
+
+                >
+                <TextFieldStyledInput
+                  // className={classes.input}
+                  name="Username"
+                  label="Username"
+                  type="text"
+                  value={username}
+                  // handleChange={handleChange}
+                  onChange={(e) => setUsername(e.target.value)}
+                  variant="outlined"
+                  inputProps={{
+                    autoComplete: 'on'
+                  }}
+                  placeholder="Username"
+                    // error={username}
                 />
               </ReStyledGrid>
               <ReStyledGrid item
@@ -412,8 +437,8 @@ function LoginForm () {
                   inputProps={{
                     autoComplete: 'on'
                   }}
-                    // error={errors.password}
                   placeholder="Password"
+                    // error={errors.password}
                 />
               </ReStyledGrid>
             </ReStyledGrid>
@@ -429,7 +454,7 @@ function LoginForm () {
               variant="contained"
               type="submit"
               // onClick={()=> {fetchAuthUser(data)}}
-              >Login
+              >Sign Up
             </LoginBtn>
           </ReStyledGrid>
         </ReStyledGrid>
@@ -501,4 +526,4 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-export default connect(null, mapDispatchToProps)(LoginForm)
+export default connect(null, mapDispatchToProps)(SignUpForm)

@@ -21,6 +21,7 @@ function LargeFileUpload() {
   const [endOfTheChunk, setEndOfTheChunk] = useState(chunkSize)
   const [progress, setProgress] = useState(0)
   const [fileGuid, setFileGuid] = useState("")
+  const [fileNameV1, setFileNameV1] = useState("");
   const [fileSize, setFileSize] = useState(0)
   const [chunkCount, setChunkCount] = useState(0)
 
@@ -41,8 +42,12 @@ function LargeFileUpload() {
     setChunkCount(_totalCount)
     console.log(_totalCount);
     setFileToBeUpload(_file)
+
     const _fileID = uuidv4() + "." + _file.name.split('.').pop();
     setFileGuid(_fileID)
+
+    const _fileNameV1 = _file.name;
+    setFileNameV1(_fileNameV1)
   }
 
 
@@ -86,16 +91,37 @@ function LargeFileUpload() {
 
   const uploadChunk = async (chunk) => {
     try {
-      const response = await axios.post("https://localhost:8000/fu/upload", chunk, {
-        params: {
-          id: counter,
-          fileName: fileGuid,
-        },
-        headers: {
-          'Content-Type': 'application/json',
-          'X-CSRFToken': csrftoken
+      // const response = await axios.post("http://localhost:8000/fu/upload/", chunk, {
+      //   params: {
+      //     id: counter,
+      //     fileName: fileGuid,
+      //   },
+      //   headers: {
+      //     'Content-Type': 'application/json',
+      //     'X-CSRFToken': csrftoken
+      //   }
+      // });
+
+      // REFERENCE https://axios-http.com/docs/post_example
+      const response = await axios.post('http://localhost:8000/fu/upload/', {
+          qqfile: chunk,
+          qquuid: fileGuid,
+          qqfilename: fileGuid,
+          // qqpartindex: ,
+          // qqchunksize: ,
+          // qqtotalparts: ,
+          // qqtotalfilesize: ,
+          // qqpartbyteoffset:
+        }, {
+          // params: {
+          //   id: counter,
+          //   fileName: fileGuid,
+          // },
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          }
         }
-      });
+      )
       const data = response.data;
       if (data.isSuccess) {
         setBeginingOfTheChunk(endOfTheChunk);

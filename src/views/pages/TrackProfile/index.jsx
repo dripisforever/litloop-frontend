@@ -15,7 +15,11 @@ import TrackIntroduction from "./TrackIntroduction";
 // import TrackVideoList from "./TrackVideoList";
 // import TrackVideoRecommendations from "./TrackVideoRecommendations";
 import StyledVideoCard from "./StyledVideoCard";
+// import StyledVideoCard from "./StyledVideoCardV2";
 // import VideoCard from "./VideoCard";
+
+import VideoPlayer from "views/components/video-player/chatgpt/VideoPlayer"
+import VideoPlayerV2 from "views/components/video-player/chatgpt/VideoPlayerV2"
 // import TrackCastGridList from "./TrackCastGridList";
 import SimilarTracks from "./SimilarTracks";
 
@@ -39,6 +43,19 @@ const api_data = [
   {
     // url: "https://d1ca20q97pi6ei.cloudfront.net/Crystal+Castles+-+Kerosene(American+Psycho).mp4",
     url: "https://cdn.coverr.co/videos/coverr-golden-dunes-4546/1080p.mp4",
+    viewsCount: "3.2M",
+    likesCount: "100K",
+    // thumbNail: "https://d1ca20q97pi6ei.cloudfront.net/thumbnail/Crystal+Castles+-+Kerosene(American+Psycho)+.jpeg",
+
+    // thumbNail: "https%3A%2F%2Fd1ca20q97pi6ei.cloudfront.net%2Fthumbnail%2FCrystal%2BCastles%2B-%2BKerosene(American%2BPsycho)%2B.jpeg",
+    thumbNail: "https://images.unsplash.com/photo-1560440293-855922f9cc7d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1472&q=80",
+
+
+    // thumbNail: "https://views-test-api.s3.us-west-1.amazonaws.com/thumbnail/Crystal+Castles+-+Kerosene(American+Psycho)+.jpeg",
+  },
+  {
+    // url: "https://d1ca20q97pi6ei.cloudfront.net/Crystal+Castles+-+Kerosene(American+Psycho).mp4",
+    url: "https://bitdash-a.akamaihd.net/content/MI201109210084_1/m3u8s/f08e80da-bf1d-4e3d-8899-f0f6155f6efa_video_1080_4800000.m3u8",
     viewsCount: "3.2M",
     likesCount: "100K",
     // thumbNail: "https://d1ca20q97pi6ei.cloudfront.net/thumbnail/Crystal+Castles+-+Kerosene(American+Psycho)+.jpeg",
@@ -119,11 +136,13 @@ function TrackProfile() {
       main={
         <>
 
-          <ReStyledTypography variant="h6" gutterBottom>Videos</ReStyledTypography>
+          <StyledTypography variant="h6" gutterBottom>Videos</StyledTypography>
           <VideoWrapper>
             {api_data.map((item, index) =>
-                <StyledVideoCard
+                // <StyledVideoCard
                 // <VideoCard
+                <VideoPlayer
+                // <VideoPlayerV2
                   url={item.url}
                   key={index}
                   // light={item.url}

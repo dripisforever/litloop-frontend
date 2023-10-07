@@ -1,15 +1,36 @@
-import React, { FC, useEffect, memo } from 'react';
+import React, { FC, useEffect, memo } from '../../lib/teact/teact';
 import { getGlobal, withGlobal } from '../../lib/teact/teactn';
 
 import { GlobalActions } from '../../global/types';
 import { ApiMessage } from '../../api/types';
 
-
+import '../../modules/actions/all';
+import {
+  ANIMATION_END_DELAY, DEBUG, INACTIVE_MARKER, PAGE_TITLE,
+} from '../../config';
+import { pick } from '../../util/iteratees';
+import {
+  selectChatMessage,
+  selectCountNotMutedUnread,
+  selectIsForwardModalOpen,
+  selectIsMediaViewerOpen,
+  selectIsRightColumnShown,
+} from '../../modules/selectors';
+import { dispatchHeavyAnimationEvent } from '../../hooks/useHeavyAnimationCheck';
+import buildClassName from '../../util/buildClassName';
+import useShowTransition from '../../hooks/useShowTransition';
+import useBackgroundMode from '../../hooks/useBackgroundMode';
 
 import LeftColumn from '../left/LeftColumn';
 import MiddleColumn from '../middle/MiddleColumn';
 import RightColumn from '../right/RightColumn';
-
+import MediaViewer from '../mediaViewer/MediaViewer.async';
+import AudioPlayer from '../middle/AudioPlayer';
+import Notifications from './Notifications.async';
+import Errors from './Errors.async';
+import ForwardPicker from './ForwardPicker.async';
+import SafeLinkModal from './SafeLinkModal.async';
+import HistoryCalendar from './HistoryCalendar.async';
 
 import './Main.scss';
 
@@ -23,8 +44,21 @@ let notificationInterval;
 let DEBUG_isLogged = false;
 
 const Main = ({
-
-
+  lastSyncTime,
+  isLeftColumnShown,
+  isRightColumnShown,
+  isMediaViewerOpen,
+  isForwardModalOpen,
+  animationLevel,
+  hasNotifications,
+  hasErrors,
+  audioMessage,
+  safeLinkModalUrl,
+  isHistoryCalendarOpen,
+  loadAnimatedEmojis,
+  loadNotificationSettings,
+  loadNotificationExceptions,
+  updateIsOnline,
 }) => {
   if (DEBUG && !DEBUG_isLogged) {
     DEBUG_isLogged = true;
@@ -42,6 +76,13 @@ const Main = ({
     }
   }, [lastSyncTime, loadAnimatedEmojis, loadNotificationExceptions, loadNotificationSettings, updateIsOnline]);
 
+  const {
+    transitionClassNames: middleColumnTransitionClassNames,
+  } = useShowTransition(!isLeftColumnShown, undefined, true);
+
+  const {
+    transitionClassNames: rightColumnTransitionClassNames,
+  } = useShowTransition(isRightColumnShown, undefined, true);
 
   const className = buildClassName(
     middleColumnTransitionClassNames.replace(/([\w-]+)/g, 'middle-column-$1'),
@@ -125,12 +166,29 @@ const Main = ({
       <LeftColumn />
       <MiddleColumn />
       <RightColumn />
-
+      <MediaViewer isOpen={isMediaViewerOpen} />
+      <ForwardPicker isOpen={isForwardModalOpen} />
+      <Notifications isOpen={hasNotifications} />
+      <Errors isOpen={hasErrors} />
+      {audioMessage && <AudioPlayer key={audioMessage.id} message={audioMessage} noUi />}
+      <SafeLinkModal url={safeLinkModalUrl} />
+      <HistoryCalendar isOpen={isHistoryCalendarOpen} />
     </div>
   );
 };
 
-
+function updateIcon(asUnread) {
+  document.querySelectorAll('link[rel="icon"]')
+    .forEach((link) => {
+      if (asUnread) {
+        if (!link.href.includes('favicon-unread')) {
+          link.href = link.href.replace('favicon', 'favicon-unread');
+        }
+      } else {
+        link.href = link.href.replace('favicon-unread', 'favicon');
+      }
+    });
+}
 
 export default memo(withGlobal(
   (global) => {

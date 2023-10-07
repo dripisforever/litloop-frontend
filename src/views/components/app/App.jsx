@@ -338,7 +338,7 @@ const App = () => {
 
   const [theme, themeToggler, mountedComponent] = useThemeMode();
   const themeMode = theme === 'light' ? lightTheme : darkTheme;
-  
+
   return (
     <ThemeProvider theme={themeMode}>
       <>
@@ -356,7 +356,7 @@ const App = () => {
           <TwitchProvider>
             <GoogleProvider>
               <MusicPlayerProvider>*/}
-        {(pathname === '/login' || pathname === '/auth/twitch/callback' || pathname === '/auth/google/callback') ? null : (
+        {(pathname === '/login' || pathname === '/signup' || pathname === '/auth/twitch/callback' || pathname === '/auth/google/callback') ? null : (
           <AppHeader
             imgSrc={childMessage}
             themeToggler={themeToggler}
@@ -378,10 +378,10 @@ const App = () => {
           </Wrapperz>
         </LeftSide>*/}
 
-        {(pathname === '/login' && '/signup') ? null : (<Sidebar />)}
+        {(pathname === '/login' || pathname === '/signup') ? null : (<Sidebar />)}
 
 
-        {(pathname === '/login' && '/signup') ? (
+        {(pathname === '/login' || pathname === '/signup') ? (
           <SidebarContainer>
             {/*<Route path="auth/twitch/callback" element={<TwitchAuthCallback />} />*/}
 

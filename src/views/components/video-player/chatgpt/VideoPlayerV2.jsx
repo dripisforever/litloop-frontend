@@ -31,10 +31,9 @@ const StyledVolume = styled.input`
 
   height: 80px;
   width: 20px;
-  background: red;
 
   input[type="range"]::-webkit-slider-runnable-track {
-    background: red;
+    background: #053a5f;
     height: 0.5rem;
   }
 `;
@@ -49,137 +48,9 @@ const Bottom = styled.div`
 `;
 const Button = styled.button`
   width: 32px;
-  cursor: pointer;
 `;
-
-const height = "36px";
-const thumbHeight = 18;
-const trackHeight = "16px";
-
-// colours
-const upperColor = "#edf5f9";
-// const lowerColor = "#0199ff";
-const lowerColor = "red";
-const thumbColor = "#ddd";
-const thumbHoverColor = "#ccc";
-const upperBackground = `linear-gradient(to bottom, ${upperColor}, ${upperColor}) 100% 50% / 100% ${trackHeight} no-repeat transparent`;
-const lowerBackground = `linear-gradient(to bottom, ${lowerColor}, ${lowerColor}) 100% 50% / 100% ${trackHeight} no-repeat transparent`;
-
-// Webkit cannot style progress so we fake it with a long shadow on the thumb element
-const makeLongShadow = (color, size) => {
-  let i = 18;
-  let shadow = `${i}px 0 0 ${size} ${color}`;
-
-  for (; i < 706; i++) {
-    shadow = `${shadow}, ${i}px 0 0 ${size} ${color}`;
-  }
-
-  return shadow;
-};
-
-
 const Input = styled.input`
-  overflow: hidden;
-  display: block;
-  appearance: none;
-  max-width: 700px;
-  width: 100%;
-  margin: 0;
-  height: ${height};
   cursor: pointer;
-  background: green;
-  &:focus {
-    outline: none;
-  }
-
-  &::-webkit-slider-runnable-track {
-    width: 100%;
-    height: ${height};
-
-    background: red;
-  }
-
-  &::-webkit-slider-thumb {
-    position: relative;
-    appearance: none;
-    height: ${thumbHeight}px;
-    width: ${thumbHeight}px;
-    background: ${thumbColor};
-    border-radius: 100%;
-    border: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    box-shadow: ${makeLongShadow(upperColor, "-4px")};
-    transition: background-color 150ms;
-  }
-  &::-webkit-progress-bar {
-    background-color: orange;
-  }
-  &::-moz-range-track,
-  &::-moz-range-progress {
-    width: 100%;
-    height: ${height};
-    background: ${upperBackground};
-  }
-
-  &::-moz-range-progress {
-    background: ${lowerBackground};
-  }
-
-  &::-moz-range-thumb {
-    appearance: none;
-    margin: 0;
-    height: ${thumbHeight};
-    width: ${thumbHeight};
-    background: ${thumbColor};
-    border-radius: 100%;
-    border: 0;
-    transition: background-color 150ms;
-  }
-
-  &::-ms-track {
-    width: 100%;
-    height: ${height};
-    border: 0;
-    /* color needed to hide track marks */
-    color: transparent;
-    background: transparent;
-  }
-
-  &::-ms-fill-lower {
-    background: ${lowerBackground};
-  }
-
-  &::-ms-fill-upper {
-    background: ${upperBackground};
-  }
-
-  &::-ms-thumb {
-    appearance: none;
-    height: ${thumbHeight};
-    width: ${thumbHeight};
-    background: ${thumbColor};
-    border-radius: 100%;
-    border: 0;
-    transition: background-color 150ms;
-    /* IE Edge thinks it can support -webkit prefixes */
-    top: 0;
-    margin: 0;
-    box-shadow: none;
-  }
-
-  &:hover,
-  &:focus {
-    &::-webkit-slider-thumb {
-      background-color: ${thumbHoverColor};
-    }
-    &::-moz-range-thumb {
-      background-color: ${thumbHoverColor};
-    }
-    &::-ms-thumb {
-      background-color: ${thumbHoverColor};
-    }
-  }
 `;
 
 const format = (seconds) => {
@@ -208,6 +79,7 @@ function VideoPlayer({ url, light, viewsCount, likesCount }, props) {
   const playerContainerRef = useRef(null);
   const wrapperRef = useRef(null);
 
+  const videoRef = useRef(null)
 
   const handleSeekMouseDown = () => {
     setSeeking(true);
@@ -236,6 +108,16 @@ function VideoPlayer({ url, light, viewsCount, likesCount }, props) {
     dispatch({ type: 'PLAY' });
   };
 
+  const handlePlayPauseClick = () => {
+    if (videoRef.current) {
+      if (state.playing) {
+        videoRef.current.pause()
+      } else {
+        videoRef.current.play()
+      }
+    }
+  }
+
   const handleSound = (_event, newValue) => {
     dispatch({ type: 'VOLUME', payload: newValue });
   };
@@ -243,15 +125,6 @@ function VideoPlayer({ url, light, viewsCount, likesCount }, props) {
   const handlePreview = () => {
     dispatch({ type: 'PLAY' });
     dispatch({ type: 'LIGHT', payload: false });
-  };
-
-
-  // const handleProgress = (progress) => {
-  //   dispatch({ type: 'SEEK', payload: progress.playedSeconds });
-  // };
-
-  const handleDuration = (duration) => {
-    dispatch({ type: 'DURATION', payload: duration });
   };
 
   // Progress bar
@@ -274,15 +147,18 @@ function VideoPlayer({ url, light, viewsCount, likesCount }, props) {
   return (
     <StyledContainer>
       <StyledPlayer state={state} ref={wrapperRef}>
-        <ReactPlayer
+        <video
           playing={state.playing}
-          ref={playerRef}
-          url={url}
-          controls={state.controls}
-          // onProgress={handleProgress}
-          onPlay={handlePlay}
-          onPause={handlePause}
+          // ref={playerRef}
+          ref={videoRef}
+          src={url}
+          // autoplay={true}
+          controls={true}
+          onProgress={handleProgress}
+          // onPlay={handlePlay}
+          // onPause={handlePause}
           onEnded={handlePause}
+          onClick={handlePlayPauseClick}
 
           playIcon={
             <FiPlay
@@ -297,12 +173,9 @@ function VideoPlayer({ url, light, viewsCount, likesCount }, props) {
           height="100%"
 
           onClickPreview={handlePreview}
-
-          onDuration={handleDuration}
-          onProgress={handleProgress}
-
-        />
-
+        >
+        <source src={url} type="application/x-mpegURL" />
+        </video>
 
         {!state.controls && !state.light && (
           <Control>
@@ -312,11 +185,13 @@ function VideoPlayer({ url, light, viewsCount, likesCount }, props) {
               min={0}
               max={1}
               step="any"
+              // step="0.001"
               value={played}
 
               onMouseDown={handleSeekMouseDown}
-              onMouseUp={handleSeekMouseUp}
               onChange={handleSeekChange}
+              onMouseUp={handleSeekMouseUp}
+
 
               // onChange={seek} Weird
             />
@@ -326,11 +201,11 @@ function VideoPlayer({ url, light, viewsCount, likesCount }, props) {
               </Button>
 
               <div spacing={2} direction="row" sx={{ mb: 1, px: 1 }} alignItems="center">
-                <div variant="body2" color="white">
+                <StyledTypography variant="body2" color="white">
                   {format(new Date(state.progress.playedSeconds ), 'mm:ss')}
                   {' / '}
                   {format(new Date(state.duration ), 'mm:ss')}
-                </div>
+                </StyledTypography>
               </div>
               <StyledIconButton>
                 <FaVolumeUp

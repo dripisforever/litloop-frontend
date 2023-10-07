@@ -150,8 +150,13 @@ function MovieFeedCard({ movieId, subheader, observer }) {
   const newWithBrText = text.substring(0, 212).split("<br/>").map((item, key) => { return (<div key={key}>{item}<br/></div>);});
 
   const endpoint = 'http://localhost:8000/post/impression';
+  const endpointV1 = 'http://localhost:8000/views/up';
 
-  const formData = axios.toFormData({"id": movieId});
+  const formData = axios.toFormData({
+    "post_id": movieId,
+    "user_id": '1',
+
+  });
 
   const customViewport = document.querySelector('#custom-viewport');
 
@@ -165,7 +170,7 @@ function MovieFeedCard({ movieId, subheader, observer }) {
 
             axios({
               method: "post",
-              url: endpoint,
+              url: endpointV1,
               data: formData,
               // headers: { ... }
             })

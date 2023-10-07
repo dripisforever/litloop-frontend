@@ -33,6 +33,7 @@ const LikedBtn = styled(Button)`
   display: flex;
   align-items: center;
   margin: 0;
+  background-color: #ebebeb;
   ${props =>
     props.likedByUser &&
     `

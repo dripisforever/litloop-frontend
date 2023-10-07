@@ -332,6 +332,11 @@ const Sidebar = () => {
         </StyledLi>
 
         <StyledLi>
+          <LinkStyled onClick={handleCloseSidebar} to="/vine/top250">
+            <div className="icon"><span>Top 250 Vines</span></div>
+          </LinkStyled>
+        </StyledLi>
+        <StyledLi>
           <LinkStyled onClick={handleCloseSidebar} to="/playlist/1iC9VT69XLLRPtrkBA7tCT">
             <div className="icon"><span>DRIPTASET</span></div>
           </LinkStyled>

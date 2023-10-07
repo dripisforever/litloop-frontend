@@ -4,14 +4,6 @@ import ReactPlayer, { ReactPlayerProps } from "react-player";
 import screenful from "screenfull";
 import styled from "styled-components";
 
-// MATERIAL
-// import Typography from "@mui/material/Typography";
-// import Slider from "@mui/material/Slider";
-// import Tooltip from "@mui/material/Tooltip";
-// import Grid from "@mui/material/Grid";
-// import Paper from "@mui/material/Paper";
-// import Popover from "@mui/material/Popover";
-
 import {
   // StyledTypography,
   // StyledSlider,
@@ -21,12 +13,7 @@ import {
   // StyledPopover,
 } from 'views/styledComponents';
 
-// import PlayArrowIcon from "@mui/icons-material/PlayArrow";
-// import VolumeUp from "@mui/icons-material/VolumeUp";
-// import VolumeDown from "@mui/icons-material/VolumeDown";
-// import VolumeMute from "@mui/icons-material/VolumeOff";
-// import FullScreen from "@mui/icons-material/Fullscreen";
-// import { makeStyles, withStyles } from "@mui/material/styles";
+
 
 import {
   StyledPlayArrowIcon,
@@ -159,9 +146,16 @@ let count = 0;
 function StyledVideoCard({ url, light, viewsCount, likesCount }, props) {
   // const { url, light } = props;
   const [state, dispatch] = useReducer(reducer, INITIAL_STATE);
+  const [played, setPlayed] = useState(0);
+
+  const [seekedTime, setSeekedTime] = useState(0);
+  const [seeking, setSeeking] = useState(false);
+
   const playerRef = useRef(null);
   const playerContainerRef = useRef(null);
   const wrapperRef = useRef(null);
+
+  const seekBar = useRef(null);
 
   const handlePreview = () => {
     dispatch({ type: 'PLAY' });
@@ -204,8 +198,23 @@ function StyledVideoCard({ url, light, viewsCount, likesCount }, props) {
     setVideoState({ ...videoState, played: parseFloat(value) / 100 });
   };
 
-  const [seekedTime, setSeekedTime] = useState(0);
-  const seekBar = useRef(null);
+
+
+
+  // progress bar
+  const handleSeekMouseDown = () => {
+    setSeeking(true);
+  };
+
+  const handleSeekChange = e => {
+    setPlayed(parseFloat(e.target.value));
+  };
+
+  const handleSeekMouseUp = e => {
+    setSeeking(false);
+    playerRef.current.seekTo(parseFloat(e.target.value));
+  };
+
 
   return (
 
@@ -242,18 +251,17 @@ function StyledVideoCard({ url, light, viewsCount, likesCount }, props) {
           onProgress={handleProgress}
           onClickPreview={handlePreview}
 
-          // onSeek={() => {
-          //   console.log("onSeek");
-          // }}
 
-          // onSeek={(time) => {
-          //   setSeekedTime(time);
-          //   seekBar.current.value = time;
-          // }}
 
           onSeek={(time) => {
             player.seekTo(time);
+            console.log(playerRef.current.getDuration());
           }}
+
+
+
+
+
         />
         {/*<DoubleClickFullScreenWrapper onClick={doubleClickToggleFullScreen} className="DoubleClick" />*/}
         <PlayerOverlay state={state} />
@@ -264,6 +272,12 @@ function StyledVideoCard({ url, light, viewsCount, likesCount }, props) {
             playerRef={playerRef}
             wrapperRef={wrapperRef}
             doubleClickToggleFullScreen={doubleClickToggleFullScreen}
+
+            onMouseDown={handleSeekMouseDown}
+
+            onMouseUp={handleSeekMouseUp}
+            onChange={handleSeekChange}
+
             // onSeek={}
             />
         )}

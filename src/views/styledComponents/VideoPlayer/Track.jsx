@@ -5,7 +5,7 @@ export const StyledTrack = styled.div`
   /* width: 20%; */
   /* width: ${props => props.value}%;  */
   width: ${props => props.progress}%;
-
+  
   border-bottom-left-radius 12px;
   border-bottom-right-radius 12px;
   border-top-left-radius 12px;

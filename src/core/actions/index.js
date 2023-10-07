@@ -12,6 +12,15 @@ export const fetchAuthUser = createAction(
     }
   })
 );
+// export const fetchSignUpUser = createAction(
+//   "signup/fetch",
+//   (data) => ({
+//     payload: {
+//       email: data.email,
+//       password: data.password
+//     }
+//   })
+// );
 
 export const fetchOAuthUser = createAction(
   "user/oauth/setUserProfile",
@@ -342,7 +351,9 @@ export const fetchSignUpUser = createAction(
   "signup/fetch",
   (email, username, password) => ({
     payload: {
-      email, username, password
+      email,
+      username,
+      password
     }
   })
 )
