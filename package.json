@@ -9,6 +9,7 @@
     "classnames": "^2.2.5",
     "downshift": "^7.0.5",
     "history": "^4.10.1",
+    "hls.js": "^1.4.12",
     "immer": "^9.0.16",
     "immutable": "^4.0.0-rc.14",
     "lodash": "^4.17.15",
