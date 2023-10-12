@@ -91,16 +91,16 @@ function ControlPanel({ play, isPlaying, duration, currentTime, wrapperRef }) {
       <div>
 
 
-        // <button onClick={handleFullscreen}>
-        //  fullscreen
-        // </button>
+        {/* <button onClick={handleFullscreen}>
+         fullscreen
+        </button>*/}
 
         <div className="controls">
           <button onClick={handleFullScreen}>{isFullScreen ? 'Exit Full Screen' : 'Full Screen'}</button>
         </div>
-        <FullScreen handle={handle}>
+        {/* <FullScreen handle={handle}>
           content here
-        </FullScreen>
+        </FullScreen>*/}
 
       </div>
     </div>

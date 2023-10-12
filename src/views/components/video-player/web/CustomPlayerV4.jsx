@@ -25,7 +25,7 @@ const StyledSlider = styled(Slider)`
   bottom: 18px;
 `;
 
-const CustomPlayerV3 = ({ url, light, viewsCount, likesCount }, props) => {
+const CustomPlayerV4 = ({ url, light, viewsCount, likesCount }, props) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [volume, setVolume] = useState(1);
   const [isFullScreen, setIsFullScreen] = useState(false);
@@ -152,4 +152,4 @@ const CustomPlayerV3 = ({ url, light, viewsCount, likesCount }, props) => {
     </div>
   );
 };
-export default CustomPlayerV3
+export default CustomPlayerV4
