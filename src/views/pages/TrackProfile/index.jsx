@@ -22,6 +22,8 @@ import VideoPlayer from "views/components/video-player/chatgpt/VideoPlayer"
 import VideoPlayerV2 from "views/components/video-player/chatgpt/VideoPlayerV2"
 import CustomPlayer from "views/components/video-player/web/CustomPlayer"
 import CustomPlayerV2 from "views/components/video-player/web/CustomPlayerV2"
+import CustomPlayerV3 from "views/components/video-player/web/CustomPlayerV3"
+import CustomBardPlayer from "views/components/video-player/bard/CustomBardPlayer"
 // import TrackCastGridList from "./TrackCastGridList";
 import SimilarTracks from "./SimilarTracks";
 
@@ -144,8 +146,10 @@ function TrackProfile() {
                 // <StyledVideoCard
                 // <VideoCard
                 // <VideoPlayer
-                <CustomPlayer
+                // <CustomPlayer
                 // <CustomPlayerV2
+                <CustomPlayerV3
+                // <CustomBardPlayer
                 // <VideoPlayerV2
                   url={item.url}
                   key={index}
