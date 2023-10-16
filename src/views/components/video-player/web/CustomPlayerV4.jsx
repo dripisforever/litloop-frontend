@@ -16,6 +16,7 @@ import HLS from 'hls.js';
 
 import './video-player.css';
 import Slider from './slider/Slider';
+import { StyledTypography } from 'views/styledComponents';
 
 const DisplayDiv = styled.div`
   display: flex;
@@ -32,12 +33,38 @@ const OverlayPlayButton = styled.div`
 
   position: absolute;
   z-index: 100;
-  width: 400px;
+  width: 403px;
   height: 176px;
+  /* background: #0000002e; */
+`;
+const OverlayPlayButtonV2 = styled.div`
+
+  width: 100%;
+  height: 75%;
+  background-color: transparent;
+
+  position: absolute;
+  z-index: 100;
+  top:0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+  margin-top: 0px;
+  margin-bottom: 1px;
+  margin-right: auto;
+  margin-left: auto;
+
+
 `;
 const PlayButton = styled.button`
   /* cursor: pointer; */
   margin-left: 10px;
+`;
+const Duration = styled.div`
+  /* cursor: pointer; */
+  color: white;
+  font-family: sans-serif;
 `;
 
 const CustomPlayerV4 = ({ url, light, viewsCount, likesCount }, props) => {
@@ -159,11 +186,11 @@ const CustomPlayerV4 = ({ url, light, viewsCount, likesCount }, props) => {
 
   return (
     <div className="video-player" ref={videoContainerRef}>
-      <Overlay>
-        <OverlayPlayButton onClick={handlePlayPause}>
 
-        </OverlayPlayButton>
-      </Overlay>
+        <OverlayPlayButtonV2 onClick={handlePlayPause}>
+
+        </OverlayPlayButtonV2>
+
       <video
         ref={videoRef}
         onPlay={() => setIsPlaying(true)}
@@ -192,11 +219,11 @@ const CustomPlayerV4 = ({ url, light, viewsCount, likesCount }, props) => {
             }}
           />
           <PlayButton onClick={handlePlayPause}>{isPlaying ? <FaPause /> : <FaPlay />}</PlayButton>
-          <div className="duration">
+          <Duration className="duration">
             {format((currentTime ), 'mm:ss')}
             {' / '}
             {format((duration ), 'mm:ss')}
-          </div>
+          </Duration>
 
           <button>{volume > 0 ? <FaVolumeUp /> : <FaVolumeMute />}</button>
           {/*<input type="range" min="0" max="1" step="0.01" value={volume} onChange={handleVolumeChange} />*/}
