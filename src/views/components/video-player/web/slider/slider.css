@@ -1,9 +1,10 @@
 .slider-container {
-  --progress-bar-height: 4px;
+  --progress-bar-height: 7px;
 }
 
 .slider-container {
-  position: relative;
+  position: absolute;
+  bottom: 34px;
   width: 100%;
 }
 .audio-player {
@@ -12,9 +13,11 @@
 /* Background */
 .slider-container::before {
   content: '';
-  background-color: #ffffff45;
+  /* background-color: #ffffff45; */
+  background-color: #ffffff66;
   width: 99%;
-  height: calc(var(--progress-bar-height) - 1px);
+  /* height: calc(var(--progress-bar-height) - 1px); */
+  height: 7px;
   display: block;
   position: absolute;
   border-radius: 10px;

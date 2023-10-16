@@ -58,12 +58,12 @@ function CustomPlayer({ url, light, viewsCount, likesCount }, props) {
         }}
       ></video>
       <Slider percentage={percentage} onChange={onChange} />
-      <ControlPanel
+      {/* <ControlPanel
         play={play}
         isPlaying={isPlaying}
         duration={duration}
         currentTime={currentTime}
-      />
+      /> */}
     </div>
   )
 }

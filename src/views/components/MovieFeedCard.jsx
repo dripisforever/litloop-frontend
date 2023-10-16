@@ -35,7 +35,7 @@ import { selectors } from "core/reducers/index";
 const HeaderText = styled.div`
   color: ${props => props.theme.text};
   cursor: pointer;
-  font-family: Helvetica Neue;
+  font-family: system-ui;
   font-weight: 400;
 `;
 const ShowMore = styled.div`

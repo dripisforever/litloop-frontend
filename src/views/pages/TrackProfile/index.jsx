@@ -23,6 +23,7 @@ import VideoPlayerV2 from "views/components/video-player/chatgpt/VideoPlayerV2"
 import CustomPlayer from "views/components/video-player/web/CustomPlayer"
 import CustomPlayerV2 from "views/components/video-player/web/CustomPlayerV2"
 import CustomPlayerV3 from "views/components/video-player/web/CustomPlayerV3"
+import CustomPlayerV4 from "views/components/video-player/web/CustomPlayerV4"
 import CustomBardPlayer from "views/components/video-player/bard/CustomBardPlayer"
 // import TrackCastGridList from "./TrackCastGridList";
 import SimilarTracks from "./SimilarTracks";
@@ -47,6 +48,45 @@ const api_data = [
   {
     // url: "https://d1ca20q97pi6ei.cloudfront.net/Crystal+Castles+-+Kerosene(American+Psycho).mp4",
     url: "https://cdn.coverr.co/videos/coverr-golden-dunes-4546/1080p.mp4",
+    viewsCount: "3.2M",
+    likesCount: "100K",
+    // thumbNail: "https://d1ca20q97pi6ei.cloudfront.net/thumbnail/Crystal+Castles+-+Kerosene(American+Psycho)+.jpeg",
+
+    // thumbNail: "https%3A%2F%2Fd1ca20q97pi6ei.cloudfront.net%2Fthumbnail%2FCrystal%2BCastles%2B-%2BKerosene(American%2BPsycho)%2B.jpeg",
+    thumbNail: "https://images.unsplash.com/photo-1560440293-855922f9cc7d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1472&q=80",
+
+
+    // thumbNail: "https://views-test-api.s3.us-west-1.amazonaws.com/thumbnail/Crystal+Castles+-+Kerosene(American+Psycho)+.jpeg",
+  },
+  {
+    // url: "https://d1ca20q97pi6ei.cloudfront.net/Crystal+Castles+-+Kerosene(American+Psycho).mp4",
+    url: "https://cdn.coverr.co/videos/coverr-golden-gate-bridge-at-sunset-5420/1080p.mp4",
+    viewsCount: "3.2M",
+    likesCount: "100K",
+    // thumbNail: "https://d1ca20q97pi6ei.cloudfront.net/thumbnail/Crystal+Castles+-+Kerosene(American+Psycho)+.jpeg",
+
+    // thumbNail: "https%3A%2F%2Fd1ca20q97pi6ei.cloudfront.net%2Fthumbnail%2FCrystal%2BCastles%2B-%2BKerosene(American%2BPsycho)%2B.jpeg",
+    thumbNail: "https://images.unsplash.com/photo-1560440293-855922f9cc7d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1472&q=80",
+
+
+    // thumbNail: "https://views-test-api.s3.us-west-1.amazonaws.com/thumbnail/Crystal+Castles+-+Kerosene(American+Psycho)+.jpeg",
+  },
+  {
+    // url: "https://d1ca20q97pi6ei.cloudfront.net/Crystal+Castles+-+Kerosene(American+Psycho).mp4",
+    url: "https://static.videezy.com/system/resources/previews/000/049/801/original/DJI_0104.mp4",
+    viewsCount: "3.2M",
+    likesCount: "100K",
+    // thumbNail: "https://d1ca20q97pi6ei.cloudfront.net/thumbnail/Crystal+Castles+-+Kerosene(American+Psycho)+.jpeg",
+
+    // thumbNail: "https%3A%2F%2Fd1ca20q97pi6ei.cloudfront.net%2Fthumbnail%2FCrystal%2BCastles%2B-%2BKerosene(American%2BPsycho)%2B.jpeg",
+    thumbNail: "https://images.unsplash.com/photo-1560440293-855922f9cc7d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1472&q=80",
+
+
+    // thumbNail: "https://views-test-api.s3.us-west-1.amazonaws.com/thumbnail/Crystal+Castles+-+Kerosene(American+Psycho)+.jpeg",
+  },
+  {
+    // url: "https://d1ca20q97pi6ei.cloudfront.net/Crystal+Castles+-+Kerosene(American+Psycho).mp4",
+    url: "https://static.videezy.com/system/resources/previews/000/048/776/original/refinery01.mp4",
     viewsCount: "3.2M",
     likesCount: "100K",
     // thumbNail: "https://d1ca20q97pi6ei.cloudfront.net/thumbnail/Crystal+Castles+-+Kerosene(American+Psycho)+.jpeg",
@@ -109,7 +149,7 @@ const VideoWrapper = styled.div`
 
   display: grid;
   grid-gap: 3em;
-  grid-template-columns: repeat(3, 293px);
+  grid-template-columns: repeat(3, 403px);
   /* grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); */
 `;
 
@@ -148,7 +188,8 @@ function TrackProfile() {
                 // <VideoPlayer
                 // <CustomPlayer
                 // <CustomPlayerV2
-                <CustomPlayerV3
+                // <CustomPlayerV3
+                <CustomPlayerV4
                 // <CustomBardPlayer
                 // <VideoPlayerV2
                   url={item.url}

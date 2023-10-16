@@ -1,6 +1,6 @@
 // REFERENCE: https://voskan.host/2023/03/26/how-to-create-a-custom-video-player-in-react-js/
 
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import {
   FaPlay,
   FaPause,
@@ -12,6 +12,7 @@ import {
 } from 'react-icons/fa';
 import { BsArrowRepeat } from 'react-icons/bs';
 import styled from 'styled-components';
+import HLS from 'hls.js';
 
 import './video-player.css';
 import Slider from './slider/Slider';
@@ -19,10 +20,24 @@ import Slider from './slider/Slider';
 const DisplayDiv = styled.div`
   display: flex;
 `;
+const Overlay = styled.div`
+  position: absolute;
+`;
 
 const StyledSlider = styled(Slider)`
   position: absolute;
   bottom: 18px;
+`;
+const OverlayPlayButton = styled.div`
+
+  position: absolute;
+  z-index: 100;
+  width: 400px;
+  height: 176px;
+`;
+const PlayButton = styled.button`
+  /* cursor: pointer; */
+  margin-left: 10px;
 `;
 
 const CustomPlayerV4 = ({ url, light, viewsCount, likesCount }, props) => {
@@ -46,38 +61,46 @@ const CustomPlayerV4 = ({ url, light, viewsCount, likesCount }, props) => {
   const audioRef = useRef()
   const wrapperRef = useRef(null);
 
+  const format = (seconds) => {
+    if (isNaN(seconds)) {
+      return `00:00`;
+    }
+    const date = new Date(seconds * 1000);
+    const hh = date.getUTCHours();
+    const mm = date.getUTCMinutes();
+    const ss = date.getUTCSeconds().toString().padStart(2, "0");
+    if (hh) {
+      return `${hh}:${mm.toString().padStart(2, "0")}:${ss}`;
+    }
+    return `${mm}:${ss}`;
+  };
+
   const onChange = (e) => {
-    const audio = audioRef.current
-    audio.currentTime = (audio.duration / 100) * e.target.value
+    const video = videoRef.current
+    video.currentTime = (video.duration / 100) * e.target.value
     setPercentage(e.target.value)
   }
 
   const play = () => {
-    const audio = audioRef.current
-    audio.volume = 0.1
+    const video = videoRef.current
+    video.volume = 0.1
 
     if (!isPlaying) {
       setIsPlaying(true)
-      audio.play()
+      video.play()
     }
 
     if (isPlaying) {
       setIsPlaying(false)
-      audio.pause()
+      video.pause()
     }
   }
 
   const handleSubtitles = () => {
     setShowSubtitles(!showSubtitles);
   };
-  const handlePlaybackRateChange = (event) => {
-    setPlaybackRate(event.target.value);
-    videoRef.current.playbackRate = event.target.value;
-  };
-  const handleLoop = () => {
-    setIsLooping(!isLooping);
-    videoRef.current.loop = !isLooping;
-  };
+
+
   const handleFullScreen = () => {
     if (!isFullScreen) {
       videoContainerRef.current.requestFullscreen();
@@ -109,8 +132,38 @@ const CustomPlayerV4 = ({ url, light, viewsCount, likesCount }, props) => {
     setCurrentTime(time.toFixed(2))
   }
 
+  // useEffect(() => {
+  //   const video = videoRef.current;
+  //   const videoUrl = url
+  //   let hls;
+  //   if (HLS.isSupported()) {
+  //     hls = new HLS();
+  //     hls.loadSource(videoUrl);
+  //     hls.attachMedia(video);
+  //   } else {
+  //
+  //     video.src = videoUrl;
+  //     video.type = 'video/mp4';
+  //     // addSourceToVideo(video, videoSrcInMp4, 'video/mp4');
+  //     video.play();
+  //   }
+  //
+  //   function addSourceToVideo(element, src, type) {
+  //     var source = document.createElement('source');
+  //     source.src = src;
+  //     source.type = type;
+  //     element.appendChild(source);
+  //   }
+  //   return () => hls && hls.destroy();
+  // }, [url]);
+
   return (
     <div className="video-player" ref={videoContainerRef}>
+      <Overlay>
+        <OverlayPlayButton onClick={handlePlayPause}>
+
+        </OverlayPlayButton>
+      </Overlay>
       <video
         ref={videoRef}
         onPlay={() => setIsPlaying(true)}
@@ -122,14 +175,14 @@ const CustomPlayerV4 = ({ url, light, viewsCount, likesCount }, props) => {
           setDuration(e.currentTarget.duration.toFixed(2))
         }}
       >
-        <source src={url} type="video/mp4" />
+
       </video>
       <DisplayDiv>
 
 
         <div className="controls">
-          <button onClick={handlePlayPause}>{isPlaying ? <FaPause /> : <FaPlay />}</button>
-          <StyledSlider
+
+          <Slider
             className
             percentage={percentage}
             onChange={onChange}
@@ -138,12 +191,13 @@ const CustomPlayerV4 = ({ url, light, viewsCount, likesCount }, props) => {
               bottom: '18px'
             }}
           />
+          <PlayButton onClick={handlePlayPause}>{isPlaying ? <FaPause /> : <FaPlay />}</PlayButton>
+          <div className="duration">
+            {format((currentTime ), 'mm:ss')}
+            {' / '}
+            {format((duration ), 'mm:ss')}
+          </div>
 
-
-
-          <button onClick={handleSubtitles}>
-            {showSubtitles ? <FaClosedCaptioning /> : <FaClosedCaptioning color="#999" />}
-          </button>
           <button>{volume > 0 ? <FaVolumeUp /> : <FaVolumeMute />}</button>
           {/*<input type="range" min="0" max="1" step="0.01" value={volume} onChange={handleVolumeChange} />*/}
           <button onClick={handleFullScreen}>{isFullScreen ? <FaCompress /> : <FaExpand />}</button>
