@@ -187,9 +187,9 @@ const CustomPlayerV4 = ({ url, light, viewsCount, likesCount }, props) => {
   return (
     <div className="video-player" ref={videoContainerRef}>
 
-        <OverlayPlayButtonV2 onClick={handlePlayPause}>
+      <OverlayPlayButtonV2 onClick={handlePlayPause}>
 
-        </OverlayPlayButtonV2>
+      </OverlayPlayButtonV2>
 
       <video
         ref={videoRef}

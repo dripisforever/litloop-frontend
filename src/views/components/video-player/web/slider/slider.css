@@ -15,7 +15,7 @@
   content: '';
   /* background-color: #ffffff45; */
   background-color: #ffffff66;
-  width: 99%;
+  width: 100%;
   /* height: calc(var(--progress-bar-height) - 1px); */
   height: 7px;
   display: block;

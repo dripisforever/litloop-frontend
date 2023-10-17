@@ -16,6 +16,7 @@ function Slider({ percentage = 0, onChange, className }) {
     const centerThumb = (thumbWidth / 100) * percentage * -1
     const centerProgressBar =
       thumbWidth + (rangeWidth / 100) * percentage - (thumbWidth / 100) * percentage
+
     setPosition(percentage)
     setMarginLeft(centerThumb)
     setProgressBarWidth(centerProgressBar)
@@ -26,7 +27,7 @@ function Slider({ percentage = 0, onChange, className }) {
       <div
         className='progress-bar-cover'
         style={{
-          width: `${progressBarWidth}px`
+          width: `${position}%`
         }}
       >
       </div>
