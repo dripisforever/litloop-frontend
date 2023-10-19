@@ -162,7 +162,10 @@ const VideoWrapper = styled.div`
 
   display: grid;
   grid-gap: 3em;
-  grid-template-columns: repeat(3, 403px);
+  /* grid-template-columns: repeat(3, 403px); */
+  grid-template-columns: repeat(3, minmax(160px, 1fr));
+
+
   /* grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); */
 `;
 

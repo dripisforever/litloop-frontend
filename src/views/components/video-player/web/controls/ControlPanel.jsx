@@ -95,9 +95,7 @@ function ControlPanel({ play, isPlaying, duration, currentTime, wrapperRef }) {
          fullscreen
         </button>*/}
 
-        <div className="controls">
-          <button onClick={handleFullScreen}>{isFullScreen ? 'Exit Full Screen' : 'Full Screen'}</button>
-        </div>
+        
         {/* <FullScreen handle={handle}>
           content here
         </FullScreen>*/}
