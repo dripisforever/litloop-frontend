@@ -194,7 +194,7 @@ function TrackProfile() {
         <>
 
           <StyledTypography variant="h6" gutterBottom>Videos</StyledTypography>
-          {/*<VideoWrapper>
+          <VideoWrapper>
             {api_data.map((item, index) =>
                 // <StyledVideoCard
                 // <VideoCard
@@ -214,7 +214,7 @@ function TrackProfile() {
                 />
               )
             }
-          </VideoWrapper>*/}
+          </VideoWrapper>
           <StyledTypography variant="h6" gutterBottom>
             Recommendations
           </StyledTypography>

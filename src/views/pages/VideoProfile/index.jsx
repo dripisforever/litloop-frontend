@@ -618,10 +618,10 @@ const api_data = [
 const VideoWrapper = styled.div`
 
   /* display: flex; */
-
+  padding-left: 1em;
   display: grid;
   grid-gap: 1em;
-  grid-template-columns: repeat(3, 203px);
+  grid-template-columns: repeat(3, 152px);
   /* grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); */
 `;
 
@@ -678,17 +678,20 @@ function VideoProfile() {
 
   return (
     <div
-      style={{display: 'flex'}}
+      style={{
+        display: 'flex',
+        justifyContent: 'space-evenly'
+      }}
 
     >
       <div
-        style={{width: '1000px'}}
+        style={{width: '100%'}}
       >
         <VideoIntroduction videoId={videoId} url={api_data[5].url} />
       </div>
 
       <VideoWrapper
-        style={{width: '400px'}}
+        style={{width: '490px'}}
       >
         {api_data.map((item, index) =>
             // <StyledVideoCard

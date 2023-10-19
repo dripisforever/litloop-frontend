@@ -1,6 +1,6 @@
 .video-player {
   position: relative;
-  max-width: 800px;
+  /* max-width: 800px; */
   margin: 0 auto;
 }
 .video-player video {

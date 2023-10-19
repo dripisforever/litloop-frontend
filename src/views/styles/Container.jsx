@@ -11,6 +11,7 @@ const Container = styled.div`
   }
   padding-top: 5em;
   padding-left: 1em;
+  padding-right: 1em;
   padding-bottom: 6em;
   /* background-color: #181818; */
 

@@ -287,21 +287,9 @@ const Sidebar = () => {
             <span>Bookmarks</span>
           </LinkStyled>
         </StyledLi>
-        <StyledLi id="Magazines">
-          <LinkStyled
-            onClick={handleCloseSidebar}
-            to="/magazines"
-            // activeClassName="active"
-          >
-            <StyledDivIcon className="icon">
-              {/*<FiBookmark />*/}
-              <BsBook />
-              {/*<FaHistory />*/}
 
-            </StyledDivIcon>
-            <span>Magazines</span>
-          </LinkStyled>
-        </StyledLi>
+
+
         {/*<StyledLi>
           <LinkStyled
             onClick={handleCloseSidebar}
