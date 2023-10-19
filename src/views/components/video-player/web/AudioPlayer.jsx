@@ -3,6 +3,7 @@ import Hls from "hls.js";
 
 import song from './Suncrown - Legend of the Forgotten Centuries.mp3'
 import Slider from './slider/Slider'
+import AudioSlider from './slider/AudioSlider'
 import ControlPanel from './controls/ControlPanel'
 
 function AudioPlayer({ url, light, viewsCount, likesCount }, props) {
@@ -43,7 +44,13 @@ function AudioPlayer({ url, light, viewsCount, likesCount }, props) {
   }
 
   return (
-    <div className='audio-player'>
+    <div
+      className='audio-player'
+      style={{
+        width: '300px',
+
+      }}
+      >
 
 
       <audio
@@ -57,7 +64,18 @@ function AudioPlayer({ url, light, viewsCount, likesCount }, props) {
           width: `100%`
         }}
       ></audio>
-      <Slider percentage={percentage} onChange={onChange} />
+      <div
+        style={{
+          width: '100%',
+
+        }}
+      >
+      <AudioSlider
+        percentage={percentage}
+        onChange={onChange}
+
+        />
+      </div>
       <ControlPanel
         play={play}
         isPlaying={isPlaying}

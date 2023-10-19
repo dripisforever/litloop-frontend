@@ -16,9 +16,9 @@ function Profile({ introduction, main, leftSide, rightSide, loading }) {
   // const classes = useStyles();
   return (
     // <LoadingIndicator loading={loading}>
-      <StyledBox display="flex">
-        <StyledBox id="main" className="Main" padding={1}>{introduction}</StyledBox>
-        <StyledBox id="recs" className="Recs" display="grid">
+      <StyledBox >
+        <StyledBox  padding={1}>{introduction}</StyledBox>
+        <StyledBox  display="grid">
           {leftSide && (
             <StyledBox flex={1} flexBasis={240} padding={1}>
               {leftSide}

@@ -443,6 +443,9 @@ function ModalSwitch({  children, renderModal, stopSong, pauseSong, resumeSong, 
         <Route path="/video/:videoId">
           <VideoProfile />
         </Route>
+        <Route path="/vine/:videoId">
+          <VideoProfile />
+        </Route>
 
         <Route path="/playlist/:playlistId">
           <PlaylistProfile
