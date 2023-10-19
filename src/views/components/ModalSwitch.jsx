@@ -25,7 +25,7 @@ import MovieCard from "views/components/MovieCard";
 
 // import PopularMovies from "views/pages/PopularMovies";
 import MovieProfile from "views/pages/MovieProfile";
-// import VideoProfile from "views/pages/VideoProfile";
+import VideoProfile from "views/pages/VideoProfile";
 
 
 import SearchResults from "views/pages/SearchResults";
@@ -440,9 +440,9 @@ function ModalSwitch({  children, renderModal, stopSong, pauseSong, resumeSong, 
           />
         </Route>
 
-        {/*<Route path="/video/:videoId">
+        <Route path="/video/:videoId">
           <VideoProfile />
-        </Route>*/}
+        </Route>
 
         <Route path="/playlist/:playlistId">
           <PlaylistProfile

@@ -13,19 +13,19 @@ import { selectors } from "core/reducers/index";
 function renderItem(recommendationId) {
   return (
     <li>
-      <MovieCard movieId={recommendationId} />
+      <VideoCard videoId={recommendationId} />
     </li>
   );
 }
 
-function Recommendations({ movieId }) {
+function Recommendations({ videoId }) {
   // const theme = useTheme();
   const dispatch = useDispatch();
   const recommendationIds = useSelector(
-    state => selectors.selectMovieRecommendations(state, movieId) || []
+    state => selectors.selectVideoRecommendations(state, videoId) || []
   );
   const isFetching = useSelector(state =>
-    selectors.selectIsFetchingMovieRecommendations(state, movieId)
+    selectors.selectIsFetchingVideoRecommendations(state, videoId)
   );
 
   // const nextPage = useSelector(state =>
@@ -50,8 +50,8 @@ function Recommendations({ movieId }) {
   // );
 
   useEffect(() => {
-    dispatch(fetchRecommendations(movieId));
-  }, [movieId, dispatch]);
+    dispatch(fetchRecommendations(videoId));
+  }, [videoId, dispatch]);
 
   return (
     <BaseGridList
