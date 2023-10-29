@@ -22,7 +22,7 @@ function AudioPlayer({ url, light, viewsCount, likesCount }, props) {
 
   const play = () => {
     const audio = audioRef.current
-    audio.volume = 0.1
+    audio.volume = 0.8
 
     if (!isPlaying) {
       setIsPlaying(true)
@@ -81,7 +81,9 @@ function AudioPlayer({ url, light, viewsCount, likesCount }, props) {
         isPlaying={isPlaying}
         duration={duration}
         currentTime={currentTime}
+        audioRef={audioRef}
       />
+
     </div>
   )
 }
