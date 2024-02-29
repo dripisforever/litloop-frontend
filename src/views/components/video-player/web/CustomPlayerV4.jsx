@@ -40,7 +40,7 @@ const OverlayPlayButton = styled.div`
 const OverlayPlayButtonV2 = styled.div`
 
   width: 100%;
-  height: 75%;
+  height: 88%;
   background-color: transparent;
 
   position: absolute;

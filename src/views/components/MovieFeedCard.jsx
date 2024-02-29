@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import styled from 'styled-components';
 import axios from 'axios';
 
@@ -23,7 +23,7 @@ import { useConfiguration } from "./ConfigurationProvider";
 
 import offline_data from 'views/skeletons/data.json';
 
-
+import { fetchMovieImdb } from "core/actions";
 import { selectors } from "core/reducers/index";
 
 // const useStyles = makeStyles(theme => ({
@@ -125,6 +125,8 @@ const Card = styled.div`
 
 function MovieFeedCard({ movieId, subheader, observer }) {
   // const classes = useStyles();
+  const dispatch = useDispatch();
+
   const [showMore, setShowMore] = useState(false);
 
   const postRef = useRef(null);
@@ -133,6 +135,7 @@ function MovieFeedCard({ movieId, subheader, observer }) {
 
 
   const movie = useSelector(state => selectors.selectMovie(state, movieId));
+  const movie_imdb = useSelector(state => selectors.selectImdbMovie(state, movieId));
 
   const { getImageUrl } = useConfiguration();
 
@@ -150,7 +153,7 @@ function MovieFeedCard({ movieId, subheader, observer }) {
   const newWithBrText = text.substring(0, 212).split("<br/>").map((item, key) => { return (<div key={key}>{item}<br/></div>);});
 
   const endpoint = 'http://localhost:8000/post/impression';
-  const endpointV1 = 'http://localhost:8000/views/up';
+  const endpointV1 = 'http://localhost:8000/movies/up';
 
   const formData = axios.toFormData({
     "post_id": movieId,
@@ -197,6 +200,10 @@ function MovieFeedCard({ movieId, subheader, observer }) {
     };
   }, []);
 
+  useEffect(() => {
+    // dispatch(fetchMovieImdb(imdbId, REQUIRED_FIELDS));
+  }, [movieId, dispatch]);
+
   const randomLikes = Math.floor(99 + Math.random() * 9900);
   // const randomFloat = 10 + Math.random() * 89;
   const randomViewsFloat = (Math.floor(99 + Math.random() * 899) * 10 + Math.floor(Math.random() * 10)) / 10;
@@ -234,6 +241,7 @@ function MovieFeedCard({ movieId, subheader, observer }) {
 
           <HeaderText onClick={() => setShowMore(!showMore)}>
             <div>
+              {movie_imdb.imdbId}
               {showMore ? newText : newWithBrText}
               <ShowMore className="btn" >
                 {showMore ? "Show less" : "Show more"}

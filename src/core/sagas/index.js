@@ -639,6 +639,16 @@ function* fetchMovieSaga(action) {
     cachedData: movie
   });
 }
+function* fetchMovieExternalIdsSaga(action) {
+  const { movieId } = action.payload;
+  const movie = yield select(selectors.selectMovie, movieId);
+  yield call(fetcherSaga, {
+    action,
+    endpoint: `/movie/${movieId}/external_ids`,
+    schema: schemas.movieSchema,
+    cachedData: movie
+  });
+}
 
 
 
@@ -672,6 +682,10 @@ export function* watchFetchPopularAlbums() {
 
 export function* watchFetchMovie() {
   yield takeEvery(actions.fetchMovie, fetchMovieSaga);
+}
+
+export function* watchFetchMovieExternalIds() {
+  yield takeEvery(actions.fetchMovieImdb, fetchMovieExternalIdsSaga);
 }
 
 
@@ -827,7 +841,7 @@ function* fetchSearchSaga(action) {
           ...action,
           type: actions.fetchArtistSearch
         }),
-        
+
         call(fetchAlbumSearchSaga, {
           ...action,
           type: actions.fetchAlbumSearch
@@ -1027,6 +1041,8 @@ export default function* root() {
     fork(watchFetchPopularPeople),
 
     fork(watchFetchMovie),
+    fork(watchFetchMovieExternalIds),
+
     fork(watchFetchPerson),
     // fork(watchFetchGenres),
 

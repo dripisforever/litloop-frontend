@@ -15,6 +15,12 @@ export const fetchMovie = createAction(
     payload: { movieId, requiredFields }
   })
 );
+export const fetchMovieImdb = createAction(
+  "movie_imdb/fetch",
+  (movieId, requiredFields) => ({
+    payload: { movieId, requiredFields }
+  })
+);
 
 export const fetchRecommendations = createAction(
   "movie/fetchRecommendations",

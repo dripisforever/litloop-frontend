@@ -183,6 +183,7 @@ const entities = (state = initialState, action) => {
 export default entities;
 
 const selectMovie = (state, movieId) => state.movies[movieId];
+const selectImdbMovie = (state, movieId) => state.movies[movieId];
 const selectPerson = (state, personId) => state.people[personId];
 const selectArtist = (state, artistId) => state.artists[artistId];
 const selectAlbum = (state, albumId) => state.albums[albumId];
@@ -199,6 +200,7 @@ const selectTrack = (state, trackId) => state.tracks[trackId];
 // No need to use it like "state.entities...".
 export const selectors = {
   selectMovie,
+  selectImdbMovie,
   selectArtist,
   selectAlbum,
   selectPlaylist,

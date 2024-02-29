@@ -1,7 +1,7 @@
-// REFERENCE
-// mern-chunked-upload
+// REFERENCE: https://github.com/dejwid/mern-chunked-upload/blob/master/client/src/App.js
 
-import React, {useState, useEffect} from "react";
+
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 // import './App.css';
 
@@ -38,18 +38,29 @@ function ChunkUpload() {
     const data = readerEvent.target.result;
     const params = new URLSearchParams();
     const formData = new FormData();
+    formData.append(
+      "qqfile", file,
+
+    );
+    formData.append(
+      // "qquuid", qquuid
+    );
     params.set('name', file.name);
     params.set('size', file.size);
     params.set('currentChunkIndex', currentChunkIndex);
     params.set('totalChunks', Math.ceil(file.size / chunkSize));
     const headers = {'Content-Type': 'application/octet-stream'};
-    const url = 'http://localhost:4001/upload?'+params.toString();
-    axios.post(url, data, {headers})
+
+    const url = 'http://localhost:8000/fu/upload/?'+params.toString();
+
+    axios.post(url, formData, {headers})
       .then(response => {
+
         const file = files[currentFileIndex];
         const filesize = files[currentFileIndex].size;
         const chunks = Math.ceil(filesize / chunkSize) - 1;
         const isLastChunk = currentChunkIndex === chunks;
+
         if (isLastChunk) {
           file.finalFilename = response.data.finalFilename;
           setLastUploadedFileIndex(currentFileIndex);
