@@ -32,8 +32,8 @@ export default defineConfig({
     },
   },
   server: {
-    host: 'localhost',
-    open: '/',
+    host: true,
+    // open: '/',
     port: 3001,
   },
 });
