@@ -19,7 +19,7 @@ import litloopLogo from "views/assets/litloopLogo3.png";
 import Dropdown from "views/components/Dropdown/Dropdown";
 import DropdownV2 from "views/components/Dropdown/DropdownV2";
 import DropdownPortal from "views/components/Dropdown/DropdownPortal";
-import DropDown from "views/components/DropDownV2/DropDown";
+import DropDown from "views/components/DropdownV2/DropDown";
 
 
 import Toggle from "views/components/Toggle/Toggler";
